@@ -14,6 +14,7 @@ const {
   setRefContext,
   clearRefContext,
   PART_MAT_ICONS,
+  ms,
 } = createRenderer({ config: GUIDE_CONFIG });
 
 /** @type {{ manifest: object|null, items: Array }} */
@@ -85,17 +86,103 @@ function renderHomeGrid() {
   });
 }
 
-function renderSidebarToc(item) {
-  const nav = document.getElementById('sidebarToc');
-  if (!nav || !item.toc) return;
-  nav.innerHTML = item.toc.parts.map(part => `
-    <div class="toc-part mb-md">
-      <a href="#${esc(part.id)}" class="toc-part__title block px-lg py-sm font-label-md text-primary hover:bg-surface-variant">${esc(part.title)}</a>
-      ${(part.subsections || []).map(s => `
-        <a href="#${esc(s.id)}" class="toc-section block px-xl py-xs font-label-sm text-on-surface-variant hover:text-primary">${esc(s.text)}</a>
-      `).join('')}
-    </div>
-  `).join('');
+function anchorIdFromHash(hash) {
+  if (!hash) return '';
+  return decodeURIComponent(String(hash).replace(/^#/, ''));
+}
+
+function revealAnimated(el) {
+  if (!el) return;
+  const section = el.classList.contains('section-block') ? el : el.closest('.section-block');
+  const targets = section ? [section, ...section.querySelectorAll('.box-animate')] : [el];
+  targets.forEach(node => node.classList.add('is-visible'));
+}
+
+function scrollToAnchor(anchorHash) {
+  if (!anchorHash) return;
+  const id = anchorIdFromHash(anchorHash);
+  requestAnimationFrame(() => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    revealAnimated(el);
+    el.classList.add('anchor-flash');
+    setTimeout(() => el.classList.remove('anchor-flash'), 2200);
+  });
+}
+
+function setActiveNavLink(activeEl) {
+  document.querySelectorAll('.toc-nav-link').forEach(a => {
+    a.classList.remove('bg-primary-container', 'text-on-primary-container', 'border-primary', 'font-bold');
+    a.classList.add('text-on-surface-variant');
+  });
+  if (activeEl) {
+    activeEl.classList.add('bg-primary-container', 'text-on-primary-container', 'border-primary', 'font-bold');
+    activeEl.classList.remove('text-on-surface-variant');
+  }
+}
+
+function buildSidebar(toc) {
+  const container = document.getElementById('sidebarToc');
+  if (!container || !toc) return;
+
+  container.innerHTML = '';
+  const allLinks = [];
+
+  toc.parts.forEach(part => {
+    const partLabel = part.title
+      .replace(/^الجزء[^:]+:\s*/, '')
+      .replace(/^📌\s*/, '');
+    const link = document.createElement('a');
+    link.href = `#${part.id}`;
+    link.className = 'toc-nav-link flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high p-md transition-all mx-md mb-xs font-label-md text-label-md rounded-l-lg border-r-4 border-transparent';
+    link.innerHTML = `${ms(part.icon, false, 'text-lg shrink-0')}<span class="line-clamp-2">${esc(partLabel)}</span>`;
+    link.dataset.partType = part.type;
+    container.appendChild(link);
+    allLinks.push({ el: link, target: null });
+
+    (part.subsections || []).forEach(sub => {
+      const subLink = document.createElement('a');
+      const subId = `${part.id}-${sub.id}`;
+      const indent = sub.level >= 5 ? 'mr-2xl' : sub.level >= 4 ? 'mr-xl' : 'mr-lg';
+      subLink.href = `#${subId}`;
+      subLink.className = `toc-nav-link flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high py-xs px-md transition-all ${indent} mb-xs font-label-md text-label-md rounded-l-lg border-r-4 border-transparent opacity-80`;
+      subLink.innerHTML = `${ms('chevron_left', false, 'text-sm shrink-0')}<span class="line-clamp-2 text-xs leading-snug">${esc(sub.text.replace(/^\d+(?:\.\d+)*\.?\s*/, ''))}</span>`;
+      container.appendChild(subLink);
+      allLinks.push({ el: subLink, target: null });
+    });
+  });
+
+  allLinks.forEach(item => {
+    const id = anchorIdFromHash(item.el.hash);
+    if (id) item.target = document.getElementById(id);
+  });
+
+  if (allLinks.length) setActiveNavLink(allLinks[0].el);
+
+  const observer = new IntersectionObserver(entries => {
+    const visible = entries.filter(e => e.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    if (visible.length) {
+      const link = allLinks.find(l => l.target === visible[0].target)?.el;
+      if (link) setActiveNavLink(link);
+    }
+  }, { rootMargin: '-20% 0px -65% 0px', threshold: [0, 0.1, 0.25] });
+
+  allLinks.forEach(item => {
+    if (item.target) observer.observe(item.target);
+    item.el.addEventListener('click', e => {
+      e.preventDefault();
+      const id = anchorIdFromHash(item.el.hash);
+      if (!id) return;
+      if (location.hash !== `#${id}`) location.hash = id;
+      else scrollToAnchor(id);
+      if (item.target) {
+        setActiveNavLink(item.el);
+        revealAnimated(item.target);
+      }
+    });
+  });
 }
 
 function initScrollAnimations(root = document) {
@@ -110,44 +197,64 @@ function initScrollAnimations(root = document) {
     });
   }, { rootMargin: '0px 0px -5% 0px', threshold: 0.05 });
 
-  root.querySelectorAll('.box-animate').forEach((el, i) => {
-    el.classList.remove('is-visible');
-    el.classList.remove('stagger-1', 'stagger-2', 'stagger-3', 'stagger-4', 'stagger-5', 'stagger-6');
-    el.classList.add(`stagger-${(i % 6) + 1}`);
-
+  const reveal = el => {
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight * 1.1) {
       el.classList.add('is-visible');
     } else {
       scrollAnimObserver.observe(el);
     }
+  };
+
+  root.querySelectorAll('.section-block').forEach((sec, i) => {
+    sec.classList.remove('is-visible');
+    sec.classList.remove('stagger-1', 'stagger-2', 'stagger-3', 'stagger-4', 'stagger-5', 'stagger-6');
+    sec.classList.add(`stagger-${(i % 6) + 1}`);
+    reveal(sec);
+  });
+
+  root.querySelectorAll('.box-animate').forEach(el => {
+    if (el.closest('.section-block')) return;
+    el.classList.remove('is-visible');
+    reveal(el);
   });
 }
 
 function loadLectureView(idx, hashPart) {
   const item = appState.items[idx];
   if (!item) return;
+
+  const needsRender = currentLectureIndex !== idx || !document.getElementById(item.lec.id);
   currentLectureIndex = idx;
   localStorage.setItem(STORAGE_LAST_LECTURE, String(idx));
 
-  document.getElementById('sidebarCourseTitle').textContent = shortLectureTitle(item.lec.title);
-  document.getElementById('sidebarCourseSub').textContent = item.lec.tag || '';
-  document.getElementById('sidebarMatIcon').textContent = item.matIcon || 'school';
+  if (needsRender) {
+    document.getElementById('sidebarCourseTitle').textContent = shortLectureTitle(item.lec.title);
+    document.getElementById('sidebarCourseSub').textContent = item.lec.tag || '';
+    document.getElementById('sidebarMatIcon').textContent = item.matIcon || 'school';
 
-  setRefContext({ lectureRef: item.lec.id, sectionMap: item.sectionIndex || {} });
-  const html = renderLecture(item.lec, 'primary', item.icon, item.sectionIndex);
-  clearRefContext();
+    setRefContext({ lectureRef: item.lec.id, sectionMap: item.sectionIndex || {} });
+    const html = renderLecture(item.lec, 'primary', item.icon, item.sectionIndex);
+    clearRefContext();
 
-  document.getElementById('content').innerHTML = html;
-  renderSidebarToc(item);
-  showView('lecture');
-  initInteractivity(document.getElementById('content'));
-  initDiagrams(document.getElementById('content'));
-  initScrollAnimations(document.getElementById('content'));
-  if (window.hljs) document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+    document.getElementById('content').innerHTML = html;
+    showView('lecture');
+    initInteractivity(document.getElementById('content'));
+    initDiagrams(document.getElementById('content'));
+    requestAnimationFrame(() => {
+      initScrollAnimations(document.getElementById('content'));
+      buildSidebar(item.toc);
+      if (hashPart && hashPart !== item.lec.id) scrollToAnchor(hashPart);
+    });
+    if (window.hljs) document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  } else {
+    buildSidebar(item.toc);
+    if (hashPart && hashPart !== item.lec.id) scrollToAnchor(hashPart);
+  }
 
   const hash = hashPart || item.lec.id;
   if (location.hash !== `#${hash}`) location.hash = hash;
+  else if (!needsRender && hashPart && hashPart !== item.lec.id) scrollToAnchor(hashPart);
 }
 
 function initJumpQuiz() {
@@ -173,11 +280,12 @@ function initScrollFab() {
 
 function getLectureIndexFromHash(hash) {
   if (!hash || hash === 'home') return -1;
-  return appState.items.findIndex(it => it.lec.id === hash || hash.startsWith(`${it.lec.id}-`));
+  const id = anchorIdFromHash(hash);
+  return appState.items.findIndex(it => it.lec.id === id || id.startsWith(`${it.lec.id}-`));
 }
 
 function resolveRoute() {
-  const hash = location.hash.replace('#', '');
+  const hash = anchorIdFromHash(location.hash);
   const idx = getLectureIndexFromHash(hash);
   if (idx >= 0) loadLectureView(idx, hash);
   else showView('home');
