@@ -1,7 +1,7 @@
 import { esc } from '../core/escape.js';
 import { inlineMd } from '../core/inline-md.js';
 import { ms } from '../core/icons.js';
-import { diagramToHtml } from '../../../kotlin/js/diagram.js';
+import { diagramToHtml } from '../diagram/diagram.js';
 
 const MINI_HEAD_ICONS = {
   'النص الأصلي يقول:': 'record_voice_over',

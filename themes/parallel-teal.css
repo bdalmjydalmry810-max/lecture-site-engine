@@ -1,0 +1,96 @@
+/**
+ * Theme: parallel-teal — أخضر تيل (Kinetic Learning / Parallel)
+ * مستخرج من parallel/css/tokens.css + tailwind-config.js
+ */
+
+:root {
+  --palette-primary: #00685f;
+  --palette-primary-bright: #6bd8cb;
+  --palette-primary-container: #008378;
+  --palette-primary-fixed: #89f5e7;
+  --palette-on-primary: #ffffff;
+  --palette-on-primary-container: #f4fffc;
+  --palette-on-primary-fixed: #00201d;
+  --palette-on-primary-fixed-variant: #005049;
+  --palette-primary-fixed-dim: #6bd8cb;
+  --palette-primary-dark-fixed-bg: #003832;
+  --palette-primary-dark-fixed-text: #a8f0e8;
+
+  --palette-secondary: #0058be;
+  --palette-secondary-container: #2170e4;
+  --palette-secondary-fixed: #d8e2ff;
+  --palette-secondary-fixed-dim: #adc6ff;
+  --palette-secondary-accent: #8ab4ff;
+  --palette-on-secondary: #ffffff;
+  --palette-on-secondary-container: #fefcff;
+  --palette-on-secondary-fixed: #001a42;
+  --palette-on-secondary-fixed-variant: #004395;
+  --palette-secondary-dark-bg: #152a45;
+  --palette-secondary-dark-bg-hover: #1a3050;
+  --palette-secondary-dark-text: #c8d8ff;
+  --palette-secondary-dark-surface: #152a45;
+
+  --palette-tertiary: #924628;
+  --palette-tertiary-container: #b05e3d;
+  --palette-tertiary-fixed: #ffdbce;
+  --palette-tertiary-fixed-dim: #ffb59a;
+  --palette-on-tertiary: #ffffff;
+  --palette-on-tertiary-container: #fffbff;
+  --palette-on-tertiary-fixed: #370e00;
+  --palette-on-tertiary-fixed-variant: #773215;
+  --palette-tertiary-dark-bg: #3d2618;
+
+  --palette-background: #f5faf8;
+  --palette-surface: #f5faf8;
+  --palette-surface-bright: #f5faf8;
+  --palette-surface-variant: #dee4e1;
+  --palette-surface-container-lowest: #ffffff;
+  --palette-surface-container-low: #f0f5f2;
+  --palette-surface-container: #eaefed;
+  --palette-surface-container-high: #e4e9e7;
+  --palette-surface-container-highest: #dee4e1;
+  --palette-surface-tint: #00685f;
+  --palette-outline-variant: #bcc9c6;
+
+  --palette-spinner-active: #00685f;
+  --palette-spinner-active-dark: #6bd8cb;
+  --palette-shadow-border-dark: #2a5249;
+
+  --brand-glow-blue: color-mix(in srgb, var(--palette-primary) 12%, transparent);
+  --brand-glow-violet: color-mix(in srgb, var(--palette-secondary) 10%, transparent);
+  --brand-glow-coral: color-mix(in srgb, var(--palette-tertiary) 7%, transparent);
+
+  --t-lecture-accent-1: #00685f;
+  --t-lecture-accent-2: #0058be;
+  --t-lecture-accent-3: #924628;
+  --t-lecture-accent-4: #008378;
+  --t-lecture-accent-5: #2170e4;
+  --t-lecture-accent-6: #b05e3d;
+  --t-lecture-accent-7: #6bd8cb;
+  --t-lecture-accent-8: #adc6ff;
+}
+
+.dark {
+  --palette-dm-bg: #0a1f1c;
+  --palette-dm-surface: #0d2420;
+  --palette-dm-elevated: #132e29;
+  --palette-dm-elevated-2: #1a3832;
+  --palette-dm-border: #2a5249;
+  --palette-dm-text: #e8f5f2;
+  --palette-dm-text-muted: #a8c4bc;
+
+  --color-primary: var(--palette-primary-bright);
+  --color-inverse-primary: var(--palette-primary-bright);
+
+  --brand-glow-blue: color-mix(in srgb, var(--palette-primary-bright) 14%, transparent);
+  --brand-glow-violet: color-mix(in srgb, var(--palette-secondary-accent) 10%, transparent);
+
+  --t-lecture-accent-1: #6bd8cb;
+  --t-lecture-accent-2: #adc6ff;
+  --t-lecture-accent-3: #ffb59a;
+  --t-lecture-accent-4: #008378;
+  --t-lecture-accent-5: #2170e4;
+  --t-lecture-accent-6: #b05e3d;
+  --t-lecture-accent-7: #6bd8cb;
+  --t-lecture-accent-8: #adc6ff;
+}

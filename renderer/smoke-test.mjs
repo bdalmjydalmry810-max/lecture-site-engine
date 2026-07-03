@@ -54,10 +54,5 @@ if (!lecHtml.includes('id="lec1"')) throw new Error('missing lecture id');
 const toc = buildTocData([lecture]);
 if (!toc[0].parts[0].id) throw new Error('missing toc part id');
 
-// Kotlin re-export path
-const kotlinRenderer = await import('../../kotlin/js/renderer.js');
-if (typeof kotlinRenderer.renderLecture !== 'function') throw new Error('kotlin renderer re-export failed');
-
 console.log('renderer smoke test: OK');
 console.log('  blocks:', blocks.length, 'types rendered');
-console.log('  kotlin re-export: renderLecture, initInteractivity available');

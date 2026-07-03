@@ -1,0 +1,72 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Restore dist cache
+        uses: actions/cache/restore@v4
+        with:
+          path: dist
+          key: dist-site-v1
+          restore-keys: |
+            dist-site-v1
+
+      - name: Smoke test
+        run: npm test
+
+      - name: Build changed and missing subjects
+        run: |
+          BEFORE="${{ github.event.before }}"
+          SHA="${{ github.sha }}"
+          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ] || [ -z "$BEFORE" ]; then
+            echo "First push or unknown before — build all subjects with lectures."
+            node build/deploy-build.mjs --all
+          else
+            node build/detect-changed-subjects.mjs --range "${BEFORE}..${SHA}" | node build/deploy-build.mjs
+          fi
+
+      - name: Save dist cache
+        uses: actions/cache/save@v4
+        with:
+          path: dist
+          key: dist-site-v1
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

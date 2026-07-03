@@ -1,0 +1,92 @@
+/**
+ * Theme: gis-earth — أخضر/بني/أزرق (GIS / Data Operations)
+ */
+
+:root {
+  --palette-primary: #2e7d32;
+  --palette-primary-bright: #66bb6a;
+  --palette-primary-container: #388e3c;
+  --palette-primary-fixed: #e8f5e9;
+  --palette-on-primary: #ffffff;
+  --palette-on-primary-container: #f1f8f2;
+  --palette-on-primary-fixed: #1b5e20;
+  --palette-on-primary-fixed-variant: #2e7d32;
+  --palette-primary-fixed-dim: #a5d6a7;
+  --palette-primary-dark-fixed-bg: #1b3d1f;
+  --palette-primary-dark-fixed-text: #c8e6c9;
+
+  --palette-secondary: #1565c0;
+  --palette-secondary-container: #1976d2;
+  --palette-secondary-fixed: #e3f2fd;
+  --palette-secondary-fixed-dim: #90caf9;
+  --palette-secondary-accent: #42a5f5;
+  --palette-on-secondary: #ffffff;
+  --palette-on-secondary-container: #f5f9ff;
+  --palette-on-secondary-fixed: #0d47a1;
+  --palette-on-secondary-fixed-variant: #1565c0;
+  --palette-secondary-dark-bg: #0d2137;
+  --palette-secondary-dark-bg-hover: #122a45;
+  --palette-secondary-dark-text: #bbdefb;
+  --palette-secondary-dark-surface: #0d2137;
+
+  --palette-tertiary: #795548;
+  --palette-tertiary-container: #8d6e63;
+  --palette-tertiary-fixed: #efebe9;
+  --palette-tertiary-fixed-dim: #bcaaa4;
+  --palette-on-tertiary: #ffffff;
+  --palette-on-tertiary-container: #fffaf8;
+  --palette-on-tertiary-fixed: #3e2723;
+  --palette-on-tertiary-fixed-variant: #5d4037;
+  --palette-tertiary-dark-bg: #3e2723;
+
+  --palette-background: #f5f7f0;
+  --palette-surface: #fafbf7;
+  --palette-surface-bright: #ffffff;
+  --palette-surface-variant: #e8ede0;
+  --palette-surface-container-lowest: #ffffff;
+  --palette-surface-container-low: #f0f4ea;
+  --palette-surface-container: #e8ede0;
+  --palette-surface-container-high: #dfe8d4;
+  --palette-surface-container-highest: #d5e0c8;
+  --palette-surface-tint: #2e7d32;
+  --palette-outline-variant: #b8c9a8;
+
+  --palette-spinner-active: #2e7d32;
+  --palette-spinner-active-dark: #66bb6a;
+  --palette-shadow-border-dark: #33691e;
+
+  --brand-glow-blue: color-mix(in srgb, var(--palette-secondary) 10%, transparent);
+  --brand-glow-violet: color-mix(in srgb, var(--palette-primary) 12%, transparent);
+  --brand-glow-coral: color-mix(in srgb, var(--palette-tertiary) 8%, transparent);
+
+  --t-lecture-accent-1: var(--palette-primary);
+  --t-lecture-accent-2: var(--palette-secondary);
+  --t-lecture-accent-3: var(--palette-tertiary);
+  --t-lecture-accent-4: var(--palette-primary-container);
+  --t-lecture-accent-5: var(--palette-secondary-container);
+  --t-lecture-accent-6: var(--palette-tertiary-container);
+  --t-lecture-accent-7: var(--palette-primary-bright);
+  --t-lecture-accent-8: var(--palette-secondary-accent);
+}
+
+.dark {
+  --palette-dm-bg: #0a1408;
+  --palette-dm-surface: #0f1a0c;
+  --palette-dm-elevated: #152210;
+  --palette-dm-elevated-2: #1c2e16;
+  --palette-dm-border: #33691e;
+  --palette-dm-text: #e8f5e9;
+  --palette-dm-text-muted: #a5d6a7;
+
+  --brand-glow-blue: color-mix(in srgb, var(--palette-secondary-accent) 11%, transparent);
+  --brand-glow-violet: color-mix(in srgb, var(--palette-primary-bright) 14%, transparent);
+
+  --t-lecture-accent-1: var(--palette-primary-bright);
+  --t-lecture-accent-2: var(--palette-secondary-accent);
+  --t-lecture-accent-3: var(--palette-tertiary-fixed-dim);
+  --t-lecture-accent-4: var(--palette-primary-container);
+  --t-lecture-accent-5: var(--palette-secondary-container);
+  --t-lecture-accent-6: var(--palette-tertiary-container);
+  --t-lecture-accent-7: var(--palette-primary-bright);
+  --t-lecture-accent-8: var(--palette-secondary-accent);
+}

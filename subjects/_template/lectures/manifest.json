@@ -1,0 +1,15 @@
+{
+  "settings": {
+    "subjectName": "اسم المادة بالعربي",
+    "subjectNameEn": "Subject Name in English",
+    "year": "2025-2026",
+    "academicYear": 1,
+    "theme": "amber-default",
+    "department": "القسم"
+  },
+  "title": "اسم المادة — عنوان الموقع",
+  "subtitle": "دليل دراسي تفاعلي",
+  "files": [],
+  "lectureIcons": ["📌", "📖", "💻", "🎯", "📝"],
+  "lectureMatIcons": ["school", "menu_book", "code", "quiz", "description"]
+}

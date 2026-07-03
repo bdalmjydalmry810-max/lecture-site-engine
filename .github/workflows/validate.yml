@@ -1,0 +1,43 @@
+name: Validate lectures
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Smoke test
+        run: npm test
+
+      - name: Detect changed subjects
+        id: changed
+        run: |
+          SUBJECTS=$(node build/detect-changed-subjects.mjs --base "origin/${{ github.base_ref }}")
+          echo "subjects<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$SUBJECTS" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+          if [ -z "$SUBJECTS" ]; then
+            echo "has_subjects=false" >> "$GITHUB_OUTPUT"
+            echo "No subject content changes in this PR."
+          else
+            echo "has_subjects=true" >> "$GITHUB_OUTPUT"
+            echo "Changed subjects:"
+            echo "$SUBJECTS"
+          fi
+
+      - name: Validate changed subjects
+        if: steps.changed.outputs.has_subjects == 'true'
+        run: |
+          echo "${{ steps.changed.outputs.subjects }}" | node build/validate-changed.mjs

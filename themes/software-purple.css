@@ -1,0 +1,130 @@
+/**
+ * ═══════════════════════════════════════════════════════
+ *  🎨 ثيم software_eng — موف احترافي + طاقة
+ * ═══════════════════════════════════════════════════════
+ *
+ *  لتبديل الأزرق ↔ الموف: بدّل سطرَي --palette-primary و --palette-secondary
+ *  (أو swap قيم --brand-hero-* مع --brand-accent-*).
+ */
+
+:root {
+  /* ── Hero (موف — اللون الرئيسي للموقع) ── */
+  --brand-hero: #7c3aed;
+  --brand-hero-bright: #a78bfa;
+  --brand-hero-container: #8b5cf6;
+  --brand-hero-fixed: #ede9fe;
+  --brand-hero-fixed-dim: #c4b5fd;
+  --brand-hero-on: #ffffff;
+  --brand-hero-on-container: #faf5ff;
+  --brand-hero-on-fixed: #2e1065;
+  --brand-hero-on-fixed-variant: #5b21b6;
+  --brand-hero-dark-bg: #2e1065;
+  --brand-hero-dark-text: #ddd6fe;
+
+  /* ── Accent (أزرق — لمسة ثانوية حيوية) ── */
+  --brand-accent: #2563eb;
+  --brand-accent-container: #3b82f6;
+  --brand-accent-fixed: #dbeafe;
+  --brand-accent-fixed-dim: #93c5fd;
+  --brand-accent-bright: #60a5fa;
+  --brand-accent-on: #ffffff;
+  --brand-accent-on-container: #eff6ff;
+  --brand-accent-on-fixed: #1e3a8a;
+  --brand-accent-on-fixed-variant: #1d4ed8;
+  --brand-accent-dark-bg: #1e3a8a;
+  --brand-accent-dark-bg-hover: #1e40af;
+  --brand-accent-dark-text: #bfdbfe;
+  --brand-accent-dark-surface: #172554;
+
+  /* ── Map to system tokens (swap هذين السطرين لعكس الألوان) ── */
+  --palette-primary: var(--brand-hero);
+  --palette-primary-bright: var(--brand-hero-bright);
+  --palette-primary-container: var(--brand-hero-container);
+  --palette-primary-fixed: var(--brand-hero-fixed);
+  --palette-on-primary: var(--brand-hero-on);
+  --palette-on-primary-container: var(--brand-hero-on-container);
+  --palette-on-primary-fixed: var(--brand-hero-on-fixed);
+  --palette-on-primary-fixed-variant: var(--brand-hero-on-fixed-variant);
+  --palette-primary-fixed-dim: var(--brand-hero-fixed-dim);
+  --palette-primary-dark-fixed-bg: var(--brand-hero-dark-bg);
+  --palette-primary-dark-fixed-text: var(--brand-hero-dark-text);
+
+  --palette-secondary: var(--brand-accent);
+  --palette-secondary-container: var(--brand-accent-container);
+  --palette-secondary-fixed: var(--brand-accent-fixed);
+  --palette-secondary-fixed-dim: var(--brand-accent-fixed-dim);
+  --palette-secondary-accent: var(--brand-accent-bright);
+  --palette-on-secondary: var(--brand-accent-on);
+  --palette-on-secondary-container: var(--brand-accent-on-container);
+  --palette-on-secondary-fixed: var(--brand-accent-on-fixed);
+  --palette-on-secondary-fixed-variant: var(--brand-accent-on-fixed-variant);
+  --palette-secondary-dark-bg: var(--brand-accent-dark-bg);
+  --palette-secondary-dark-bg-hover: var(--brand-accent-dark-bg-hover);
+  --palette-secondary-dark-text: var(--brand-accent-dark-text);
+  --palette-secondary-dark-surface: var(--brand-accent-dark-surface);
+
+  /* Tertiary — وردي/كорал للطاقة والتباين */
+  --palette-tertiary: #e11d8f;
+  --palette-tertiary-container: #f0439f;
+  --palette-tertiary-fixed: #fce7f3;
+  --palette-tertiary-fixed-dim: #f9a8d4;
+  --palette-on-tertiary: #ffffff;
+  --palette-on-tertiary-container: #fff8fc;
+  --palette-on-tertiary-fixed: #500724;
+  --palette-on-tertiary-fixed-variant: #9d174d;
+  --palette-tertiary-dark-bg: #3b0a28;
+
+  /* Surfaces — خلفية مائلة للموف الفاتح */
+  --palette-background: #f5f0ff;
+  --palette-surface: #faf7ff;
+  --palette-surface-bright: #fdfcff;
+  --palette-surface-variant: #e9e0ff;
+  --palette-surface-container-lowest: #ffffff;
+  --palette-surface-container-low: #f0eaff;
+  --palette-surface-container: #e8deff;
+  --palette-surface-container-high: #dfd4fc;
+  --palette-surface-container-highest: #d4c7f9;
+  --palette-surface-tint: var(--brand-hero);
+  --palette-outline-variant: #c4b5fd;
+
+  --palette-spinner-active: var(--brand-hero);
+  --palette-spinner-active-dark: var(--brand-hero-bright);
+  --palette-shadow-border-dark: #4c1d95;
+
+  /* Atmosphere — الموف أقوى في الخلفية، الأزرق ثانوي */
+  --brand-glow-violet: color-mix(in srgb, var(--brand-hero) 18%, transparent);
+  --brand-glow-blue: color-mix(in srgb, var(--brand-accent) 10%, transparent);
+  --brand-glow-coral: color-mix(in srgb, var(--palette-tertiary) 8%, transparent);
+
+  --t-lecture-accent-1: var(--palette-primary);
+  --t-lecture-accent-2: var(--palette-secondary);
+  --t-lecture-accent-3: var(--palette-tertiary);
+  --t-lecture-accent-4: var(--palette-primary-container);
+  --t-lecture-accent-5: var(--palette-secondary-container);
+  --t-lecture-accent-6: var(--palette-tertiary-container);
+  --t-lecture-accent-7: var(--palette-primary-bright);
+  --t-lecture-accent-8: var(--palette-secondary-accent);
+}
+
+.dark {
+  --palette-dm-bg: #0c0618;
+  --palette-dm-surface: #130a24;
+  --palette-dm-elevated: #1a1030;
+  --palette-dm-elevated-2: #221542;
+  --palette-dm-border: #4c1d95;
+  --palette-dm-text: #f5f0ff;
+  --palette-dm-text-muted: #a78bfa;
+
+  --brand-glow-violet: color-mix(in srgb, var(--brand-hero-bright) 20%, transparent);
+  --brand-glow-blue: color-mix(in srgb, var(--brand-accent-bright) 11%, transparent);
+  --brand-glow-coral: color-mix(in srgb, var(--palette-tertiary-fixed-dim) 9%, transparent);
+
+  --t-lecture-accent-1: var(--palette-primary-bright);
+  --t-lecture-accent-2: var(--palette-secondary-accent);
+  --t-lecture-accent-3: var(--palette-tertiary-fixed-dim);
+  --t-lecture-accent-4: var(--palette-primary-container);
+  --t-lecture-accent-5: var(--palette-secondary-container);
+  --t-lecture-accent-6: var(--palette-tertiary-container);
+  --t-lecture-accent-7: var(--palette-primary-bright);
+  --t-lecture-accent-8: var(--palette-secondary-accent);
+}

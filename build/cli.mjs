@@ -1,0 +1,186 @@
+#!/usr/bin/env node
+/**
+ * Build a deployable static site for one subject.
+ *
+ * Usage:
+ *   node build/cli.mjs --subject year-1/kotlin
+ *   node build/cli.mjs --subject subjects/year-1/kotlin --output dist/year-1/kotlin
+ */
+import { readFile, writeFile, mkdir, cp, readdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createParser } from '../parser/index.js';
+import { runSchemaChecks, hasErrors } from './lib/schema-checks.mjs';
+
+const ENGINE_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+function parseArgs(argv) {
+  const args = { subject: null, output: null, skipValidate: false };
+  for (let i = 2; i < argv.length; i++) {
+    if (argv[i] === '--subject' && argv[i + 1]) args.subject = argv[++i];
+    else if (argv[i] === '--output' && argv[i + 1]) args.output = argv[++i];
+    else if (argv[i] === '--skip-validate') args.skipValidate = true;
+  }
+  return args;
+}
+
+function resolveSubjectDir(subjectArg) {
+  const raw = subjectArg.replace(/^subjects\//, '');
+  const withSubjects = path.join(ENGINE_ROOT, 'subjects', raw);
+  if (existsSync(withSubjects)) return withSubjects;
+  const direct = path.resolve(process.cwd(), subjectArg);
+  if (existsSync(direct)) return direct;
+  throw new Error(`Subject not found: ${subjectArg} (tried ${withSubjects})`);
+}
+
+function pathToFileUrl(p) {
+  return new URL(`file://${path.resolve(p)}`).href;
+}
+
+async function loadGuideConfig(subjectDir) {
+  const configPath = path.join(subjectDir, 'guide-config.js');
+  if (!existsSync(configPath)) {
+    return (await import(pathToFileUrl(path.join(ENGINE_ROOT, 'subjects/_template/guide-config.js')))).GUIDE_CONFIG;
+  }
+  return (await import(pathToFileUrl(configPath))).GUIDE_CONFIG;
+}
+
+async function validateSubject(subjectDir, parser) {
+  const lecturesDir = path.join(subjectDir, 'lectures');
+  const names = (await readdir(lecturesDir)).filter(n => /^par.+\.md$/i.test(n)).sort();
+  let errorCount = 0;
+  for (const name of names) {
+    const filePath = path.join(lecturesDir, name);
+    const rel = path.relative(ENGINE_ROOT, filePath);
+    const text = await readFile(filePath, 'utf8');
+    const issues = runSchemaChecks(text, rel);
+    try {
+      parser.parseDocument(text);
+    } catch (err) {
+      issues.push({ severity: 'error', line: 1, message: `parse failed: ${err.message}` });
+    }
+    if (issues.length) {
+      const errors = issues.filter(i => i.severity === 'error');
+      errorCount += errors.length;
+      console.error(`✗ ${rel}: ${errors.length} error(s), ${issues.length - errors.length} warning(s)`);
+      for (const i of issues) console.error(`  L${i.line} ${i.severity}: ${i.message}`);
+    } else {
+      console.log(`✓ ${rel}`);
+    }
+  }
+  if (errorCount) throw new Error(`Validation failed with ${errorCount} error(s)`);
+  return names;
+}
+
+async function copyDir(src, dest) {
+  await mkdir(path.dirname(dest), { recursive: true });
+  await cp(src, dest, { recursive: true });
+}
+
+async function main() {
+  const args = parseArgs(process.argv);
+  if (!args.subject) {
+    console.error('Usage: node build/cli.mjs --subject <year-N/subject-id> [--output dist/...]');
+    process.exit(1);
+  }
+
+  const subjectDir = resolveSubjectDir(args.subject);
+  const subjectRel = path.relative(path.join(ENGINE_ROOT, 'subjects'), subjectDir);
+  const outDir = args.output
+    ? path.resolve(process.cwd(), args.output)
+    : path.join(ENGINE_ROOT, 'dist', subjectRel);
+
+  const guide = await loadGuideConfig(subjectDir);
+  const parser = createParser({
+    config: {
+      lectureSplit: guide.lectureSplit,
+      lectureHeading: guide.lectureHeading,
+      partTypes: guide.partTypes,
+      callouts: guide.callouts,
+      arabicKey: guide.arabicKey,
+    },
+  });
+
+  const mdFiles = args.skipValidate
+    ? (await readdir(path.join(subjectDir, 'lectures'))).filter(n => /^par.+\.md$/i.test(n)).sort()
+    : await validateSubject(subjectDir, parser);
+
+  if (!mdFiles.length) {
+    console.log('No lecture files to build.');
+    process.exit(0);
+  }
+
+  await mkdir(outDir, { recursive: true });
+
+  // Site shell + assets
+  await copyDir(path.join(ENGINE_ROOT, 'site-shell'), outDir);
+  await copyDir(path.join(ENGINE_ROOT, 'themes'), path.join(outDir, 'themes'));
+  await copyDir(path.join(ENGINE_ROOT, 'renderer'), path.join(outDir, 'engine/renderer'));
+
+  const guideSrc = path.join(subjectDir, 'guide-config.js');
+  const guideDest = path.join(outDir, 'js/guide-config.js');
+  if (existsSync(guideSrc)) {
+    await cp(guideSrc, guideDest);
+  } else {
+    await cp(path.join(ENGINE_ROOT, 'subjects/_template/guide-config.js'), guideDest);
+  }
+
+  // Parse lectures → JSON
+  const lecturesOut = path.join(outDir, 'lectures');
+  await mkdir(lecturesOut, { recursive: true });
+
+  const manifestSrc = path.join(subjectDir, 'lectures/manifest.json');
+  const manifest = JSON.parse(await readFile(manifestSrc, 'utf8'));
+
+  const builtFiles = [];
+  for (const name of mdFiles) {
+    const text = await readFile(path.join(subjectDir, 'lectures', name), 'utf8');
+    const doc = parser.parseDocument(text);
+    const lec = doc.lectures[0];
+    const sectionIndex = lec ? parser.buildSectionIndex(lec) : {};
+    const jsonName = name.replace(/\.md$/i, '.json');
+    await writeFile(
+      path.join(lecturesOut, jsonName),
+      JSON.stringify({
+        schemaVersion: '1.0',
+        source: name,
+        parsedAt: new Date().toISOString(),
+        sectionIndex,
+        ...doc,
+      }, null, 2),
+    );
+    builtFiles.push(jsonName);
+    console.log(`  parsed → lectures/${jsonName}`);
+  }
+
+  // Update manifest paths .md → .json
+  if (manifest.files?.length) {
+    manifest.files = manifest.files.map(f => ({
+      ...f,
+      path: String(f.path).replace(/\.md$/i, '.json'),
+      source: f.path,
+    }));
+  } else {
+    manifest.files = builtFiles.map((p, i) => ({ path: p, num: i + 1 }));
+  }
+
+  await writeFile(path.join(lecturesOut, 'manifest.json'), JSON.stringify(manifest, null, 2));
+
+  const report = {
+    subject: subjectRel,
+    builtAt: new Date().toISOString(),
+    output: path.relative(ENGINE_ROOT, outDir),
+    lectures: builtFiles,
+    settings: manifest.settings || {},
+  };
+  await writeFile(path.join(outDir, 'build-report.json'), JSON.stringify(report, null, 2));
+
+  console.log(`\n✓ Built → ${outDir}`);
+  console.log(`  Deploy: drag-drop folder or GitHub Pages root = ${path.relative(ENGINE_ROOT, outDir)}`);
+}
+
+main().catch(err => {
+  console.error(err.message || err);
+  process.exit(1);
+});

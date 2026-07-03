@@ -1,0 +1,275 @@
+# Subject Brief Template — Lecture Site Engine v1.0
+# هذا الملف يغطي جميع محاضرات المادة النظريّة كاملة (Android Platform, Kotlin, App Fundamentals, Activity, Compose 1&2).
+
+schema_version: "1.0"
+
+# ─── Subject identity ─────────────────────────────────────────────────────────
+subject:
+  id: android-dev-fundamentals
+  name_ar: "أساسيات تطوير تطبيقات أندرويد (النظري الكامل)"
+  name_en: "Android Development Fundamentals (Full Theory)"
+  tagline: "منصة أندرويد كوتلن Compose"  # 4-word summary
+  section_label: "نظري"
+
+# ─── Locale & terminology ─────────────────────────────────────────────────────
+locale:
+  language: ar
+  direction: rtl
+  terms_in_backticks: true
+  inline_code_comments: english
+  extra_explanation_tag: "(شرح زيادة للفهم)"
+  not_in_lecture_tag: "(غير مشروحة في المحاضرة)"
+
+# ─── Domain ───────────────────────────────────────────────────────────────────
+domain: programming
+
+domain_profile:
+  content_types:
+    - theory
+    - code
+    - diagrams
+    - tables
+    - commands
+  forbid_adding:
+    - "Swift"
+    - "React Native"
+    - "Flutter"
+  prerequisites:
+    - "أساسيات البرمجة (متغيرات، دوال، كائنات)"
+
+# ─── Lecture heading ──────────────────────────────────────────────────────────
+lecture:
+  unit_label: "المحاضرة"
+  split_regex: "^# المحاضرة "
+  title_pattern: "# {unit_label} {num} — {title_en} ({title_ar})"
+  intro_blockquote: true
+
+# ─── Parts ────────────────────────────────────────────────────────────────────
+parts:
+
+  integration_map:
+    enabled: true
+    heading: "📌 خريطة التكامل (أين تقع هذه المادة في مسار أندرويد؟)"
+
+  detail:
+    enabled: true
+    heading: "الجزء الأول: الشرح التفصيلي (سطر بسطر / فقرة بفقرة)"
+    numbered_sections: true
+
+  summary:
+    enabled: true
+    heading: "الجزء الثاني: ملخص منظم شامل"
+    subsections:
+      - definitions_table
+      - components_table
+      - comparisons_table
+      - glossary
+      - golden_points
+      - common_mistakes_table
+      - patterns
+      - main_ideas
+
+  mcq:
+    enabled: true
+    heading: "الجزء الثالث: أسئلة اختيار من متعدد (MCQ)"
+    count: 16
+    difficulty: [medium, hard]
+    forbid_easy_literal: false
+    distribution:
+      comparisons: 25
+      code_scenario: 35
+      application: 40
+
+  debug:
+    enabled: true
+    heading: "الجزء الرابع: أسئلة تصحيح الكود"
+    count: 6
+    cover: [syntax, logic, return_check, dead_code, misconception]
+
+  exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين إضافية (من إعداد الدليل للتدريب)"
+    count_min: 5
+    count_max: 8
+    authored_by_guide: true
+    types:
+      - fill_gaps
+      - code_fix
+      - scenario
+
+  analysis_exercise:
+    enabled: false
+
+  interpreter_exercise:
+    enabled: false
+
+  trace_exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين تتبع التنفيذ"
+    count_min: 3
+
+  design_question:
+    enabled: true
+    heading: "الجزء الرابع: أسئلة تصميم"
+    count_min: 2
+    types:
+      - uml_design
+      - architecture
+
+  theory:
+    enabled: true
+    heading: "الجزء الخامس: أسئلة نظرية متوقعة بالامتحان"
+    count_min: 8
+
+  cheat_sheet:
+    enabled: true
+    heading: "الجزء السادس: ورقة المراجعة السريعة (Cheat Sheet)"
+    subsections:
+      - integration_map_table
+      - golden_rules_table
+      - quick_reference_tables
+
+  qa_cards:
+    enabled: true
+    heading: "الجزء الرابع: بطاقات سؤال وجواب (Q&A Cards)"
+    count_min: 12
+
+  reference_code:
+    enabled: true
+    heading: "الجزء الخامس: الكود النهائي الكامل (مرجع شامل)"
+
+  checklist:
+    enabled: true
+    heading: "الجزء السادس: قائمة فحص ذاتي قبل الامتحان ✅"
+
+# ─── Blocks ───────────────────────────────────────────────────────────────────
+blocks:
+
+  original_quote:
+    enabled: true
+
+  simplified_explanation:
+    enabled: true
+
+  code:
+    enabled: true
+    languages: [kotlin, xml, groovy, bash]
+    require_line_explain: true
+
+  line_explain:
+    enabled: true
+    format: numbered_list
+
+  imports:
+    enabled: true
+
+  expected_output:
+    enabled: true
+
+  troubleshooting:
+    enabled: true
+
+  diagrams:
+    enabled: true
+    types: [flowchart, decision-tree]
+    require_node_table: true
+    require_edge_table: true
+
+  uml:
+    enabled: true
+    types: [class, activity, flowchart]
+
+  screen_description:
+    enabled: true
+
+  algorithm:
+    enabled: true
+
+  structured_english:
+    enabled: false
+
+  compare:
+    enabled: true
+
+  callouts:
+    enabled: true
+
+  think_prompt:
+    enabled: true
+    min_per_lecture: 3
+
+  tables:
+    enabled: true
+
+  fill_gaps:
+    enabled: true
+
+  code_fix:
+    enabled: true
+
+  images_note:
+    enabled: true
+
+  qa_inline:
+    enabled: true
+
+  analogy:
+    enabled: true
+
+  trade_off:
+    enabled: true
+
+  before_after:
+    enabled: true
+
+  trace:
+    enabled: true
+
+# ─── Pedagogy flags ───────────────────────────────────────────────────────────
+pedagogy:
+  cover_every_line: true
+  complete_gaps: true
+  beginner_friendly: true
+  explain_why: true
+  daily_analogy_plus_example: true
+  follow_lecture_order: true
+  adapt_to_lecture_type: true
+
+  lecture_types:
+    - match: "Android Platform"
+      tools: ["Linux Kernel", "HAL", "ART", "Native Libraries", "Java API Framework", "System Apps", "Gradle"]
+    - match: "Kotlin Basics"
+      tools: ["val/var", "Type Inference", "if/when", "Null Safety (?.)", "Functions", "Lambdas", "repeat()"]
+    - match: "Kotlin OOP"
+      tools: ["class", "primary/secondary constructor", "inheritance", "override", "super", "visibility modifiers", "property delegates"]
+    - match: "Kotlin Advanced"
+      tools: ["Generics", "enum class", "data class", "singleton object", "companion object", "extension functions", "scope functions (let, apply)"]
+    - match: "App Fundamentals"
+      tools: ["Activity", "Service", "Broadcast Receiver", "Content Provider", "AndroidManifest.xml", "App Resources"]
+    - match: "Activity & Intents"
+      tools: ["Activity Lifecycle (onCreate, onStart, onResume...)", "Explicit Intent", "Implicit Intent", "Intent Filter", "Intent Resolution"]
+    - match: "Compose UI"
+      tools: ["@Composable", "Column/Row/Box", "Modifier", "Recomposition", "Phases (Composition, Layout, Drawing)"]
+    - match: "Compose State & Navigation"
+      tools: ["remember", "mutableStateOf", "Stateful vs Stateless", "State Hoisting", "NavController", "NavHost", "popBackStack"]
+
+# ─── Assessment ───────────────────────────────────────────────────────────────
+assessment:
+  mcq_option_letters: arabic
+
+# ─── Output ───────────────────────────────────────────────────────────────────
+output:
+  validation_footer: true
+  closing_line: "ابدأ الآن. سأرسل المحاضرة في الرسالة التالية."
+
+  checklist_items:
+    - "غطّيت كل معلومة وردت في جميع محاضرات الملف"
+    - "كل قسم يبدأ بـ «النص الأصلي يقول» + «الشرح المبسّط»"
+    - "الأقسام مرقّمة هرمياً (1، 1.1، 2 …)"
+    - "استخدمت جداول لكل مقارنة وقائمة تعريفات"
+    - "كل مصطلح إنجليزي بين backticks"
+    - "شرحت كل مثال كود سطر بسطر"
+    - "غطّيت مراحل Compose الثلاث ودورة حياة Activity"
+    - "شرحت Modifiers وأنواعها الشائعة"
+    - "وضّحت الفرق بين declarative و imperative"
+    - "شرحت مفهوم State Hoisting و Navigation مع الأمثلة"

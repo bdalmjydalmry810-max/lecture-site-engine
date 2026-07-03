@@ -1,0 +1,104 @@
+/**
+ * ═══════════════════════════════════════════════════════
+ *  🎨 ثيم هذا المجلد — غيّر الألوان هنا فقط
+ * ═══════════════════════════════════════════════════════
+ *
+ *  أزرق حيوي + لافندر خفيف (بدون teal).
+ *  tokens.css يوفّر النظام؛ هذا الملف يحدّد روح الألوان.
+ */
+
+:root {
+  /* Primary — أزرق حيوي */
+  --palette-primary: #1064e0;
+  --palette-primary-bright: #5b9cff;
+  --palette-primary-container: #1a75f5;
+  --palette-primary-fixed: #dbe8ff;
+  --palette-on-primary: #ffffff;
+  --palette-on-primary-container: #f5f9ff;
+  --palette-on-primary-fixed: #0a1e42;
+  --palette-on-primary-fixed-variant: #0047a8;
+  --palette-primary-fixed-dim: #93c0ff;
+  --palette-primary-dark-fixed-bg: #152a52;
+  --palette-primary-dark-fixed-text: #c8dcff;
+
+  /* Secondary — لافندر/بنفسجي فاتح (مو teal) */
+  --palette-secondary: #6d5ce7;
+  --palette-secondary-container: #8575f2;
+  --palette-secondary-fixed: #ebe6ff;
+  --palette-secondary-fixed-dim: #c4b8ff;
+  --palette-secondary-accent: #a99dff;
+  --palette-on-secondary: #ffffff;
+  --palette-on-secondary-container: #faf9ff;
+  --palette-on-secondary-fixed: #1e0f5c;
+  --palette-on-secondary-fixed-variant: #3d2a9e;
+  --palette-secondary-dark-bg: #2a2460;
+  --palette-secondary-dark-bg-hover: #352e75;
+  --palette-secondary-dark-text: #ddd6ff;
+  --palette-secondary-dark-surface: #221d52;
+
+  /* Tertiary — coral وردي للّمسات الدافئة */
+  --palette-tertiary: #d94a72;
+  --palette-tertiary-container: #e86388;
+  --palette-tertiary-fixed: #ffe0ea;
+  --palette-tertiary-fixed-dim: #ffb3c8;
+  --palette-on-tertiary: #ffffff;
+  --palette-on-tertiary-container: #fff8fa;
+  --palette-on-tertiary-fixed: #4a0a1f;
+  --palette-on-tertiary-fixed-variant: #8c2347;
+  --palette-tertiary-dark-bg: #3d1a2a;
+
+  /* Surfaces — خلفية حية مائلة للأزرق واللافندر */
+  --palette-background: #eef3ff;
+  --palette-surface: #f4f7ff;
+  --palette-surface-bright: #fafbff;
+  --palette-surface-variant: #e2e8f8;
+  --palette-surface-container-lowest: #ffffff;
+  --palette-surface-container-low: #e8efff;
+  --palette-surface-container: #dfe8fc;
+  --palette-surface-container-high: #d5e0fa;
+  --palette-surface-container-highest: #cad6f5;
+  --palette-surface-tint: #1064e0;
+  --palette-outline-variant: #b8c4de;
+
+  --palette-spinner-active: #1064e0;
+  --palette-spinner-active-dark: #5b9cff;
+  --palette-shadow-border-dark: #2a4070;
+
+  /* Atmosphere — تدرجات الخلفية */
+  --brand-glow-blue: color-mix(in srgb, var(--palette-primary) 14%, transparent);
+  --brand-glow-violet: color-mix(in srgb, var(--palette-secondary) 11%, transparent);
+  --brand-glow-coral: color-mix(in srgb, var(--palette-tertiary) 7%, transparent);
+
+  /* Lecture card accents — ألوان متنوعة */
+  --t-lecture-accent-1: var(--palette-primary);
+  --t-lecture-accent-2: var(--palette-secondary);
+  --t-lecture-accent-3: var(--palette-tertiary);
+  --t-lecture-accent-4: var(--palette-primary-container);
+  --t-lecture-accent-5: var(--palette-secondary-container);
+  --t-lecture-accent-6: var(--palette-tertiary-container);
+  --t-lecture-accent-7: var(--palette-primary-bright);
+  --t-lecture-accent-8: var(--palette-secondary-accent);
+}
+
+.dark {
+  --palette-dm-bg: #070d1a;
+  --palette-dm-surface: #0c1528;
+  --palette-dm-elevated: #111f38;
+  --palette-dm-elevated-2: #182948;
+  --palette-dm-border: #2a4070;
+  --palette-dm-text: #eef3ff;
+  --palette-dm-text-muted: #9eb0d4;
+
+  --brand-glow-blue: color-mix(in srgb, var(--palette-primary-bright) 16%, transparent);
+  --brand-glow-violet: color-mix(in srgb, var(--palette-secondary-accent) 12%, transparent);
+  --brand-glow-coral: color-mix(in srgb, var(--palette-tertiary-fixed-dim) 8%, transparent);
+
+  --t-lecture-accent-1: var(--palette-primary-bright);
+  --t-lecture-accent-2: var(--palette-secondary-accent);
+  --t-lecture-accent-3: var(--palette-tertiary-fixed-dim);
+  --t-lecture-accent-4: var(--palette-primary-container);
+  --t-lecture-accent-5: var(--palette-secondary-container);
+  --t-lecture-accent-6: var(--palette-tertiary-container);
+  --t-lecture-accent-7: var(--palette-primary-bright);
+  --t-lecture-accent-8: var(--palette-secondary-accent);
+}

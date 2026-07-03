@@ -1,0 +1,54 @@
+{
+  "version": "1.0",
+  "default": "amber-default",
+  "themes": [
+    {
+      "id": "amber-default",
+      "name_ar": "ذهبي كلاسيكي",
+      "name_en": "Classic Amber",
+      "description": "الافتراضي — ذهبي + أزرق + بني (tokens-base)",
+      "file": "amber-default.css",
+      "usedBy": ["generic"]
+    },
+    {
+      "id": "kotlin-pink-blue",
+      "name_ar": "زهري + أزرق",
+      "name_en": "Pink & Blue",
+      "description": "Kotlin / Android — زهري hero + أزرق accent + سماوي",
+      "file": "kotlin-pink-blue.css",
+      "usedBy": ["kotlin-android"]
+    },
+    {
+      "id": "software-purple",
+      "name_ar": "موف احترافي",
+      "name_en": "Professional Purple",
+      "description": "Software Engineering — موف + أزرق + وردي",
+      "file": "software-purple.css",
+      "usedBy": ["software-eng", "software2"]
+    },
+    {
+      "id": "programming-blue-lavender",
+      "name_ar": "أزرق + لافندر",
+      "name_en": "Blue & Lavender",
+      "description": "Programming Languages — أزرق حيوي + بنفسجي فاتح",
+      "file": "programming-blue-lavender.css",
+      "usedBy": ["programming-lang"]
+    },
+    {
+      "id": "parallel-teal",
+      "name_ar": "أخضر تيل",
+      "name_en": "Teal Green",
+      "description": "Parallel / Kinetic — أخضر تيل + أزرق",
+      "file": "parallel-teal.css",
+      "usedBy": ["parallel"]
+    },
+    {
+      "id": "gis-earth",
+      "name_ar": "أرض GIS",
+      "name_en": "GIS Earth",
+      "description": "Data Operations / GIS — أخضر + أزرق + بني",
+      "file": "gis-earth.css",
+      "usedBy": ["data-operations"]
+    }
+  ]
+}

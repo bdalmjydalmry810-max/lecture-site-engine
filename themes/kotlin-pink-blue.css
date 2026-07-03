@@ -1,0 +1,123 @@
+/**
+ * ═══════════════════════════════════════════════════════
+ *  🎨 ثيم Kotlin — زهري + أزرق
+ * ═══════════════════════════════════════════════════════
+ */
+
+:root {
+  /* ── Hero (زهري) ── */
+  --brand-hero: #ec4899;
+  --brand-hero-bright: #f472b6;
+  --brand-hero-container: #db2777;
+  --brand-hero-fixed: #fce7f3;
+  --brand-hero-fixed-dim: #f9a8d4;
+  --brand-hero-on: #ffffff;
+  --brand-hero-on-container: #fff5f8;
+  --brand-hero-on-fixed: #500724;
+  --brand-hero-on-fixed-variant: #9d174d;
+  --brand-hero-dark-bg: #3b0a28;
+  --brand-hero-dark-text: #fbcfe8;
+
+  /* ── Accent (أزرق) ── */
+  --brand-accent: #2563eb;
+  --brand-accent-container: #3b82f6;
+  --brand-accent-fixed: #dbeafe;
+  --brand-accent-fixed-dim: #93c5fd;
+  --brand-accent-bright: #60a5fa;
+  --brand-accent-on: #ffffff;
+  --brand-accent-on-container: #eff6ff;
+  --brand-accent-on-fixed: #1e3a8a;
+  --brand-accent-on-fixed-variant: #1d4ed8;
+  --brand-accent-dark-bg: #1e3a8a;
+  --brand-accent-dark-bg-hover: #1e40af;
+  --brand-accent-dark-text: #bfdbfe;
+  --brand-accent-dark-surface: #172554;
+
+  --palette-primary: var(--brand-hero);
+  --palette-primary-bright: var(--brand-hero-bright);
+  --palette-primary-container: var(--brand-hero-container);
+  --palette-primary-fixed: var(--brand-hero-fixed);
+  --palette-on-primary: var(--brand-hero-on);
+  --palette-on-primary-container: var(--brand-hero-on-container);
+  --palette-on-primary-fixed: var(--brand-hero-on-fixed);
+  --palette-on-primary-fixed-variant: var(--brand-hero-on-fixed-variant);
+  --palette-primary-fixed-dim: var(--brand-hero-fixed-dim);
+  --palette-primary-dark-fixed-bg: var(--brand-hero-dark-bg);
+  --palette-primary-dark-fixed-text: var(--brand-hero-dark-text);
+
+  --palette-secondary: var(--brand-accent);
+  --palette-secondary-container: var(--brand-accent-container);
+  --palette-secondary-fixed: var(--brand-accent-fixed);
+  --palette-secondary-fixed-dim: var(--brand-accent-fixed-dim);
+  --palette-secondary-accent: var(--brand-accent-bright);
+  --palette-on-secondary: var(--brand-accent-on);
+  --palette-on-secondary-container: var(--brand-accent-on-container);
+  --palette-on-secondary-fixed: var(--brand-accent-on-fixed);
+  --palette-on-secondary-fixed-variant: var(--brand-accent-on-fixed-variant);
+  --palette-secondary-dark-bg: var(--brand-accent-dark-bg);
+  --palette-secondary-dark-bg-hover: var(--brand-accent-dark-bg-hover);
+  --palette-secondary-dark-text: var(--brand-accent-dark-text);
+  --palette-secondary-dark-surface: var(--brand-accent-dark-surface);
+
+  --palette-tertiary: #00BCD4;
+  --palette-tertiary-container: #26C6DA;
+  --palette-tertiary-fixed: #E0F7FA;
+  --palette-tertiary-fixed-dim: #80DEEA;
+  --palette-on-tertiary: #003640;
+  --palette-on-tertiary-container: #F0FDFF;
+  --palette-on-tertiary-fixed: #006064;
+  --palette-on-tertiary-fixed-variant: #00838F;
+  --palette-tertiary-dark-bg: #004D57;
+
+  --palette-background: #fef7f9;
+  --palette-surface: #fffbfc;
+  --palette-surface-bright: #ffffff;
+  --palette-surface-variant: #e8f0ff;
+  --palette-surface-container-lowest: #ffffff;
+  --palette-surface-container-low: #fff5f8;
+  --palette-surface-container: #fce8f0;
+  --palette-surface-container-high: #e8f0ff;
+  --palette-surface-container-highest: #dbeafe;
+  --palette-surface-tint: var(--brand-hero);
+  --palette-outline-variant: #f9a8d4;
+
+  --palette-spinner-active: var(--brand-hero);
+  --palette-spinner-active-dark: var(--brand-hero-bright);
+  --palette-shadow-border-dark: #831843;
+
+  --brand-glow-violet: color-mix(in srgb, var(--brand-hero) 16%, transparent);
+  --brand-glow-blue: color-mix(in srgb, var(--brand-accent) 12%, transparent);
+  --brand-glow-coral: color-mix(in srgb, var(--palette-tertiary) 8%, transparent);
+
+  --t-lecture-accent-1: var(--palette-primary);
+  --t-lecture-accent-2: var(--palette-secondary);
+  --t-lecture-accent-3: var(--palette-tertiary);
+  --t-lecture-accent-4: var(--palette-primary-container);
+  --t-lecture-accent-5: var(--palette-secondary-container);
+  --t-lecture-accent-6: var(--palette-tertiary-container);
+  --t-lecture-accent-7: var(--palette-primary-bright);
+  --t-lecture-accent-8: var(--palette-secondary-accent);
+}
+
+.dark {
+  --palette-dm-bg: #0a0a14;
+  --palette-dm-surface: #10121f;
+  --palette-dm-elevated: #161b30;
+  --palette-dm-elevated-2: #1c2440;
+  --palette-dm-border: #1e40af;
+  --palette-dm-text: #fff5f8;
+  --palette-dm-text-muted: #f9a8d4;
+
+  --brand-glow-violet: color-mix(in srgb, var(--brand-hero-bright) 18%, transparent);
+  --brand-glow-blue: color-mix(in srgb, var(--brand-accent-bright) 12%, transparent);
+  --brand-glow-coral: color-mix(in srgb, var(--palette-tertiary-fixed-dim) 9%, transparent);
+
+  --t-lecture-accent-1: var(--palette-primary-bright);
+  --t-lecture-accent-2: var(--palette-secondary-accent);
+  --t-lecture-accent-3: var(--palette-tertiary-fixed-dim);
+  --t-lecture-accent-4: var(--palette-primary-container);
+  --t-lecture-accent-5: var(--palette-secondary-container);
+  --t-lecture-accent-6: var(--palette-tertiary-container);
+  --t-lecture-accent-7: var(--palette-primary-bright);
+  --t-lecture-accent-8: var(--palette-secondary-accent);
+}

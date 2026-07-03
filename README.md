@@ -59,19 +59,47 @@ Add the file to `lectures/manifest.json` and serve statically:
 python3 -m http.server 8080
 ```
 
+### 5. Theme & site metadata
+
+Each subject declares theme and display name in `lectures/manifest.json`:
+
+```json
+"settings": {
+  "subjectName": "تطوير تطبيقات Android",
+  "subjectNameEn": "Kotlin & Compose",
+  "year": "2025-2026",
+  "theme": "kotlin-pink-blue"
+}
+```
+
+See [`themes/README.md`](themes/README.md) for available palettes and wiring.
+
 ## Folder layout
 
 ```
 lecture-site-engine/
+├── subjects/                   # Content per year + subject (contributors edit here)
+│   ├── _template/
+│   ├── year-1/ … year-5/
+├── site-shell/                 # Generic HTML/CSS/JS student UI
+├── build/                      # validate.mjs + cli.mjs
+├── dist/                       # Build output (gitignored)
+├── parser/                     # MD → JSON
+├── renderer/                   # JSON → HTML
+├── themes/                     # Shared palettes + apply-theme.js
 ├── meta-prompt.md              # Meta-prompt → custom_prompt.md
-├── SCHEMA.md                   # Fixed block markers (parser contract)
-├── subject-brief.template.yaml # Master template (all parts/blocks)
-├── subject-brief.yaml          # → copy template or use examples/
-├── templates/                  # Compact snippets for enabled parts
-├── examples/                   # Filled briefs per subject
-├── parser/                     # Modular block + part parser (see parser/README.md)
-├── renderer/                   # Modular block + part HTML renderer (see renderer/README.md)
-└── rerender/                   # (future) lint / validate CLI
+├── SCHEMA.md                   # Fixed block markers
+├── templates/                  # Compact snippets for prompts
+└── examples/                   # Filled subject-brief YAMLs
+```
+
+## Build & validate
+
+```bash
+npm test
+npm run validate -- --subject year-1/my-subject
+npm run build -- --subject year-1/my-subject
+cd dist/year-1/my-subject && python3 -m http.server 8080
 ```
 
 ## Pipeline
@@ -139,8 +167,24 @@ Set in your brief:
 - `lecture.split_regex` → same as `lectureSplit` in guide-config
 - Part headings → must contain keywords in `partTypes` regex (e.g. `MCQ`, `تصحيح`, `تمارين`)
 
+## CI / GitHub Pages
+
+| Workflow | When | What |
+| --- | --- | --- |
+| [`.github/workflows/validate.yml`](.github/workflows/validate.yml) | Pull Request | Validate changed `subjects/…/lectures/*.md` — **merge blocked if red** (enable branch protection) |
+| [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) | Push to `main` | Build → `dist/` → deploy one Pages site |
+
+**Pages URLs:**
+- Hub: `https://<user>.github.io/<repo>/`
+- Subject: `https://<user>.github.io/<repo>/year-3/my-subject/`
+
+**One-time GitHub setup:**
+1. Settings → Pages → Source: **GitHub Actions**
+2. Settings → Branches → `main` → require **Validate lectures** check before merge
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Future work
 
-- Wire `parser/` into remaining subject sites (replace per-site `parser.js`)
-- Wire `renderer/` into remaining subject sites (kotlin done)
-- `rerender/` — `lint lectures/par1.md` against SCHEMA.md
+- Decap CMS contributor UI (`admin/`)
+- Wire remaining legacy sites to shared engine

@@ -1,0 +1,251 @@
+/**
+ * ═══════════════════════════════════════════════════════
+ *  🎨 مصدر الألوان الوحيد — عدّل القيم هنا فقط
+ * ═══════════════════════════════════════════════════════
+ *
+ *  lecture-site-engine/themes/tokens-base.css — semantic token system (shared)
+ *  Palette colors come from manifest.settings.theme → themes/{theme}.css
+ */
+
+:root {
+  /* ── Palette (القيم الحرفية الوحيدة في المشروع) ── */
+  --palette-primary: #7a6200;
+  --palette-primary-bright: #f0d060;
+  --palette-primary-container: #a68600;
+  --palette-primary-fixed: #fff0a3;
+  --palette-on-primary: #ffffff;
+  --palette-on-primary-container: #fffbf0;
+  --palette-on-primary-fixed: #261a00;
+  --palette-on-primary-fixed-variant: #4d3d00;
+  --palette-primary-fixed-dim: #f0d060;
+  --palette-primary-dark-fixed-bg: #35300f;
+  --palette-primary-dark-fixed-text: #f5f0b8;
+
+  --palette-secondary: #0058be;
+  --palette-secondary-container: #2170e4;
+  --palette-secondary-fixed: #d8e2ff;
+  --palette-secondary-fixed-dim: #adc6ff;
+  --palette-secondary-accent: #8ab4ff;
+  --palette-on-secondary: #ffffff;
+  --palette-on-secondary-container: #fefcff;
+  --palette-on-secondary-fixed: #001a42;
+  --palette-on-secondary-fixed-variant: #004395;
+  --palette-secondary-dark-bg: #152a45;
+  --palette-secondary-dark-bg-hover: #1a3050;
+  --palette-secondary-dark-text: #c8d8ff;
+  --palette-secondary-dark-surface: #152a45;
+
+  --palette-tertiary: #924628;
+  --palette-tertiary-container: #b05e3d;
+  --palette-tertiary-fixed: #ffdbce;
+  --palette-tertiary-fixed-dim: #ffb59a;
+  --palette-on-tertiary: #ffffff;
+  --palette-on-tertiary-container: #fffbff;
+  --palette-on-tertiary-fixed: #370e00;
+  --palette-on-tertiary-fixed-variant: #773215;
+  --palette-tertiary-dark-bg: #3d2618;
+  --palette-flow-backward: #c45c00;
+  --palette-flow-backward-dark: #f0a060;
+
+  --palette-error: #ba1a1a;
+  --palette-error-container: #ffdad6;
+  --palette-on-error: #ffffff;
+  --palette-on-error-container: #93000a;
+  --palette-error-dark-bg: #3a1c1c;
+  --palette-error-dark-text: #ffc8c4;
+
+  --palette-background: #faf8f5;
+  --palette-surface: #faf8f5;
+  --palette-surface-bright: #faf8f5;
+  --palette-surface-dim: #d6dbd9;
+  --palette-surface-variant: #e4e1de;
+  --palette-surface-container-lowest: #ffffff;
+  --palette-surface-container-low: #f5f3f0;
+  --palette-surface-container: #efede8;
+  --palette-surface-container-high: #e9e7e4;
+  --palette-surface-container-highest: #dee4e1;
+  --palette-surface-tint: #7a6200;
+  --palette-on-surface: #171d1c;
+  --palette-on-surface-variant: #3d4947;
+  --palette-on-background: #171d1c;
+  --palette-inverse-surface: #2c3130;
+  --palette-inverse-on-surface: #f2f0ed;
+  --palette-outline: #6d7a77;
+  --palette-outline-variant: #c9c3b8;
+
+  --palette-code-bg: #f6f8fa;
+  --palette-code-text: #24292f;
+  --palette-code-header-bg: #efede8;
+  --palette-code-header-text: #171d1c;
+  --palette-code-border: #c9c3b8;
+  --palette-code-bg-dark: #011627;
+  --palette-code-text-dark: #d6deeb;
+  --palette-code-header-bg-dark: #1e293b;
+  --palette-code-header-text-dark: #f2f0ed;
+  --palette-code-border-dark: #334155;
+
+  --palette-spinner-track: #c9c3b8;
+  --palette-spinner-active: #7a6200;
+  --palette-spinner-track-dark: #475569;
+  --palette-spinner-active-dark: #f0d060;
+
+  --palette-shadow-black: #000000;
+  --palette-shadow-border-dark: #52492a;
+
+  --palette-dm-bg: #1a1708;
+  --palette-dm-surface: #201c0d;
+  --palette-dm-elevated: #292513;
+  --palette-dm-elevated-2: #38321a;
+  --palette-dm-border: #52492a;
+  --palette-dm-text: #f5f2e8;
+  --palette-dm-text-muted: #c4bca8;
+
+  /* ── Semantic tokens (light mode) ── */
+  --color-primary: var(--palette-primary);
+  --color-primary-container: var(--palette-primary-container);
+  --color-primary-fixed: var(--palette-primary-fixed);
+  --color-primary-fixed-dim: var(--palette-primary-fixed-dim);
+  --color-inverse-primary: var(--palette-primary-bright);
+  --color-on-primary: var(--palette-on-primary);
+  --color-on-primary-container: var(--palette-on-primary-container);
+  --color-on-primary-fixed: var(--palette-on-primary-fixed);
+  --color-on-primary-fixed-variant: var(--palette-on-primary-fixed-variant);
+
+  --color-secondary: var(--palette-secondary);
+  --color-secondary-container: var(--palette-secondary-container);
+  --color-secondary-fixed: var(--palette-secondary-fixed);
+  --color-secondary-fixed-dim: var(--palette-secondary-fixed-dim);
+  --color-secondary-accent: var(--palette-secondary-accent);
+  --color-on-secondary: var(--palette-on-secondary);
+  --color-on-secondary-container: var(--palette-on-secondary-container);
+  --color-on-secondary-fixed: var(--palette-on-secondary-fixed);
+  --color-on-secondary-fixed-variant: var(--palette-on-secondary-fixed-variant);
+
+  --color-tertiary: var(--palette-tertiary);
+  --color-tertiary-container: var(--palette-tertiary-container);
+  --color-tertiary-fixed: var(--palette-tertiary-fixed);
+  --color-tertiary-fixed-dim: var(--palette-tertiary-fixed-dim);
+  --color-on-tertiary: var(--palette-on-tertiary);
+  --color-on-tertiary-container: var(--palette-on-tertiary-container);
+  --color-on-tertiary-fixed: var(--palette-on-tertiary-fixed);
+  --color-on-tertiary-fixed-variant: var(--palette-on-tertiary-fixed-variant);
+  --color-flow-backward: var(--palette-flow-backward);
+  --color-flow-backward-dark: var(--palette-flow-backward-dark);
+
+  --color-error: var(--palette-error);
+  --color-error-container: var(--palette-error-container);
+  --color-on-error: var(--palette-on-error);
+  --color-on-error-container: var(--palette-on-error-container);
+
+  --color-background: var(--palette-background);
+  --color-surface: var(--palette-surface);
+  --color-surface-bright: var(--palette-surface-bright);
+  --color-surface-dim: var(--palette-surface-dim);
+  --color-surface-variant: var(--palette-surface-variant);
+  --color-surface-container-lowest: var(--palette-surface-container-lowest);
+  --color-surface-container-low: var(--palette-surface-container-low);
+  --color-surface-container: var(--palette-surface-container);
+  --color-surface-container-high: var(--palette-surface-container-high);
+  --color-surface-container-highest: var(--palette-surface-container-highest);
+  --color-surface-tint: var(--palette-surface-tint);
+  --color-on-surface: var(--palette-on-surface);
+  --color-on-surface-variant: var(--palette-on-surface-variant);
+  --color-on-background: var(--palette-on-background);
+  --color-inverse-surface: var(--palette-inverse-surface);
+  --color-inverse-on-surface: var(--palette-inverse-on-surface);
+  --color-outline: var(--palette-outline);
+  --color-outline-variant: var(--palette-outline-variant);
+
+  --code-bg: var(--palette-code-bg);
+  --code-text: var(--palette-code-text);
+  --code-header-bg: var(--palette-code-header-bg);
+  --code-header-text: var(--palette-code-header-text);
+  --code-border: var(--palette-code-border);
+
+  --spinner-track: var(--palette-spinner-track);
+  --spinner-active: var(--palette-spinner-active);
+
+  /* Alpha mixes */
+  --primary-a5: color-mix(in srgb, var(--color-primary) 5%, transparent);
+  --primary-a8: color-mix(in srgb, var(--color-primary) 8%, transparent);
+  --primary-a10: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  --primary-a12: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  --primary-a15: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  --primary-a18: color-mix(in srgb, var(--color-primary) 18%, transparent);
+  --primary-a20: color-mix(in srgb, var(--color-primary) 20%, transparent);
+  --primary-a22: color-mix(in srgb, var(--color-primary) 22%, transparent);
+  --primary-a28: color-mix(in srgb, var(--color-primary) 28%, transparent);
+  --primary-a40: color-mix(in srgb, var(--color-primary) 40%, transparent);
+
+  --inverse-primary-a8: color-mix(in srgb, var(--color-inverse-primary) 8%, transparent);
+  --inverse-primary-a10: color-mix(in srgb, var(--color-inverse-primary) 10%, transparent);
+  --inverse-primary-a12: color-mix(in srgb, var(--color-inverse-primary) 12%, transparent);
+  --inverse-primary-a14: color-mix(in srgb, var(--color-inverse-primary) 14%, transparent);
+  --inverse-primary-a15: color-mix(in srgb, var(--color-inverse-primary) 15%, transparent);
+  --inverse-primary-a18: color-mix(in srgb, var(--color-inverse-primary) 18%, transparent);
+  --inverse-primary-a22: color-mix(in srgb, var(--color-inverse-primary) 22%, transparent);
+  --inverse-primary-a25: color-mix(in srgb, var(--color-inverse-primary) 25%, transparent);
+  --inverse-primary-a30: color-mix(in srgb, var(--color-inverse-primary) 30%, transparent);
+  --inverse-primary-a35: color-mix(in srgb, var(--color-inverse-primary) 35%, transparent);
+
+  --secondary-fixed-a35: color-mix(in srgb, var(--color-secondary) 35%, transparent);
+  --secondary-fixed-a55: color-mix(in srgb, var(--color-secondary-fixed) 55%, transparent);
+  --secondary-accent-a25: color-mix(in srgb, var(--color-secondary-accent) 25%, transparent);
+  --secondary-dark-surface-a55: color-mix(in srgb, var(--palette-secondary-dark-surface) 55%, transparent);
+  --error-dark-bg-a45: color-mix(in srgb, var(--palette-error-dark-bg) 45%, transparent);
+
+  /* Shadows */
+  --shadow-primary-sm: color-mix(in srgb, var(--color-primary) 5%, transparent);
+  --shadow-primary-xs: color-mix(in srgb, var(--color-primary) 3%, transparent);
+  --shadow-primary-md: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  --shadow-primary-lg: color-mix(in srgb, var(--color-primary) 35%, transparent);
+  --shadow-inverse-primary-md: color-mix(in srgb, var(--color-inverse-primary) 25%, transparent);
+  --shadow-black-35: color-mix(in srgb, var(--palette-shadow-black) 35%, transparent);
+  --shadow-black-40: color-mix(in srgb, var(--palette-shadow-black) 40%, transparent);
+  --shadow-black-45: color-mix(in srgb, var(--palette-shadow-black) 45%, transparent);
+  --shadow-black-50: color-mix(in srgb, var(--palette-shadow-black) 50%, transparent);
+  --shadow-border-dark-40: color-mix(in srgb, var(--palette-shadow-border-dark) 40%, transparent);
+  --shadow-border-dark-50: color-mix(in srgb, var(--palette-shadow-border-dark) 50%, transparent);
+
+  /* Lecture accents */
+  --t-lecture-accent-1: var(--palette-primary);
+  --t-lecture-accent-2: var(--palette-secondary);
+  --t-lecture-accent-3: var(--palette-tertiary);
+  --t-lecture-accent-4: var(--palette-primary-container);
+  --t-lecture-accent-5: var(--palette-secondary-container);
+  --t-lecture-accent-6: var(--palette-tertiary-container);
+  --t-lecture-accent-7: var(--palette-primary-bright);
+  --t-lecture-accent-8: var(--palette-secondary-fixed-dim);
+}
+
+.dark {
+  /* Dark amber surfaces */
+  --dm-bg: var(--palette-dm-bg);
+  --dm-surface: var(--palette-dm-surface);
+  --dm-elevated: var(--palette-dm-elevated);
+  --dm-elevated-2: var(--palette-dm-elevated-2);
+  --dm-border: var(--palette-dm-border);
+  --dm-text: var(--palette-dm-text);
+  --dm-text-muted: var(--palette-dm-text-muted);
+
+  --color-primary: var(--palette-primary-bright);
+  --color-inverse-primary: var(--palette-primary-bright);
+
+  --code-bg: var(--palette-code-bg-dark);
+  --code-text: var(--palette-code-text-dark);
+  --code-header-bg: var(--palette-code-header-bg-dark);
+  --code-header-text: var(--palette-code-header-text-dark);
+  --code-border: var(--palette-code-border-dark);
+
+  --spinner-track: var(--palette-spinner-track-dark);
+  --spinner-active: var(--palette-spinner-active-dark);
+
+  --t-lecture-accent-1: var(--palette-primary-bright);
+  --t-lecture-accent-2: var(--palette-secondary-fixed-dim);
+  --t-lecture-accent-3: var(--palette-tertiary-fixed-dim);
+  --t-lecture-accent-4: var(--palette-primary-container);
+  --t-lecture-accent-5: var(--palette-secondary-container);
+  --t-lecture-accent-6: var(--palette-tertiary-container);
+  --t-lecture-accent-7: var(--palette-primary-bright);
+  --t-lecture-accent-8: var(--palette-secondary-fixed-dim);
+}

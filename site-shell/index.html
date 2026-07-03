@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Guide</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" id="hljsTheme">
+  <link rel="stylesheet" href="themes/tokens-base.css">
+  <link id="siteTheme" rel="stylesheet" href="themes/amber-default.css">
+  <script src="css/tailwind-config.js"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-background text-on-surface scroll-smooth">
+  <header class="bg-surface border-b border-outline-variant flex justify-between items-center w-full px-lg h-16 sticky top-0 z-50">
+    <div class="flex items-center gap-md">
+      <button type="button" id="backToHomeBtn" class="hidden p-base rounded-full hover:bg-surface-variant transition-all" aria-label="العودة للمحاضرات">
+        <span class="material-symbols-outlined text-primary">arrow_forward</span>
+      </button>
+      <button type="button" id="brandBtn" class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary hover:opacity-80 transition-opacity text-right">
+        <span id="appBrand">Study Guide</span>
+      </button>
+    </div>
+    <div class="hidden md:flex items-center gap-md text-on-surface-variant font-label-md">
+      <span id="heroSub">دليل دراسي تفاعلي</span>
+    </div>
+    <button type="button" id="themeToggle" class="p-base rounded-full hover:bg-surface-variant transition-all" aria-label="تبديل الوضع">
+      <span class="material-symbols-outlined text-on-surface-variant" id="themeIcon">dark_mode</span>
+    </button>
+  </header>
+
+  <div id="homeView" class="min-h-[calc(100vh-64px)]">
+    <div class="max-w-container-max mx-auto px-lg md:px-xl py-xl">
+      <section class="text-center mb-xl">
+        <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary dark:text-inverse-primary mb-md" id="homeTitle">Study Guide</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto" id="homeSubtitle"></p>
+        <div class="disclaimers-stack mt-lg max-w-2xl mx-auto">
+          <div class="ai-disclaimer" role="note">
+            <span class="material-symbols-outlined ai-disclaimer__icon" aria-hidden="true">smart_toy</span>
+            <p class="ai-disclaimer__text"><strong>تنبيه:</strong> المحتوى مُولَّد بمساعدة AI. دليل <strong id="aiDisclaimerSubject">المادة</strong> غير مسؤول عن أي نقص أو خطأ.</p>
+          </div>
+        </div>
+      </section>
+      <div class="flex items-center gap-md mb-lg">
+        <span class="material-symbols-outlined text-primary">school</span>
+        <h2 class="font-headline-md text-headline-md text-on-surface">المحاضرات</h2>
+      </div>
+      <div id="lectureGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-lg"></div>
+    </div>
+  </div>
+
+  <div id="lectureView" class="hidden flex">
+    <aside class="hidden lg:flex flex-col h-[calc(100vh-64px)] w-80 bg-surface-container-low border-l border-outline-variant sticky top-16 overflow-hidden">
+      <div id="sidebarCourse" class="p-lg flex flex-col items-center border-b border-outline-variant shrink-0">
+        <span class="material-symbols-outlined text-primary scale-150 mb-md" id="sidebarMatIcon">school</span>
+        <h3 class="font-headline-sm text-headline-sm text-primary text-center" id="sidebarCourseTitle">...</h3>
+        <p class="font-label-md text-label-md text-on-surface-variant text-center" id="sidebarCourseSub">...</p>
+      </div>
+      <nav id="sidebarToc" class="flex-1 py-md overflow-y-auto"></nav>
+      <div class="p-lg border-t border-outline-variant shrink-0">
+        <button type="button" id="jumpQuizBtn" class="w-full bg-primary text-on-primary py-md rounded-lg font-bold hover:opacity-90 transition-all font-label-md">ابدأ الاختبار</button>
+      </div>
+    </aside>
+    <main class="flex-1 p-lg md:p-xl max-w-5xl mx-auto w-full">
+      <div id="content"></div>
+    </main>
+  </div>
+
+  <footer class="bg-surface-container w-full py-lg border-t border-outline-variant">
+    <div class="flex flex-col md:flex-row justify-between items-center px-lg gap-md max-w-container-max mx-auto">
+      <span class="font-label-md text-on-surface-variant">© <span id="siteYear">2025-2026</span> — <span id="siteSubject">المادة</span> — المكتب الأكاديمي</span>
+    </div>
+  </footer>
+
+  <button type="button" id="scrollTopFab" class="fixed bottom-lg left-lg w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform z-40 opacity-0 pointer-events-none" aria-label="العودة للأعلى">
+    <span class="material-symbols-outlined">keyboard_arrow_up</span>
+  </button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/kotlin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
