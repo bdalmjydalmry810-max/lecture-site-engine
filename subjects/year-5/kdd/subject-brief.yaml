@@ -1,0 +1,283 @@
+schema_version: "1.0"
+
+subject:
+  id: kdd
+  name_ar: "اكتشاف المعرفة في قواعد البيانات"
+  name_en: "Knowledge Discovery in Databases"
+  tagline: "تنقيب + تصنيف + تجميع + تنبؤ"
+  section_label: "القسم العملي"
+
+locale:
+  language: ar
+  direction: rtl
+  terms_in_backticks: true
+  inline_code_comments: english
+  extra_explanation_tag: "(شرح زيادة للفهم)"
+  not_in_lecture_tag: "(غير مشروحة في المحاضرة)"
+
+domain: mixed
+
+domain_profile:
+  content_types:
+    - theory
+    - code
+    - diagrams
+    - tables
+    - pseudocode
+    - equations
+  forbid_adding: []
+  prerequisites: []
+
+lecture:
+  unit_label: "المحاضرة"
+  split_regex: "^# المحاضرة "
+  title_pattern: "# {unit_label} {num} — {title_en} ({title_ar})"
+  intro_blockquote: true
+
+parts:
+  integration_map:
+    enabled: true
+    heading: "📌 خريطة التكامل (أين تقع هذه المحاضرة في الدورة؟)"
+
+  detail:
+    enabled: true
+    heading: "الجزء الأول: الشرح التفصيلي (سطر بسطر / فقرة بفقرة)"
+    numbered_sections: true
+    require_per_section:
+      - original_quote
+      - simplified_explanation
+
+  summary:
+    enabled: true
+    heading: "الجزء الثاني: ملخص منظم"
+    subsections:
+      - definitions_table
+      - components_table
+      - comparisons_table
+      - glossary
+      - golden_points
+      - common_mistakes_table
+      - patterns
+      - main_ideas
+
+  mcq:
+    enabled: true
+    heading: "الجزء الثالث: أسئلة اختيار من متعدد (MCQ)"
+    count: 14
+    min_count: 14
+    difficulty: [medium, hard]
+    forbid_easy_literal: false
+    distribution:
+      comparisons: 30
+      code_scenario: 25
+      application: 45
+
+  debug:
+    enabled: false
+    heading: "الجزء الرابع: أسئلة تصحيح الكود"
+    count: 5
+    cover: [syntax, logic, return_check, dead_code, misconception]
+
+  exercise:
+    enabled: false
+    heading: "الجزء الرابع: تمارين إضافية (من إعداد الدليل للتدريب)"
+    count_min: 4
+    count_max: 6
+    authored_by_guide: true
+    types:
+      - fill_gaps
+      - code_fix
+      - scenario
+
+  analysis_exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين تحليل وتطبيق (إضافية — من إعداد الدليل)"
+    count_min: 4
+    count_max: 8
+    types:
+      - case_study
+      - table_fill
+      - written_analysis
+
+  trace_exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين تتبع التنفيذ"
+    count_min: 2
+
+  design_question:
+    enabled: false
+    heading: "الجزء الرابع: أسئلة تصميم"
+    count_min: 1
+    types:
+      - er_diagram
+      - uml_design
+      - architecture
+      - schema_design
+
+  theory:
+    enabled: true
+    heading: "الجزء الخامس: أسئلة نظرية متوقعة بالامتحان"
+    count_min: 8
+
+  cheat_sheet:
+    enabled: true
+    heading: "الجزء السادس: ورقة المراجعة السريعة (Cheat Sheet)"
+    subsections:
+      - integration_map_table
+      - golden_rules_table
+      - quick_reference_tables
+
+  qa_cards:
+    enabled: true
+    heading: "الجزء السابع: بطاقات سؤال وجواب (Q&A Cards) — للمراجعة العميقة"
+    count_min: 12
+
+  reference_code:
+    enabled: false
+    heading: "الجزء الثامن: كتابة الكود الكامل (مرجع شامل)"
+    assemble_from_fragments: true
+    same_program_only: true
+    languages: []
+    note: ""
+
+  checklist:
+    enabled: true
+    heading: "الجزء التاسع: قائمة فحص ذاتي قبل الامتحان ✅"
+
+blocks:
+  original_quote:
+    enabled: true
+
+  simplified_explanation:
+    enabled: true
+
+  code:
+    enabled: true
+    languages: [python, sql, r]
+    require_line_explain: true
+
+  line_explain:
+    enabled: true
+    format: numbered_list
+
+  imports:
+    enabled: true
+
+  expected_output:
+    enabled: true
+
+  troubleshooting:
+    enabled: false
+
+  diagrams:
+    enabled: true
+    types: [flowchart, decision-tree]
+    require_node_table: true
+    require_edge_table: true
+
+  uml:
+    enabled: false
+    types: [usecase, class, activity, flowchart]
+
+  screen_description:
+    enabled: false
+
+  algorithm:
+    enabled: true
+
+  structured_english:
+    enabled: true
+
+  compare:
+    enabled: true
+
+  callouts:
+    enabled: true
+
+  think_prompt:
+    enabled: true
+    min_per_lecture: 2
+
+  tables:
+    enabled: true
+
+  fill_gaps:
+    enabled: false
+
+  code_fix:
+    enabled: false
+
+  images_note:
+    enabled: false
+
+  qa_inline:
+    enabled: true
+
+  analogy:
+    enabled: true
+
+  trade_off:
+    enabled: true
+
+  before_after:
+    enabled: true
+
+  trace:
+    enabled: true
+
+  equations:
+    enabled: true
+    display_mode: block
+    require_explanation: true
+    common_symbols:
+      - "Support"
+      - "Confidence"
+      - "Lift"
+      - "Entropy"
+      - "Information Gain"
+      - "Gini Index"
+      - "Gradient Descent"
+      - "RSS"
+      - "Bayes' Theorem"
+      - "Minkowski Distance"
+      - "Accuracy"
+      - "Precision"
+      - "Recall"
+      - "F1"
+
+pedagogy:
+  cover_every_line: true
+  complete_gaps: true
+  beginner_friendly: true
+  explain_why: true
+  daily_analogy_plus_example: true
+  follow_lecture_order: true
+  adapt_to_lecture_type: true
+
+  lecture_types:
+    - match: "Association Rules & Frequent Patterns"
+      tools: ["Apriori", "support", "confidence", "lift", "itemset", "transaction", "FIM", "ARM"]
+    - match: "Regression"
+      tools: ["Linear Regression", "RSS", "Gradient Descent", "R²", "RMSE", "Multiple Regression", "Polynomial Regression"]
+    - match: "Classification"
+      tools: ["Decision Tree", "Entropy", "Information Gain", "Gini Index", "Naive Bayes", "kNN", "SVM", "Confusion Matrix", "Precision", "Recall", "F1"]
+    - match: "Clustering"
+      tools: ["k-Means", "k-Medoids", "PAM", "k-Modes", "Euclidean Distance", "Manhattan Distance", "Silhouette", "Within-Cluster Variation"]
+    - match: "Ensemble Methods"
+      tools: ["Bagging", "Boosting", "AdaBoost", "Random Forest", "Bootstrap", "Voting", "Weighted Voting"]
+    - match: "Data Preprocessing"
+      tools: ["Missing Values", "Noise", "Normalization", "Binning", "Correlation", "Chi-Square", "Discretization"]
+
+assessment:
+  mcq_option_letters: arabic
+
+output:
+  validation_footer: true
+  schema_reference: "SCHEMA.md v1.0"
+  closing_line: "ابدأ الآن. سأرسل المحاضرة في الرسالة التالية."
+  checklist_items:
+    - "غطّيت كل معلومة وردت في المحاضرة"
+    - "كل قسم يبدأ بـ «النص الأصلي يقول» + «الشرح المبسّط»"
+    - "الأقسام مرقّمة هرمياً (1، 1.1، 2 …)"
+    - "استخدمت جداول لكل مقارنة وقائمة تعريفات"
+    - "كل مصطلح إنجليزي بين backticks"

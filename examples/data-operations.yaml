@@ -57,8 +57,6 @@ parts:
     count_min: 3
     count_max: 6
     types: [case_study, diagram_completion, table_fill, written_analysis]
-  interpreter_exercise:
-    enabled: false
   theory:
     enabled: true
     heading: "الجزء الخامس: أسئلة نظرية متوقعة بالامتحان"

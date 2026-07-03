@@ -11,6 +11,26 @@ export function isTableStart(lines, i) {
   );
 }
 
+/** @param {string[]} lines @param {number} start */
+export function collectDollarMath(lines, start) {
+  let i = start;
+  while (i < lines.length && !lines[i].trim()) i++;
+  if (i >= lines.length) return null;
+
+  const line = lines[i].trim();
+  const inline = line.match(/^\$\$([\s\S]+)\$\$$/);
+  if (inline) return { latex: inline[1].trim(), nextIndex: i + 1 };
+
+  if (line !== '$$') return null;
+  i++;
+  const parts = [];
+  while (i < lines.length && lines[i].trim() !== '$$') {
+    parts.push(lines[i]);
+    i++;
+  }
+  return { latex: parts.join('\n').trim(), nextIndex: i + 1 };
+}
+
 export function collectBlockquote(lines, start) {
   const parts = [];
   let i = start;

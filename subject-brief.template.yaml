@@ -1,3 +1,50 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# تعليمات للذكاء الاصطناعي (DeepSeek / Claude) — اقرأ قبل التعبئة
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# مهمتك: املأ هذا القالب وارجع ملف YAML واحد فقط باسم subject-brief.yaml
+# لا تشرح، لا تضف markdown، لا تولّد محتوى محاضرات — فقط إعدادات المادة.
+#
+# المدخلات التي سيرسلها المستخدم:
+#   1) هذا القالب (subject-brief.template.yaml)
+#   2) النظري الكامل للمادة (كل المحاضرات: PDF أو نص)
+#
+# ماذا تفعل:
+#   - اقرأ كل المحاضرات وافهم: هل فيها أكواد؟ مخططات؟ أوامر CLI؟ جداول؟
+#   - فعّل (enabled: true) الأجزاء (parts) والبلوكات (blocks) الموجودة فعلاً في المادة
+#   - حاول قدر الإمكان تفعيل **أكبر عدد معقول** من البلوكات والأجزاء المهمّة للمادة —
+#     لا تكتفِ بالحد الأدنى: إذا النوع متواجد أو مفيد لهذه المادة فعّله واضبط إعداداته
+#   - عطّل (enabled: false) فقط ما لا يظهر أبداً ولا ينطبق على المادة
+#   - اضبط count / count_min / count_max للأسئلة حسب حجم المادة
+#   - اختر domain الصحيح: programming | analysis | theory | mixed
+#   - املأ domain_profile.content_types و forbid_adding حسب اللغات/الأدوات الفعلية
+#   - املأ subject (name_ar, name_en, tagline, section_label) من اسم المادة
+#   - املأ lecture_types تحت pedagogy إذا adapt_to_lecture_type: true
+#   - فعّل reference_code إذا المحاضرة تشرح برنامجاً واحداً على دفعات — يُجمَّع كود كامل في النهاية
+#   - فعّل equations للمواد الرياضية (Work, Span, Amdahl, تعقيد، إلخ)
+#
+# قواعد صارمة:
+#   - أبقِ schema_version: "1.0" كما هو
+#   - لا تغيّر عناوين heading للأجزاء المفعّلة — الـ parser يعتمد عليها
+#   - لا تخترع أجزاء غير موجودة في القالب (انظر القائمة أدناه)
+#   - أرجع YAML صالح فقط — بدون ```yaml wrapper
+#
+# أجزاء المحاضرة (parts) — فعّل ما يناسب المادة فقط:
+#   integration_map | detail | summary | mcq | debug | exercise |
+#   analysis_exercise | trace_exercise | design_question |
+#   qa_cards | reference_code | theory | checklist | cheat_sheet
+#
+# كتل الشرح (blocks) — فعّل كل ما يظهر أو يهم المادة (لا تقتصد بالتفعيل):
+#   original_quote | simplified_explanation | code | line_explain | imports |
+#   expected_output | troubleshooting | diagrams | uml | screen_description |
+#   algorithm | structured_english | compare | callouts | think_prompt |
+#   tables | fill_gaps | code_fix | images_note | qa_inline | analogy |
+#   trade_off | before_after | trace | equations
+#
+# الناتج يُستخدم في الخطوة التالية:
+#   subject-brief.yaml + meta-prompt.md → custom_prompt.md → استخراج parN.md من PDF
+# ═══════════════════════════════════════════════════════════════════════════════
+
 # Subject Brief Template — Lecture Site Engine v1.0
 # Fill this file for your subject, then send it to meta-prompt with SCHEMA.md.
 # Fields the AI reads: enabled, heading, count, difficulty, types, languages, format, flags.
@@ -34,6 +81,7 @@ domain_profile:
     - commands                      # CLI tools (git, dotnet, bash)
     - tables                        # comparisons, data dictionaries
     - pseudocode                    # Structured English, analysis notation
+    - equations                     # mathematical formulas (LaTeX/KaTeX)
   forbid_adding: []                 # language/tool names the AI must NOT invent
                                     # e.g. ["Java", "Python"] for analysis subjects
   prerequisites: []                 # assumed prior knowledge, shown in prompt header
@@ -59,6 +107,9 @@ parts:
     enabled: true
     heading: "الجزء الأول: الشرح التفصيلي (سطر بسطر / فقرة بفقرة)"
     numbered_sections: true         # require ### 1., ### 1.1. numbering
+    require_per_section:            # optional — blocks required in every ### section
+      - original_quote
+      - simplified_explanation
 
   summary:
     enabled: true
@@ -79,6 +130,7 @@ parts:
     enabled: true
     heading: "الجزء الثالث: أسئلة اختيار من متعدد (MCQ)"
     count: 14
+    min_count: 14                   # optional — minimum if count is approximate
     difficulty: [medium, hard]      # easy | medium | hard (list the allowed levels)
     forbid_easy_literal: false      # true → no trivial recall questions
     distribution:                   # optional — approximate percentages
@@ -113,12 +165,6 @@ parts:
       - diagram_completion
       - table_fill
       - written_analysis
-
-  interpreter_exercise:
-    enabled: false
-    heading: "الجزء السابع: تمارين كتابة مفسر كامل"
-    count_min: 2
-    note: "full interpreter lab — programming languages course only"
 
   trace_exercise:
     enabled: false
@@ -155,7 +201,11 @@ parts:
 
   reference_code:
     enabled: false
-    heading: "الجزء الخامس: الكود النهائي الكامل (مرجع شامل)"
+    heading: "الجزء الخامس: كتابة الكود الكامل (مرجع شامل)"
+    assemble_from_fragments: true   # if lecture splits one program across sections → merge at end
+    same_program_only: true         # only when all fragments belong to the SAME code/project
+    languages: []                   # e.g. [kotlin, java, python] — empty = infer from lecture
+    note: ""                        # optional — extra instructions for meta-prompt
 
   checklist:
     enabled: false
@@ -239,13 +289,19 @@ blocks:
     enabled: true                   # 💡 التشبيه — daily-life analogy as a named highlighted block (use after every abstract concept)
 
   trade_off:
-    enabled: false                  # ⚖️ المقايضة — both options valid, context decides (≠ compare block)
+    enabled: true                  # ⚖️ المقايضة — both options valid, context decides (≠ compare block)
 
   before_after:
-    enabled: false                  # 🔄 قبل / بعد — code or state before + after an operation
+    enabled: true                  # 🔄 قبل / بعد — code or state before + after an operation
 
   trace:
-    enabled: false                  # 🔍 تتبع التنفيذ — inline walk-through of execution step by step
+    enabled: true                  # 🔍 تتبع التنفيذ — inline walk-through of execution step by step
+
+  equations:
+    enabled: false
+    display_mode: block            # block | inline | both — how formulas appear
+    require_explanation: true      # require **الشرح:** after each display equation
+    common_symbols: []             # e.g. ["Work", "Span", "Ideal Parallelism", "Amdahl"]
 
 # ─── Pedagogy flags ───────────────────────────────────────────────────────────
 # Each true flag produces one Arabic rule bullet in the custom prompt.
@@ -262,7 +318,8 @@ pedagogy:
   # Uncomment and fill entries when adapt_to_lecture_type: true
   # Each entry produces one "إذا كانت عن X → استخدم Y" bullet.
   # Example:
-  # - match: "Kotlin Basics"
+  # - id: kotlin_basics              # optional slug
+  #   match: "Kotlin Basics"
   #   tools: ["val/var", "main()", "fun", "String Template"]
   # - match: "State"
   #   tools: ["remember", "mutableStateOf", "State Hoisting"]
@@ -274,6 +331,7 @@ assessment:
 # ─── Output ───────────────────────────────────────────────────────────────────
 output:
   validation_footer: true           # add <!-- VALIDATION ... --> at end of lecture file
+  schema_reference: "SCHEMA.md v1.0"  # optional — shown in custom_prompt footer
   closing_line: "ابدأ الآن. سأرسل المحاضرة في الرسالة التالية."
 
   # These checklist items appear verbatim in the custom_prompt تحقق قبل الإنهاء section.

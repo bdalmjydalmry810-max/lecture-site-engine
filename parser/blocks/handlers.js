@@ -1,5 +1,6 @@
 import {
   collectBlockquote,
+  collectDollarMath,
   collectFence,
   collectList,
   collectParagraph,
@@ -53,6 +54,12 @@ export function createDefaultBlockHandlers() {
         if (lang === 'algorithm') {
           return { block: { type: 'algorithm', steps: parseAlgorithmLines(code) }, nextIndex };
         }
+        if (lang === 'math' || lang === 'latex') {
+          return {
+            block: { type: 'equation', latex: code.trim(), displayMode: true },
+            nextIndex,
+          };
+        }
         return {
           block: {
             type: 'code',
@@ -81,6 +88,58 @@ export function createDefaultBlockHandlers() {
         return {
           block: { type: 'callout', cls: callout.cls, label: callout.label, content: content.text },
           nextIndex: content.nextIndex,
+        };
+      },
+    },
+
+    {
+      id: 'h4-schema-equation',
+      priority: 90,
+      test: (ctx) => /^#### (?:📐|المعادلة)/.test(ctx.line),
+      parse: (ctx) => {
+        const title = ctx.line.replace(/^#### /, '').trim();
+        let i = ctx.i + 1;
+        let latex = '';
+        let displayMode = true;
+
+        while (i < ctx.lines.length && !ctx.lines[i].trim()) i++;
+
+        if (i < ctx.lines.length && /^```/.test(ctx.lines[i].trim())) {
+          const fence = collectFence(ctx.lines, i);
+          if (fence.lang === 'math' || fence.lang === 'latex' || !fence.lang) {
+            latex = fence.code.trim();
+            i = fence.nextIndex;
+          }
+        } else {
+          const math = collectDollarMath(ctx.lines, i);
+          if (math?.latex) {
+            latex = math.latex;
+            i = math.nextIndex;
+          }
+        }
+
+        let explanation = '';
+        while (i < ctx.lines.length && !ctx.lines[i].trim()) i++;
+        if (i < ctx.lines.length) {
+          const t = ctx.lines[i].trim();
+          if (/^\*\*الشرح:?\*\*/.test(t) || /^#### شرح المعادلة/.test(t)) {
+            i++;
+            while (i < ctx.lines.length && !ctx.lines[i].trim()) i++;
+            const bq = collectBlockquote(ctx.lines, i);
+            if (bq.text) {
+              explanation = bq.text;
+              i = bq.nextIndex;
+            } else {
+              const para = collectParagraph(ctx.lines, i);
+              explanation = para.text;
+              i = para.nextIndex;
+            }
+          }
+        }
+
+        return {
+          block: { type: 'equation', title, latex, displayMode, explanation },
+          nextIndex: i,
         };
       },
     },

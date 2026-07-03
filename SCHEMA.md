@@ -235,6 +235,46 @@ A: [answer]
 
 ---
 
+### Equation (LaTeX / KaTeX)
+
+Use when the lecture contains **mathematical formulas** (Work, Span, Amdahl, complexity, etc.). The site renders via KaTeX.
+
+**Display block** (recommended):
+
+```markdown
+#### 📐 المعادلة: [name]
+
+$$
+W = \sum_i t_i
+$$
+
+**الشرح:**
+> [what each symbol means]
+```
+
+Alternate fence:
+
+```markdown
+#### المعادلة: Ideal Parallelism
+
+```math
+P = \frac{W}{S}
+```
+
+**الشرح:**
+> ...
+```
+
+**Inline** in any paragraph (when brief enables equations): `$O(n \log n)$` or `$\text{Span} = \max_i t_i$`
+
+Rules:
+- Use LaTeX syntax inside `$$` or ` ```math ` fences
+- One named equation block per major formula in detail sections
+- Always add **الشرح** when `require_explanation: true` in subject brief
+- Do **not** mix unrelated formulas in one block
+
+---
+
 ### Analogy (named block)
 
 Use after any abstract concept to provide a concrete mental hook. One block per concept — do **not** embed the analogy inside paragraph text where the parser cannot find it.

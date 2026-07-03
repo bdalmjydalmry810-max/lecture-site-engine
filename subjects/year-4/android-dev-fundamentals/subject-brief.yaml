@@ -100,9 +100,6 @@ parts:
   analysis_exercise:
     enabled: false
 
-  interpreter_exercise:
-    enabled: false
-
   trace_exercise:
     enabled: true
     heading: "الجزء الرابع: تمارين تتبع التنفيذ"
@@ -136,7 +133,10 @@ parts:
 
   reference_code:
     enabled: true
-    heading: "الجزء الخامس: الكود النهائي الكامل (مرجع شامل)"
+    heading: "الجزء الخامس: كتابة الكود الكامل (مرجع شامل)"
+    assemble_from_fragments: true
+    same_program_only: true
+    languages: [kotlin, xml, gradle]
 
   checklist:
     enabled: true

@@ -1,0 +1,390 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# تعليمات للذكاء الاصطناعي (DeepSeek / Claude) — اقرأ قبل التعبئة
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# مهمتك: املأ هذا القالب وارجع ملف YAML واحد فقط باسم subject-brief.yaml
+# لا تشرح، لا تضف markdown، لا تولّد محتوى محاضرات — فقط إعدادات المادة.
+#
+# المدخلات التي سيرسلها المستخدم:
+#   1) هذا القالب (subject-brief.template.yaml)
+#   2) النظري الكامل للمادة (كل المحاضرات: PDF أو نص)
+#
+# ماذا تفعل:
+#   - اقرأ كل المحاضرات وافهم: هل فيها أكواد؟ مخططات؟ أوامر CLI؟ جداول؟
+#   - فعّل (enabled: true) الأجزاء (parts) والبلوكات (blocks) الموجودة فعلاً في المادة
+#   - حاول قدر الإمكان تفعيل **أكبر عدد معقول** من البلوكات والأجزاء المهمّة للمادة —
+#     لا تكتفِ بالحد الأدنى: إذا النوع متواجد أو مفيد لهذه المادة فعّله واضبط إعداداته
+#   - عطّل (enabled: false) فقط ما لا يظهر أبداً ولا ينطبق على المادة
+#   - اضبط count / count_min / count_max للأسئلة حسب حجم المادة
+#   - اختر domain الصحيح: programming | analysis | theory | mixed
+#   - املأ domain_profile.content_types و forbid_adding حسب اللغات/الأدوات الفعلية
+#   - املأ subject (name_ar, name_en, tagline, section_label) من اسم المادة
+#   - املأ lecture_types تحت pedagogy إذا adapt_to_lecture_type: true
+#   - فعّل reference_code إذا المحاضرة تشرح برنامجاً واحداً على دفعات — يُجمَّع كود كامل في النهاية
+#
+# قواعد صارمة:
+#   - أبقِ schema_version: "1.0" كما هو
+#   - لا تغيّر عناوين heading للأجزاء المفعّلة — الـ parser يعتمد عليها
+#   - لا تخترع أجزاء غير موجودة في القالب (انظر القائمة أدناه)
+#   - أرجع YAML صالح فقط — بدون ```yaml wrapper
+#
+# أجزاء المحاضرة (parts) — فعّل ما يناسب المادة فقط:
+#   integration_map | detail | summary | mcq | debug | exercise |
+#   analysis_exercise | trace_exercise | design_question |
+#   qa_cards | reference_code | theory | checklist | cheat_sheet
+#
+# كتل الشرح (blocks) — فعّل كل ما يظهر أو يهم المادة (لا تقتصد بالتفعيل):
+#   original_quote | simplified_explanation | code | line_explain | imports |
+#   expected_output | troubleshooting | diagrams | uml | screen_description |
+#   algorithm | structured_english | compare | callouts | think_prompt |
+#   tables | fill_gaps | code_fix | images_note | qa_inline | analogy |
+#   trade_off | before_after | trace
+#
+# الناتج يُستخدم في الخطوة التالية:
+#   subject-brief.yaml + meta-prompt.md → custom_prompt.md → استخراج parN.md من PDF
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Subject Brief Template — Lecture Site Engine v1.0
+# Fill this file for your subject, then send it to meta-prompt with SCHEMA.md.
+# Fields the AI reads: enabled, heading, count, difficulty, types, languages, format, flags.
+# Fields marked [HUMAN ONLY] are for your reference — the AI ignores them.
+
+schema_version: "1.0"
+
+# ─── Subject identity ─────────────────────────────────────────────────────────
+subject:
+  id: parallel-concurrent-programming
+  name_ar: "البرمجة المتوازية والمتزامنة"
+  name_en: "Parallel and Concurrent Programming"
+  tagline: "توازي تزامن خيوط مسيرات"
+  section_label: "نظري"
+
+# ─── Locale & terminology ─────────────────────────────────────────────────────
+locale:
+  language: ar
+  direction: rtl
+  terms_in_backticks: true
+  inline_code_comments: english
+  extra_explanation_tag: "(شرح زيادة للفهم)"
+  not_in_lecture_tag: "(غير مشروحة في المحاضرة)"
+
+# ─── Domain ───────────────────────────────────────────────────────────────────
+domain: theory
+
+domain_profile:
+  content_types:
+    - theory
+    - code
+    - pseudocode
+    - diagrams
+    - tables
+  forbid_adding:
+    - "Python"
+    - "C++"
+    - "Kotlin"
+    - "C#"
+    - "Ruby"
+  prerequisites:
+    - "أساسيات البرمجة بلغة Java أو C++"
+    - "مفاهيم أساسية في نظم التشغيل"
+
+# ─── Lecture heading — must match guide-config.js ────────────────────────────
+lecture:
+  unit_label: "المحاضرة"
+  split_regex: "^# المحاضرة "
+  title_pattern: "# {unit_label} {num} — {title_en} ({title_ar})"
+  intro_blockquote: true
+
+# ─── Parts ────────────────────────────────────────────────────────────────────
+parts:
+
+  integration_map:
+    enabled: true
+    heading: "📌 خريطة التكامل (أين تقع هذه المادة في مسار البرمجة المتقدمة؟)"
+
+  detail:
+    enabled: true
+    heading: "الجزء الأول: الشرح التفصيلي (سطر بسطر / فقرة بفقرة)"
+    numbered_sections: true
+    require_per_section:
+      - original_quote
+      - simplified_explanation
+
+  summary:
+    enabled: true
+    heading: "الجزء الثاني: ملخص منظم"
+    subsections:
+      - definitions_table
+      - components_table
+      - comparisons_table
+      - glossary
+      - golden_points
+      - common_mistakes_table
+      - patterns
+      - main_ideas
+
+  mcq:
+    enabled: true
+    heading: "الجزء الثالث: أسئلة اختيار من متعدد (MCQ)"
+    count: 16
+    min_count: 14
+    difficulty: [medium, hard]
+    forbid_easy_literal: false
+    distribution:
+      comparisons: 30
+      code_scenario: 40
+      application: 30
+
+  debug:
+    enabled: true
+    heading: "الجزء الرابع: أسئلة تصحيح الكود"
+    count: 5
+    cover: [logic, misconception, return_check, dead_code]
+
+  exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين إضافية (من إعداد الدليل للتدريب)"
+    count_min: 4
+    count_max: 6
+    authored_by_guide: true
+    types:
+      - fill_gaps
+      - code_fix
+      - scenario
+
+  analysis_exercise:
+    enabled: false
+
+  trace_exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين تتبع التنفيذ والمخططات البيانية"
+    count_min: 4
+
+  design_question:
+    enabled: true
+    heading: "الجزء الرابع: أسئلة تصميم (هيكلية)"
+    count_min: 2
+    types:
+      - uml_design
+      - architecture
+
+  theory:
+    enabled: true
+    heading: "الجزء الخامس: أسئلة نظرية متوقعة بالامتحان"
+    count_min: 8
+
+  cheat_sheet:
+    enabled: true
+    heading: "الجزء السادس: ورقة المراجعة السريعة (Cheat Sheet)"
+    subsections:
+      - integration_map_table
+      - golden_rules_table
+      - quick_reference_tables
+
+  qa_cards:
+    enabled: true
+    heading: "الجزء الرابع: بطاقات سؤال وجواب (Q&A Cards)"
+    count_min: 12
+
+  reference_code:
+    enabled: true
+    heading: "الجزء الخامس: كتابة الكود الكامل (مرجع شامل)"
+    assemble_from_fragments: true
+    same_program_only: true
+    languages: [java]
+    note: "يجمع الكود من جميع أجزاء المادة (async/finish, futures, streams, threads, locks, phasers, actors)"
+
+  checklist:
+    enabled: true
+    heading: "الجزء السادس: قائمة فحص ذاتي قبل الامتحان ✅"
+
+# ─── Blocks ───────────────────────────────────────────────────────────────────
+blocks:
+
+  original_quote:
+    enabled: true
+
+  simplified_explanation:
+    enabled: true
+
+  code:
+    enabled: true
+    languages: [java, pseudocode]
+    require_line_explain: true
+
+  line_explain:
+    enabled: true
+    format: numbered_list
+
+  imports:
+    enabled: true
+
+  expected_output:
+    enabled: true
+
+  troubleshooting:
+    enabled: true
+
+  diagrams:
+    enabled: true
+    types: [flowchart, decision-tree]
+    require_node_table: true
+    require_edge_table: true
+
+  uml:
+    enabled: true
+    types: [class, activity, flowchart]
+
+  screen_description:
+    enabled: false
+
+  algorithm:
+    enabled: true
+
+  structured_english:
+    enabled: false
+
+  compare:
+    enabled: true
+
+  callouts:
+    enabled: true
+
+  think_prompt:
+    enabled: true
+    min_per_lecture: 3
+
+  tables:
+    enabled: true
+
+  fill_gaps:
+    enabled: true
+
+  code_fix:
+    enabled: true
+
+  images_note:
+    enabled: true
+
+  qa_inline:
+    enabled: true
+
+  analogy:
+    enabled: true
+
+  trade_off:
+    enabled: true
+
+  before_after:
+    enabled: true
+
+  trace:
+    enabled: true
+
+  equations:
+    enabled: true
+    display_mode: both
+    require_explanation: true
+    common_symbols: ["Work", "Span", "Ideal Parallelism", "Amdahl's Law", "Speedup", "Efficiency"]
+
+# ─── Pedagogy flags ───────────────────────────────────────────────────────────
+pedagogy:
+  cover_every_line: true
+  complete_gaps: true
+  beginner_friendly: true
+  explain_why: true
+  daily_analogy_plus_example: true
+  follow_lecture_order: true
+  adapt_to_lecture_type: true
+
+  lecture_types:
+    - id: task_parallelism
+      match: "Task Parallelism"
+      tools:
+        - "async"
+        - "finish"
+        - "Fork/Join"
+        - "RecursiveAction"
+        - "Computation Graph"
+        - "Work"
+        - "Span"
+        - "Ideal Parallelism"
+        - "Speedup"
+        - "Amdahl's Law"
+    - id: functional_parallelism
+      match: "Functional Parallelism"
+      tools:
+        - "Futures"
+        - "RecursiveTask"
+        - "Memoization"
+        - "Lazy Evaluation"
+        - "Java Streams"
+        - "Stream.parallel()"
+        - "Data Races"
+        - "Determinism"
+    - id: loop_parallelism
+      match: "Loop Parallelism"
+      tools:
+        - "forall"
+        - "forallChunked"
+        - "Barriers"
+        - "next()"
+        - "Phasers"
+        - "forallPhased"
+        - "Iterative Averaging"
+        - "Chunking"
+    - id: dataflow_pipelining
+      match: "Data Flow Synchronization and Pipelining"
+      tools:
+        - "Split-Phase Barriers"
+        - "Java Phasers"
+        - "arrive()"
+        - "awaitAdvance()"
+        - "Point-to-Point Synchronization"
+        - "Pipeline Parallelism"
+        - "asyncAwait"
+    - id: threads_locks
+      match: "Concurrent Programming — Threads and Locks"
+      tools:
+        - "Thread"
+        - "start()/join()"
+        - "synchronized"
+        - "wait()/notify()/notifyAll()"
+        - "ReentrantLock"
+        - "Condition"
+        - "Structured/Unstructured Locks"
+        - "Deadlock/Livelock/Starvation"
+    - id: isolation_actors
+      match: "Critical Sections, Isolation and Actors"
+      tools:
+        - "Critical Sections"
+        - "Isolated Construct"
+        - "Object-based Isolation"
+        - "AtomicInteger"
+        - "Compare-and-Set"
+        - "Work-Sharing"
+        - "Read/Write Isolation"
+        - "Actors"
+        - "HJlib Actors"
+
+# ─── Assessment ───────────────────────────────────────────────────────────────
+assessment:
+  mcq_option_letters: arabic
+
+# ─── Output ───────────────────────────────────────────────────────────────────
+output:
+  validation_footer: true
+  schema_reference: "SCHEMA.md v1.0"
+  closing_line: "ابدأ الآن. سأرسل المحاضرة في الرسالة التالية."
+
+  checklist_items:
+    - "غطّيت تعريفات التوازي والتزامن والفرق بينهما"
+    - "شرحت Computation Graphs وعمليات WORK و SPAN و Ideal Parallelism"
+    - "غطّيت قانون Amdahl وأهميته مع أمثلة"
+    - "شرحت أنواع التوازي (Task, Data, Loop, Pipeline)"
+    - "غطّيت أدوات المزامنة: Barriers، Phasers، Locks، Conditions"
+    - "شرحت مشاكل التزامن: Data Races، Deadlock، Livelock، Starvation"
+    - "غطّيت الـ Isolated Construct والـ Object-based Isolation"
+    - "شرحت نموذج Actors وكيفية استخدامه"
+    - "استخدمت تشبيهات حياتية لتبسيط الأفكار الصعبة"
+    - "كل مصطلح إنجليزي بين backticks"

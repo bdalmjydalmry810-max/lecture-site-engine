@@ -102,9 +102,6 @@ parts:
   analysis_exercise:
     enabled: false
 
-  interpreter_exercise:
-    enabled: false
-
   trace_exercise:
     enabled: true
     heading: "الجزء الرابع: تمارين تتبع التنفيذ وحساب العناوين والخوارزميات"

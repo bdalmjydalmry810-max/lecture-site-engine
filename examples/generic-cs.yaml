@@ -55,8 +55,6 @@ parts:
     enabled: false
   analysis_exercise:
     enabled: false
-  interpreter_exercise:
-    enabled: false
   theory:
     enabled: true
     heading: "الجزء الخامس: أسئلة نظرية متوقعة بالامتحان"

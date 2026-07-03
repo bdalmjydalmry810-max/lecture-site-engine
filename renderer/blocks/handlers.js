@@ -312,6 +312,22 @@ function renderAnalogy(block) {
   </div>`;
 }
 
+function renderEquation(block) {
+  const title = block.title || '📐 المعادلة';
+  const display = block.displayMode !== false;
+  const latex = block.latex || '';
+  let html = `<div class="equation-block mb-lg box-animate bg-surface-container-low border border-outline-variant rounded-xl p-lg">
+    <div class="flex items-center gap-sm mb-md">
+      ${ms('functions', false, 'text-primary text-lg')}
+      <h5 class="font-headline-sm text-headline-sm text-on-surface">${inlineMd(title)}</h5>
+    </div>
+    <div class="equation-block__math overflow-x-auto py-sm text-center" data-katex-display="${display ? 'true' : 'false'}">${esc(latex)}</div>`;
+  if (block.explanation) {
+    html += `<div class="equation-block__explain mt-md pt-md border-t border-outline-variant font-body-md text-on-surface-variant leading-relaxed">${inlineMd(block.explanation).replace(/\n/g, '<br>')}</div>`;
+  }
+  return html + '</div>';
+}
+
 function renderTradeOff(block) {
   if (block.header?.length && block.rows?.length) {
     let html = `<div class="trade-off-block mb-lg box-animate">
@@ -554,6 +570,7 @@ export function createDefaultBlockHandlers(extraHandlers = []) {
       </div>
     </article>` },
   { id: 'analogy', match: b => b.type === 'analogy', render: renderAnalogy },
+  { id: 'equation', match: b => b.type === 'equation', render: renderEquation },
   { id: 'trade-off', match: b => b.type === 'trade-off', render: renderTradeOff },
   { id: 'before-after', match: b => b.type === 'before-after', render: renderBeforeAfter },
   { id: 'trace', match: b => b.type === 'trace', render: renderTraceBlock },

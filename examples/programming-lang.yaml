@@ -55,10 +55,12 @@ parts:
     enabled: false
   analysis_exercise:
     enabled: false
-  interpreter_exercise:
+  reference_code:
     enabled: true
-    heading: "الجزء السابع: تمارين كتابة مفسر كامل (مهم للامتحان ⚠️)"
-    count_min: 2
+    heading: "الجزء الخامس: كتابة الكود الكامل (مرجع شامل)"
+    assemble_from_fragments: true
+    same_program_only: true
+    languages: [python, c, java]
   theory:
     enabled: true
     heading: "الجزء الخامس: أسئلة نظرية متوقعة بالامتحان"
@@ -67,8 +69,6 @@ parts:
     enabled: true
     heading: "الجزء السادس: ورقة المراجعة السريعة (Cheat Sheet)"
   qa_cards:
-    enabled: false
-  reference_code:
     enabled: false
   checklist:
     enabled: false

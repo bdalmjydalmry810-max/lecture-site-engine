@@ -129,11 +129,12 @@ templates/          ──┘                              │
 | `debug` | debug | Fix buggy code |
 | `exercise` | exercise | Fill gaps, code fix |
 | `analysis_exercise` | exercise | Case studies (no code) |
-| `interpreter_exercise` | exercise | Full interpreter labs |
+| `trace_exercise` | exercise | Execution trace tables |
+| `design_question` | exercise | ER / UML / architecture design |
 | `theory` | theory | Exam essay questions |
 | `cheat_sheet` | cheat | Quick reference |
 | `qa_cards` | qa | Q&A flip cards |
-| `reference_code` | reference | Full project code |
+| `reference_code` | reference | Assembled full program when lecture fragments one codebase |
 | `checklist` | summary | Self-review checklist |
 
 ## Blocks reference (enable in brief)
@@ -149,6 +150,7 @@ templates/          ──┘                              │
 | `fill_gaps` / `code_fix` | Exercise subtypes |
 | `think_prompt` | Self-check questions |
 | `callouts` | Exam tips, notes, lessons |
+| `equations` | LaTeX formulas (KaTeX) — Work, Span, complexity, etc. |
 
 Full marker syntax: [`SCHEMA.md`](SCHEMA.md).
 

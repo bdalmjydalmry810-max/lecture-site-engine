@@ -1,0 +1,270 @@
+
+schema_version: "1.0"
+
+subject:
+  id: numerical-analysis-1
+  name_ar: "التحليل العددي 1"
+  name_en: "Numerical Analysis 1"
+  tagline: "أخطاء + فروق + استيفاء + معادلات"
+  section_label: "القسم النظري"
+
+locale:
+  language: ar
+  direction: rtl
+  terms_in_backticks: true
+  inline_code_comments: none
+  extra_explanation_tag: "(شرح زيادة للفهم)"
+  not_in_lecture_tag: "(غير مشروحة في المحاضرة)"
+
+domain: analysis
+
+domain_profile:
+  content_types:
+    - theory
+    - tables
+    - equations
+    - pseudocode
+  forbid_adding: ["Python", "Java", "C++", "MATLAB"]
+  prerequisites: ["جبر خطي", "تفاضل وتكامل"]
+
+lecture:
+  unit_label: "المحاضرة"
+  split_regex: "^# المحاضرة "
+  title_pattern: "# {unit_label} {num} — {title_en} ({title_ar})"
+  intro_blockquote: true
+
+parts:
+  integration_map:
+    enabled: true
+    heading: "📌 خريطة التكامل (أين تقع هذه المحاضرة في الدورة؟)"
+
+  detail:
+    enabled: true
+    heading: "الجزء الأول: الشرح التفصيلي (سطر بسطر / فقرة بفقرة)"
+    numbered_sections: true
+    require_per_section:
+      - original_quote
+      - simplified_explanation
+
+  summary:
+    enabled: true
+    heading: "الجزء الثاني: ملخص منظم"
+    subsections:
+      - definitions_table
+      - components_table
+      - comparisons_table
+      - glossary
+      - golden_points
+      - common_mistakes_table
+      - patterns
+      - main_ideas
+
+  mcq:
+    enabled: true
+    heading: "الجزء الثالث: أسئلة اختيار من متعدد (MCQ)"
+    count: 16
+    min_count: 14
+    difficulty: [medium, hard]
+    forbid_easy_literal: false
+    distribution:
+      comparisons: 20
+      application: 55   # تطبيق المعادلات وحساب القيم العددية
+      numerical_trace: 25  # تتبع الخوارزميات خطوة بخطوة
+
+  debug:
+    enabled: false
+    heading: "الجزء الرابع: أسئلة تصحيح الكود"
+    count: 5
+    cover: [syntax, logic, return_check, dead_code, misconception]
+
+  exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين تطبيقية (من إعداد الدليل للتدريب)"
+    count_min: 4
+    count_max: 7
+    authored_by_guide: true
+    types:
+      - fill_gaps          # إكمال خطوات حسابية ناقصة
+      - numerical_solve    # تطبيق الطريقة كاملة على مسألة محددة
+      - error_calculation  # حساب الخطأ المطلق والنسبي والتقريبي
+      - scenario           # سيناريو: اختر الطريقة المناسبة مع التعليل
+
+  analysis_exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين تحليل وملء الجداول (إضافية — من إعداد الدليل)"
+    count_min: 3
+    count_max: 5
+    types:
+      - table_fill         # ملء جدول تكرارات (Bisection, Newton, إلخ)
+      - written_analysis   # مقارنة طريقتين أو تعليل الاختيار
+      - formula_derivation # اشتقاق الصيغة أو إثبات العلاقة
+
+  trace_exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين تتبع الخوارزميات (خطوة بخطوة)"
+    count_min: 3   # أساسي لـ: Bisection, Newton-Raphson, Gauss Elimination, Interpolation, Integration rules
+    note: "كل تمرين: المعطيات + جدول تكرارات ناقص للطالب + نموذج الحل الكامل"
+
+  design_question:
+    enabled: false
+    heading: "الجزء الرابع: أسئلة تصميم"
+    count_min: 1
+    types:
+      - er_diagram
+      - uml_design
+      - architecture
+      - schema_design
+
+  theory:
+    enabled: true
+    heading: "الجزء الخامس: أسئلة نظرية متوقعة بالامتحان"
+    count_min: 8   # مشتق، برهان، مقارنة طرق، شروط التقارب
+
+  cheat_sheet:
+    enabled: true
+    heading: "الجزء السادس: ورقة المراجعة السريعة (Cheat Sheet)"
+    subsections:
+      - integration_map_table
+      - golden_rules_table
+      - quick_reference_tables
+
+  qa_cards:
+    enabled: true
+    heading: "الجزء الرابع: بطاقات سؤال وجواب (Q&A Cards)"
+    count_min: 12
+
+  reference_code:
+    enabled: false
+    heading: "الجزء الخامس: كتابة الكود الكامل (مرجع شامل)"
+    assemble_from_fragments: false
+    same_program_only: false
+    languages: []
+    note: ""
+
+  checklist:
+    enabled: true
+    heading: "الجزء السادس: قائمة فحص ذاتي قبل الامتحان ✅"
+
+blocks:
+  original_quote:
+    enabled: true
+
+  simplified_explanation:
+    enabled: true
+
+  code:
+    enabled: false
+    languages: []
+    require_line_explain: false
+
+  line_explain:
+    enabled: false
+    format: numbered_list
+
+  imports:
+    enabled: false
+
+  expected_output:
+    enabled: false
+
+  troubleshooting:
+    enabled: false
+
+  diagrams:
+    enabled: false
+    types: [flowchart, bpmn, decision-tree, dfd]
+    require_node_table: true
+    require_edge_table: true
+
+  uml:
+    enabled: false
+    types: [usecase, class, activity, flowchart]
+
+  screen_description:
+    enabled: false
+
+  algorithm:
+    enabled: true
+
+  structured_english:
+    enabled: false
+
+  compare:
+    enabled: true
+
+  callouts:
+    enabled: true
+
+  think_prompt:
+    enabled: true
+    min_per_lecture: 3
+
+  tables:
+    enabled: true
+
+  fill_gaps:
+    enabled: true   # ملء خطوات ناقصة في الحسابات أو الجداول
+
+  code_fix:
+    enabled: false
+
+  images_note:
+    enabled: false
+
+  qa_inline:
+    enabled: true
+
+  analogy:
+    enabled: true
+
+  trade_off:
+    enabled: true
+
+  before_after:
+    enabled: true
+
+  trace:
+    enabled: true
+
+  equations:
+    enabled: true
+    display_mode: block
+    require_explanation: true
+    common_symbols:
+      - "Δ"
+      - "h"
+      - "s"
+      - "p_n(x)"
+      - "L_i(x)"
+      - "δ"
+      - "e"
+      - "G"
+
+pedagogy:
+  cover_every_line: true
+  complete_gaps: true
+  beginner_friendly: true
+  explain_why: true
+  daily_analogy_plus_example: true
+  follow_lecture_order: true
+  adapt_to_lecture_type: false
+  lecture_types: []
+
+assessment:
+  mcq_option_letters: arabic
+
+output:
+  validation_footer: true
+  schema_reference: "SCHEMA.md v1.0"
+  closing_line: "ابدأ الآن. سأرسل المحاضرة في الرسالة التالية."
+  checklist_items:
+    - "غطّيت كل معلومة وردت في المحاضرة"
+    - "كل قسم يبدأ بـ «النص الأصلي يقول» + «الشرح المبسّط»"
+    - "الأقسام مرقّمة هرمياً (1، 1.1، 2 …)"
+    - "استخدمت جداول لكل مقارنة وقائمة تعريفات"
+    - "كل مصطلح إنجليزي بين backticks"
+    - "شرحت كل معادلة مع توضيح كل رمز فيها"
+    - "أضفت تمارين تتبع خطوة بخطوة لكل خوارزمية (جدول تكرارات ناقص + نموذج حل)"
+    - "أضفت تمارين تطبيقية حسابية مع نموذج حل كامل"
+    - "غطّيت حساب الأخطاء (مطلق، نسبي، تقريبي) مع أمثلة"
+    - "قارنت بين الطرق (السرعة، الدقة، شروط التقارب، سهولة التطبيق)"

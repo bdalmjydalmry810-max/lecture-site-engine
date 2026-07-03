@@ -84,7 +84,7 @@ Fill every `[...]` from SUBJECT_BRIEF. Process enabled items only.
 [if intro_blockquote:] > **المادة:** [name_ar] ([section_label]) | **الموضوع:** ...
 
 [FOR EACH enabled part — in order: integration_map → detail → summary → mcq →
- debug | exercise | analysis_exercise | interpreter_exercise | trace_exercise | design_question → qa_cards →
+ debug | exercise | analysis_exercise | trace_exercise | design_question → qa_cards →
  reference_code → theory → checklist → cheat_sheet]
 
 ---
@@ -96,13 +96,12 @@ Fill every `[...]` from SUBJECT_BRIEF. Process enabled items only.
 [for debug: "[count] أسئلة — أنواع: [cover list]. انظر SCHEMA.md قسم Debug"]
 [for exercise: "[count_min]–[count_max] تمارين من إعداد الدليل. أنواع: [types joined by ,]. [if authored_by_guide:] اكتب في البداية: «هذه تمارين إضافية من إعداد الدليل»."]
 [for analysis_exercise: "[count_min]–[count_max] تمارين تحليلية. أنواع: [types]. سيناريوهات مؤسسية لا أكواد."]
-[for interpreter_exercise: "≥[count_min] تمارين. [note]"]
 [for trace_exercise: "≥[count_min] تمارين تتبع. كل تمرين: مدخل + جدول ناقص للطالب + نموذج الحل. انظر SCHEMA.md §Trace Exercise"]
 [for design_question: "≥[count_min] أسئلة تصميم. أنواع: [types joined by ,]. نموذج الإجابة: مخطط أو schema + معايير التقييم. انظر SCHEMA.md §Design Question"]
 [for theory: "≥[count_min] أسئلة. انظر SCHEMA.md قسم Theory"]
 [for cheat_sheet: "جداول فقط: [subsections joined by |]. مختصرة — كل ما يُذكّر قبل الامتحان"]
 [for qa_cards: "≥[count_min] بطاقة. **Q{N}:** / A: انظر SCHEMA.md"]
-[for reference_code: "الكود النهائي الكامل — مرجع للطالب، لا شرح جديد"]
+[for reference_code: "كتابة الكود الكامل — مرجع واحد للطالب بدون شرح جديد.[if assemble_from_fragments:] إذا شرحت المحاضرة برنامجاً واحداً على دفعات في أقسام متفرقة، اجمع كل الأجزاء في كتلة كود واحدة هنا.[if same_program_only:] فقط عندما تنتمي كل الفقرات لنفس الكود/المشروع — لا تدمج أكواد مستقلة.[if languages non-empty:] اللغات: [languages].[if note:] [note]"]
 [for checklist: "قائمة مراجعة ذاتية — بنود تحقق بصيغة [ ]"]
 
 [ONLY ADD a mini-example if the part format is non-obvious — max 6 lines, then stop]
@@ -131,6 +130,7 @@ Fill every `[...]` from SUBJECT_BRIEF. Process enabled items only.
 [trade_off:] **⚖️ المقايضة** — جدول: المزايا | العيوب | متى تختاره. للحالات التي لا يوجد فيها خطأ وصواب — لا تستخدم compare block هنا. انظر SCHEMA.md §Trade-off.
 [before_after:] **🔄 قبل / بعد** — كود/حالة قبل العملية + بعدها + جملة «ماذا تغيّر؟». انظر SCHEMA.md §Before-After.
 [trace:] **🔍 تتبع التنفيذ** (inline) — المدخل + جدول الخطوات (أعمدته تختلف حسب الموضوع) + النتيجة. انظر SCHEMA.md §Trace.
+[equations:] **📐 المعادلة** — LaTeX داخل `$$` أو fence `math`. [if require_explanation:] يتبعها **الشرح:** بمعنى كل رمز. [if display_mode=inline or both:] استخدم `$...$` للصيغ القصيرة داخل الفقرات. انظر SCHEMA.md §Equation.
 
 ---
 
@@ -144,7 +144,9 @@ Fill every `[...]` from SUBJECT_BRIEF. Process enabled items only.
 [if debug.enabled:] - [ ] [count] أسئلة تصحيح كود
 [if code block enabled:] - [ ] كل كود: 💻 + ما هذا الكود؟ + شرح كل سطر
 [if diagrams or uml enabled:] - [ ] كل مخطط: جدول عُقد + جدول روابط + بلوك diagram
-[if exercise or analysis_exercise or interpreter_exercise enabled:] - [ ] تمارين من إعداد الدليل مع نموذج حل
+[if exercise or analysis_exercise enabled:] - [ ] تمارين من إعداد الدليل مع نموذج حل
+[if reference_code.enabled:] - [ ] كود كامل مجمّع (إن وُجد برنامج واحد مُجزّأ في الشرح)
+[if equations.enabled:] - [ ] كل معادلة رئيسية في بلوك 📐 مع شرح الرموز
 [if trace_exercise.enabled:] - [ ] تمارين تتبع: كل تمرين له جدول ناقص + نموذج الحل
 [if design_question.enabled:] - [ ] أسئلة تصميم مع نموذج الإجابة ومعايير التقييم
 [if output.validation_footer:] - [ ] أضف تعليق VALIDATION في نهاية الملف

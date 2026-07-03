@@ -1,5 +1,6 @@
 import { createRenderer } from '../engine/renderer/index.js';
 import { initDiagrams, refreshDiagrams } from '../engine/renderer/diagram/diagram.js';
+import { initEquations } from './equations.js';
 import { applySiteSettings } from '../themes/apply-theme.js';
 import { GUIDE_CONFIG } from './guide-config.js';
 
@@ -241,6 +242,7 @@ function loadLectureView(idx, hashPart) {
     showView('lecture');
     initInteractivity(document.getElementById('content'));
     initDiagrams(document.getElementById('content'));
+    initEquations(document.getElementById('content'));
     requestAnimationFrame(() => {
       initScrollAnimations(document.getElementById('content'));
       buildSidebar(item.toc);
