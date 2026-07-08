@@ -49,6 +49,9 @@
 ### 1.1. كود الهستوغرام في R وPython
 
 #### النص الأصلي يقول:
+
+#### الشرح المبسّط:
+هذا القسم يعرض كود رسم الهستوغرام في R وPython مع شرح التنفيذ.
 > "To create a histogram corresponding to Table 1-5 in R, use the hist function with the breaks argument: `hist(state[['Population']], breaks=breaks)`"
 > "pandas supports histograms for data frames with the DataFrame.plot.hist method. Use the keyword argument bins to define the number of bins."
 
@@ -160,6 +163,12 @@ ax.set_xlabel('Population (millions)')
 ---
 
 ### 2.1. كود Density Plot في R وPython
+
+#### النص الأصلي يقول:
+> يعرض الكود كيفية رسم density plot في R باستخدام `hist()` و `density()`.
+
+#### الشرح المبسّط:
+هذا القسم يعرض كود رسم منحنى الكثافة في R.
 
 #### 💻 الكود: Density Plot في R
 
@@ -612,7 +621,7 @@ g.map(plt.hexbin, 'SqFtTotLiving', 'TaxAssessedValue',
 
 ---
 
-## الجزء الأول (تكملة) — الفصل الثاني: Data and Sampling Distributions
+## الجزء الأول (تكملة) — الفصل الثاني: Data and Sampling Distributions — شرح
 
 ---
 
@@ -1881,7 +1890,7 @@ cat("Bootstrap SE for Median:", se_boot, "\n")
 
 ---
 
-## الجزء الثامن: الكود الكامل (مرجع شامل)
+## الجزء الثامن: الكود النهائي (مرجع شامل)
 
 > الكود الكامل مجمّع من جميع أجزاء المحاضرة في ملفين منفصلين.
 
