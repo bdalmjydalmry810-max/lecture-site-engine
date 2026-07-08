@@ -8,7 +8,7 @@ import path from 'node:path';
 import { listAllSubjectDirs, parseSubjectBrief, scaffoldSubjects } from './lib/scaffold-subject.mjs';
 import { ENGINE_ROOT } from './lib/subject-paths.mjs';
 
-const REPO = (process.env.GITHUB_REPOSITORY || 'Shahd-Abbara/lecture-site-engine');
+const REPO = (process.env.GITHUB_REPOSITORY || 'homs-uni/lecture-site-engine');
 const MAIN_BRANCH = process.env.GITHUB_BRANCH || 'main';
 const GH = `https://github.com/${REPO}`;
 
@@ -152,10 +152,11 @@ async function main() {
       </div>
       <div class="field">
         <label for="ghUser">٣ — اسمك على GitHub (username)</label>
-        <input type="text" id="ghUser" placeholder="مثال: ahmad-dev" autocomplete="username" spellcheck="false">
+        <input type="text" id="ghUser" dir="ltr" inputmode="latin" placeholder="ahmad-dev" autocomplete="username" spellcheck="false" autocapitalize="off" autocorrect="off">
         <p class="hint" style="font-size:0.8rem;color:#888;margin:0.35rem 0 0">
-          بعد Fork — من صفحة GitHub تبعك: <code>github.com/<strong>USERNAME</strong></code> (مو الاسم المعروض)
+          بعد Fork — من صفحة GitHub تبعك: <code dir="ltr">github.com/<strong>USERNAME</strong></code> (حروف إنجليزية وأرقام فقط — مو الاسم العربي)
         </p>
+        <p class="hint" id="ghUserWarn" style="font-size:0.8rem;color:#b45309;margin:0.35rem 0 0;display:none" hidden></p>
       </div>
     </div>
 
@@ -223,23 +224,69 @@ async function main() {
     const btnPaste = document.getElementById('btnPaste');
     const uploadUrlHint = document.getElementById('uploadUrlHint');
     const forkHint = document.getElementById('forkHint');
+    const ghUserWarn = document.getElementById('ghUserWarn');
 
-    const savedUser = localStorage.getItem('contrib-gh-user');
-    if (savedUser) ghUserInput.value = savedUser;
+    /** GitHub usernames: ASCII letters, digits, hyphens (no Arabic / bidi marks). */
+    function stripInvalidGhUserChars(raw) {
+      return String(raw)
+        .trim()
+        .replace(/^@/, '')
+        .replace(/[\u200B-\u200F\u202A-\u202E\u2066-\u2069\uFEFF\u064B-\u065F\u0670\u0610-\u061A\u06D6-\u06ED]/g, '')
+        .replace(/[^a-zA-Z0-9-]/g, '')
+        .slice(0, 39);
+    }
 
-    function encPath(folder) {
-      return folder.split('/').map(encodeURIComponent).join('/');
+    function finalizeGhUser(raw) {
+      return stripInvalidGhUserChars(raw).replace(/^-+|-+$/g, '');
     }
 
     function ghUser() {
-      return ghUserInput.value.trim().replace(/^@/, '');
+      return finalizeGhUser(ghUserInput.value);
+    }
+
+    function isGhUserComplete() {
+      const editing = stripInvalidGhUserChars(ghUserInput.value);
+      const final = finalizeGhUser(editing);
+      return final.length > 0 && editing === final;
+    }
+
+    function applyGhUserSanitize(finalize) {
+      const raw = ghUserInput.value;
+      const stripped = stripInvalidGhUserChars(raw);
+      const clean = finalize ? finalizeGhUser(stripped) : stripped;
+      if (raw !== stripped) {
+        ghUserInput.value = stripped;
+        ghUserWarn.hidden = false;
+        ghUserWarn.style.display = 'block';
+        ghUserWarn.textContent = 'تم حذف أحرف غير صالحة (مثل علامات عربية مخفية). استخدم username إنجليزي فقط.';
+      } else if (finalize && stripped !== clean) {
+        ghUserInput.value = clean;
+        ghUserWarn.hidden = true;
+        ghUserWarn.style.display = 'none';
+      } else {
+        ghUserWarn.hidden = true;
+        ghUserWarn.style.display = 'none';
+      }
+      return finalize ? clean : stripped;
+    }
+
+    const savedUser = localStorage.getItem('contrib-gh-user');
+    if (savedUser) {
+      ghUserInput.value = finalizeGhUser(savedUser);
+      if (savedUser !== ghUserInput.value) {
+        localStorage.setItem('contrib-gh-user', ghUserInput.value);
+      }
+    }
+
+    function encPath(folder) {
+      return folder.split('/').map(encodeURIComponent).join('/');
     }
 
     function contribUrls(s) {
       const user = ghUser();
       const enc = encPath(s.path);
       const forkBase = user
-        ? 'https://github.com/' + encodeURIComponent(user) + '/' + REPO_NAME
+        ? 'https://github.com/' + user + '/' + REPO_NAME
         : null;
       return {
         fork: GH + '/fork',
@@ -251,7 +298,9 @@ async function main() {
           ? forkBase + '/upload/' + encodeURIComponent(MAIN_BRANCH) + '/' + enc
           : '#',
         paste: GH + '/new/' + encodeURIComponent(MAIN_BRANCH) + '/' + encPath(s.path + '/parN.md'),
-        openPr: GH + '/compare/' + encodeURIComponent(MAIN_BRANCH) + '?expand=1',
+        openPr: user
+          ? GH + '/compare/' + MAIN_BRANCH + '...' + user + ':' + MAIN_BRANCH + '?expand=1'
+          : '#',
         folder: GH + '/tree/' + encodeURIComponent(MAIN_BRANCH) + '/' + enc,
       };
     }
@@ -261,7 +310,7 @@ async function main() {
       if (!s) { hideCard(); return; }
       const urls = contribUrls(s);
       const user = ghUser();
-      const hasUser = !!user;
+      const hasUser = isGhUserComplete();
       cardTitle.textContent = s.title;
       cardPath.textContent = s.path + '/';
       setBtn(btnFork, urls.fork, true);
@@ -303,6 +352,12 @@ async function main() {
     }
 
     ghUserInput.addEventListener('input', () => {
+      applyGhUserSanitize(false);
+      if (subjectSelect.value) refreshSubject();
+    });
+
+    ghUserInput.addEventListener('blur', () => {
+      applyGhUserSanitize(true);
       if (subjectSelect.value) refreshSubject();
     });
 
