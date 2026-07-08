@@ -21,38 +21,87 @@ const IS_DEV = process.env.GITHUB_BRANCH === 'dev';
 /** @type {Record<string, { primary: string, secondary: string, tertiary: string, fixed: string, onFixed: string, icon: string }>} */
 const HUB_THEME_PALETTE = {
   'kotlin-pink-blue': {
-    primary: '#ec4899', secondary: '#2563eb', tertiary: '#00bcd4',
-    fixed: '#fce7f3', onFixed: '#500724', icon: 'code',
+    primary: "#111827",
+    secondary: "#4f92ff",
+    tertiary: "#2563eb",
+    fixed: "#e0f2fe",
+    onFixed: "#0f172a",
+    icon: "code",
   },
   'parallel-teal': {
-    primary: '#00685f', secondary: '#0058be', tertiary: '#924628',
-    fixed: '#e0f7f4', onFixed: '#00201d', icon: 'memory',
+    primary: "#111827",
+    secondary: "#4f92ff",
+    tertiary: "#2563eb",
+    fixed: "#e0f2fe",
+    onFixed: "#0f172a",
+    icon: "memory",
   },
   'software-purple': {
-    primary: '#7c3aed', secondary: '#2563eb', tertiary: '#06b6d4',
-    fixed: '#ede9fe', onFixed: '#2e1065', icon: 'engineering',
+    primary: "#111827",
+    secondary: "#4f92ff",
+    tertiary: "#2563eb",
+    fixed: "#e0f2fe",
+    onFixed: "#0f172a",
+    icon: "engineering",
   },
   'programming-blue-lavender': {
-    primary: '#1064e0', secondary: '#7c4dff', tertiary: '#00acc1',
-    fixed: '#e8efff', onFixed: '#001a42', icon: 'terminal',
+    primary: "#111827",
+    secondary: "#4f92ff",
+    tertiary: "#2563eb",
+    fixed: "#e0f2fe",
+    onFixed: "#0f172a",
+    icon: "terminal",
   },
   'gis-earth': {
-    primary: '#2e7d32', secondary: '#558b2f', tertiary: '#8d6e63',
-    fixed: '#e8f5e9', onFixed: '#1b5e20', icon: 'map',
+    primary: "#111827",
+    secondary: "#4f92ff",
+    tertiary: "#2563eb",
+    fixed: "#e0f2fe",
+    onFixed: "#0f172a",
+    icon: "map",
   },
   'amber-default': {
-    primary: '#7a6200', secondary: '#5c3d8a', tertiary: '#1e5a8a',
-    fixed: '#faf4e6', onFixed: '#3d3100', icon: 'school',
+    primary: "#111827",
+    secondary: "#4f92ff",
+    tertiary: "#2563eb",
+    fixed: "#e0f2fe",
+    onFixed: "#0f172a",
+    icon: "school",
   },
 };
 
 /** @type {Record<number, { primary: string, secondary: string, fixed: string, label: string }>} */
 const YEAR_ACCENTS = {
-  1: { primary: '#d97706', secondary: '#fbbf24', fixed: '#fef3c7', label: 'الأولى' },
-  2: { primary: '#d97706', secondary: '#fbbf24', fixed: '#fef3c7', label: 'الثانية' },
-  3: { primary: '#d97706', secondary: '#fbbf24', fixed: '#fef3c7', label: 'الثالثة' },
-  4: { primary: '#d97706', secondary: '#fbbf24', fixed: '#fef3c7', label: 'الرابعة' },
-  5: { primary: '#d97706', secondary: '#fbbf24', fixed: '#fef3c7', label: 'الخامسة' },
+  1: {
+    primary: "#111827",
+    secondary: "#4f92ff",
+    fixed: "#e0f2fe",
+    label: "الأولى",
+  },
+  2: {
+    primary: "#111827",
+    secondary: "#4f92ff",
+    fixed: "#e0f2fe",
+    label: "الثانية",
+  },
+  3: {
+    primary: "#111827",
+    secondary: "#4f92ff",
+    fixed: "#e0f2fe",
+    label: "الثالثة",
+  },
+  4: {
+    primary: "#111827",
+    secondary: "#4f92ff",
+    fixed: "#e0f2fe",
+    label: "الرابعة",
+  },
+  5: {
+    primary: "#111827",
+    secondary: "#4f92ff",
+    fixed: "#e0f2fe",
+    label: "الخامسة",
+  },
 };
 
 /** @param {number} n */
@@ -174,13 +223,13 @@ function renderStubHtml(subject) {
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
-    body { font-family: 'IBM Plex Sans Arabic', sans-serif; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; background: #f8f6f2; color: #1a1a1a; text-align: center; }
-    .box { max-width: 420px; background: #fff; border: 1px solid #e8e4dc; border-radius: 16px; padding: 2rem 1.5rem; }
-    h1 { font-size: 1.35rem; margin: 0 0 0.75rem; color: #5c3d8a; }
+    body { font-family: 'IBM Plex Sans Arabic', sans-serif; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; background: #f8fafc; color: #0f172a; text-align: center; }
+    .box { max-width: 420px; background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2rem 1.5rem; }
+    h1 { font-size: 1.35rem; margin: 0 0 0.75rem; color: #111827; }
     p { color: #555; margin: 0 0 1.25rem; line-height: 1.7; }
-    a { color: #1e5a8a; text-decoration: none; font-weight: 600; }
+    a { color: #2563eb; text-decoration: none; font-weight: 600; }
     a:hover { text-decoration: underline; }
-    .badge { display: inline-block; margin-bottom: 1rem; padding: 0.25rem 0.65rem; border-radius: 999px; background: #f0ebe0; color: #7a6528; font-size: 0.8rem; }
+    .badge { display: inline-block; margin-bottom: 1rem; padding: 0.25rem 0.65rem; border-radius: 999px; background: #e0f2fe; color: #1d4ed8; font-size: 0.8rem; }
   </style>
   <script type="text/javascript">
 (function(c,l,a,r,i,t,y){
@@ -282,8 +331,8 @@ function renderHtml(subjects) {
     const stats = yearBlockStats(subjects, yearNum);
     const cards = byYear[y].map(s => renderSubjectCard(s, yearNum, cardIndex++)).join('\n');
     return `
-    <section class="year-panel" style="--year-primary:${accent.primary};--year-secondary:${accent.secondary};--year-fixed:${accent.fixed}">
-      <header class="year-panel__header">
+    <details id="year-${yearNum}" class="year-panel" style="--year-primary:${accent.primary};--year-secondary:${accent.secondary};--year-fixed:${accent.fixed}">
+      <summary class="year-panel__header">
         <div class="year-panel__badge" aria-hidden="true">${toArabicDigits(y)}</div>
         <div class="year-panel__intro">
           <h2>السنة ${accent.label}</h2>
@@ -299,11 +348,12 @@ function renderHtml(subjects) {
             ${toArabicDigits(stats.lectures)} محاضرة
           </span>
         </div>
-      </header>
+        <span class="year-panel__toggle material-symbols-outlined" aria-hidden="true">expand_more</span>
+      </summary>
       <div class="year-panel__body">
         <div class="grid">${cards}</div>
       </div>
-    </section>`;
+    </details>`;
   }).join('\n');
 
   const heroStats = `
@@ -359,30 +409,144 @@ function renderHtml(subjects) {
       from { opacity: 0; transform: translateY(28px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    html, body {
+      scroll-behavior: auto;
+      scroll-padding-top: 80px;
+    }
+    html.hub-programmatic-scroll,
+    html.hub-programmatic-scroll body {
+      scroll-behavior: auto !important;
+    }
+    .hub-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.95rem 1.25rem;
+      background: color-mix(in srgb, #ffffff 86%, #dbeafe);
+      border-bottom: 1px solid #dbeafe;
+      backdrop-filter: blur(14px);
+    }
+    .dark .hub-navbar {
+      background: color-mix(in srgb, #111827 90%, #1f2937);
+      border-bottom-color: color-mix(in srgb, #4f92ff 22%, #374151);
+    }
+    .hub-navbar__brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+    .hub-navbar__brand-btn {
+      color: #111827;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: min(42vw, 20rem);
+    }
+    .dark .hub-navbar__brand-btn { color: #f8fafc; }
+    .hub-navbar__links {
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .hub-navbar__link {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.55rem 0.95rem;
+      border-radius: 999px;
+      color: #475569;
+      text-decoration: none;
+      transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+    .hub-navbar__link:hover {
+      background: color-mix(in srgb, #4f92ff 10%, transparent);
+      color: #111827;
+      transform: translateY(-1px);
+    }
+    .dark .hub-navbar__link { color: #cbd5e1; }
+    .dark .hub-navbar__link:hover { color: #ffffff; }
+    .hub-navbar__actions {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.35rem;
+    }
+    .hub-navbar__toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 999px;
+      border: 1px solid #dbeafe;
+      background: #ffffff;
+      color: #475569;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .hub-navbar__toggle:hover {
+      transform: translateY(-1px);
+      background: #f8fafc;
+      border-color: #bfdbfe;
+    }
+    .dark .hub-navbar__toggle {
+      background: #111827;
+      color: #bfdbfe;
+      border-color: #374151;
+    }
+    .dark .hub-navbar__toggle:hover {
+      background: #1f2937;
+      border-color: #4f92ff;
+    }
     body {
       font-family: 'IBM Plex Sans Arabic', sans-serif;
       margin: 0;
       padding: 0 0 3rem;
-      background: linear-gradient(180deg, #f8f6f2 0%, #efe9df 55%, #f8f6f2 100%);
-      color: #1a1a1a;
+      background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 55%, #f8fafc 100%);
+      color: #0f172a;
       min-height: 100vh;
+    }
+    .dark,
+    .dark body {
+      background: linear-gradient(180deg, #0f172a 0%, #111827 55%, #0f172a 100%);
+      color: #e2e8f0;
     }
     .page-hero {
       text-align: center;
       padding: 2.5rem 1.25rem 2rem;
       background:
-        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,162,39,.18) 0%, transparent 70%),
-        linear-gradient(180deg, #fff 0%, #f8f6f2 100%);
-      border-bottom: 1px solid #e8e4dc;
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(79,146,255,.16) 0%, transparent 70%),
+        linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+      border-bottom: 1px solid #dbeafe;
       margin-bottom: 2rem;
+    }
+    .dark .page-hero {
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(79,146,255,.12) 0%, transparent 70%),
+        linear-gradient(180deg, #111827 0%, #0f172a 100%);
+      border-bottom-color: rgba(79,146,255,.16);
     }
     .page-hero h1 {
       margin: 0 0 0.35rem;
       font-size: clamp(1.6rem, 4.5vw, 2.25rem);
-      color: #3d3100;
+      color: #111827;
       font-weight: 700;
     }
-    .lead { color: #666; margin: 0 0 1.5rem; font-size: 1.05rem; }
+    .dark .page-hero h1 { color: #f8fafc; }
+    .lead { color: #475569; margin: 0 0 1.5rem; font-size: 1.05rem; }
+    .dark .lead { color: #cbd5e1; }
     .hero-stats {
       display: flex;
       flex-wrap: wrap;
@@ -398,27 +562,38 @@ function renderHtml(subjects) {
       padding: 0.75rem 1.1rem;
       border-radius: 1rem;
       background: #fff;
-      border: 1px solid #e8e4dc;
-      box-shadow: 0 4px 16px -6px rgba(0,0,0,.08);
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 16px -6px rgba(15,23,42,.08);
       min-width: 9rem;
+    }
+    .dark .hero-stat {
+      background: #111827;
+      border-color: rgba(148,163,184,.18);
+      box-shadow: 0 4px 20px -8px rgba(0,0,0,.35);
     }
     .hero-stat__icon {
       font-size: 1.6rem !important;
-      color: #c9a227;
-      background: #faf4e6;
+      color: #2563eb;
+      background: #e0f2fe;
       padding: 0.45rem;
       border-radius: 0.75rem;
+    }
+    .dark .hero-stat__icon {
+      color: #bfdbfe;
+      background: rgba(37,99,235,.18);
     }
     .hero-stat strong {
       display: block;
       font-size: 1.2rem;
-      color: #3d3100;
+      color: #111827;
       line-height: 1.2;
     }
+    .dark .hero-stat strong { color: #f8fafc; }
     .hero-stat span {
       font-size: 0.78rem;
-      color: #777;
+      color: #64748b;
     }
+    .dark .hero-stat span { color: #94a3b8; }
     .year-panel {
       max-width: 1140px;
       margin: 0 auto 2rem;
@@ -436,16 +611,32 @@ function renderHtml(subjects) {
       gap: 1rem;
       flex-wrap: wrap;
       padding: 1.15rem 1.35rem;
-      border-radius: 1.25rem 1.25rem 0 0;
+      border-radius: 1.25rem;
       background: linear-gradient(
         135deg,
         color-mix(in srgb, var(--year-fixed) 80%, #fff) 0%,
         #fff 100%
       );
-      border: 1px solid color-mix(in srgb, var(--year-primary) 20%, #e8e4dc);
-      border-bottom: none;
+      border: 1px solid color-mix(in srgb, var(--year-primary) 16%, #e2e8f0);
       position: relative;
       overflow: hidden;
+      cursor: pointer;
+      list-style: none;
+    }
+    .year-panel__header::-webkit-details-marker { display: none; }
+    .year-panel[open] > .year-panel__header {
+      border-radius: 1.25rem 1.25rem 0 0;
+      border-bottom: none;
+    }
+    .year-panel__toggle {
+      margin-inline-start: auto;
+      color: var(--year-primary);
+      transition: transform 0.2s ease;
+    }
+    .year-panel[open] .year-panel__toggle { transform: rotate(180deg); }
+    .dark .year-panel__header {
+      background: linear-gradient(135deg, #111827 0%, #0f172a 100%);
+      border-color: rgba(79,146,255,.16);
     }
     .year-panel__header::after {
       content: '';
@@ -476,11 +667,13 @@ function renderHtml(subjects) {
       color: var(--year-primary);
       font-weight: 700;
     }
+    .dark .year-panel__intro h2 { color: #ffffff; }
     .year-panel__tagline {
       margin: 0;
       font-size: 0.85rem;
-      color: #666;
+      color: #475569;
     }
+    .dark .year-panel__tagline { color: #cbd5e1; }
     .year-panel__chips {
       display: flex;
       flex-wrap: wrap;
@@ -499,6 +692,11 @@ function renderHtml(subjects) {
       font-weight: 600;
       border: 1px solid color-mix(in srgb, var(--year-primary) 15%, transparent);
     }
+    .dark .year-panel__chip {
+      background: rgba(15,23,42,.85);
+      color: #e2e8f0;
+      border-color: rgba(148,163,184,.18);
+    }
     .year-panel__chip .material-symbols-outlined { font-size: 1rem; }
     .year-panel__body {
       padding: 1.25rem;
@@ -507,6 +705,12 @@ function renderHtml(subjects) {
       border: 1px solid color-mix(in srgb, var(--year-primary) 16%, #e8e4dc);
       border-top: 1px dashed color-mix(in srgb, var(--year-primary) 12%, #e8e4dc);
       box-shadow: 0 10px 32px -14px color-mix(in srgb, var(--year-primary) 18%, transparent);
+    }
+    .dark .year-panel__body {
+      background: #0f172a;
+      border-color: rgba(148,163,184,.16);
+      border-top-color: rgba(148,163,184,.16);
+      box-shadow: 0 10px 32px -14px rgba(0,0,0,.45);
     }
     .grid {
       display: grid;
@@ -523,7 +727,7 @@ function renderHtml(subjects) {
       text-decoration: none;
       color: inherit;
       text-align: right;
-      border: 1px solid color-mix(in srgb, var(--card-primary) 18%, #e8e4dc);
+      border: 1px solid color-mix(in srgb, var(--card-primary) 18%, #e2e8f0);
       background: linear-gradient(
         165deg,
         color-mix(in srgb, var(--card-fixed) 55%, #fff) 0%,
@@ -534,6 +738,11 @@ function renderHtml(subjects) {
       animation: hub-fade-in-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       animation-delay: var(--stagger, 0s);
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .dark .hub-card {
+      background: linear-gradient(165deg, #111827 0%, #0f172a 58%);
+      border-color: rgba(148,163,184,.18);
+      box-shadow: 0 8px 28px -10px rgba(0,0,0,.45);
     }
     .hub-card::before {
       content: '';
@@ -546,18 +755,26 @@ function renderHtml(subjects) {
     }
     .hub-card:hover {
       transform: translateY(-4px);
-      border-color: color-mix(in srgb, var(--card-primary) 42%, #e8e4dc);
-      box-shadow: 0 14px 36px -12px color-mix(in srgb, var(--card-primary) 30%, transparent);
+      border-color: color-mix(in srgb, var(--card-primary) 38%, #e2e8f0);
+      box-shadow: 0 14px 36px -12px color-mix(in srgb, var(--card-primary) 28%, transparent);
     }
     .hub-card:hover .hub-card__icon {
       transform: scale(1.08) rotate(-3deg);
     }
     .hub-card:hover .hub-card__title { color: var(--card-primary); }
+    .dark .hub-card:hover .hub-card__title {
+      color: #f8fafc;
+      text-shadow: 0 1px 10px rgba(15,23,42,.35);
+    }
     .hub-card:hover .hub-card__cta .material-symbols-outlined { transform: translateX(-4px); }
     .hub-card--pending {
       border-style: dashed;
-      background: linear-gradient(165deg, #faf9f7 0%, #fff 58%);
+      background: linear-gradient(165deg, #f8fafc 0%, #fff 58%);
       box-shadow: 0 6px 20px -12px rgba(0,0,0,.12);
+    }
+    .dark .hub-card--pending {
+      background: linear-gradient(165deg, #0f172a 0%, #111827 58%);
+      box-shadow: 0 6px 20px -12px rgba(0,0,0,.28);
     }
     .hub-card__head {
       display: flex;
@@ -607,8 +824,8 @@ function renderHtml(subjects) {
       box-shadow: 0 2px 10px color-mix(in srgb, var(--card-primary) 35%, transparent);
     }
     .hub-card--pending .hub-card__pill--count {
-      background: #9a8b6a;
-      box-shadow: 0 2px 8px rgba(122,101,40,.25);
+      background: #64748b;
+      box-shadow: 0 2px 8px rgba(100,116,139,.22);
     }
     .hub-card__title {
       margin: 0 0 0.4rem;
@@ -618,17 +835,20 @@ function renderHtml(subjects) {
       transition: color 0.2s ease;
       line-height: 1.45;
     }
+    .dark .hub-card__title { color: #f8fafc; }
     .hub-card__sub {
       margin: 0 0 0.35rem;
       font-size: 0.9rem;
-      color: #666;
+      color: #475569;
       line-height: 1.55;
     }
+    .dark .hub-card__sub { color: #cbd5e1; }
     .hub-card__meta {
       margin: 0 0 0.75rem;
       font-size: 0.78rem;
-      color: #999;
+      color: #64748b;
     }
+    .dark .hub-card__meta { color: #94a3b8; }
     .hub-card__chips {
       display: flex;
       flex-wrap: wrap;
@@ -641,14 +861,22 @@ function renderHtml(subjects) {
       gap: 0.3rem;
       padding: 0.3rem 0.65rem;
       border-radius: 999px;
-      background: #f3f0ea;
-      color: #555;
+      background: #f1f5f9;
+      color: #475569;
       font-size: 0.78rem;
+    }
+    .dark .hub-card__chip {
+      background: rgba(15,23,42,.92);
+      color: #cbd5e1;
     }
     .hub-card__chip .material-symbols-outlined { font-size: 1rem; color: var(--card-primary); }
     .hub-card__chip--pending {
-      background: #f0ebe0;
-      color: #7a6528;
+      background: #e0f2fe;
+      color: #1d4ed8;
+    }
+    .dark .hub-card__chip--pending {
+      background: rgba(37,99,235,.18);
+      color: #bfdbfe;
     }
     .hub-card__cta {
       display: inline-flex;
@@ -660,12 +888,20 @@ function renderHtml(subjects) {
       color: var(--card-primary);
       transition: gap 0.2s ease;
     }
+    .dark .hub-card__cta {
+      color: #bfdbfe;
+    }
     .hub-card__cta .material-symbols-outlined {
       font-size: 1.15rem;
       transition: transform 0.2s ease;
+      color: currentColor;
+    }
+    .dark .hub-card:hover .hub-card__cta {
+      color: #ffffff;
     }
     .empty { text-align: center; color: #888; padding: 3rem; }
     @media (prefers-reduced-motion: reduce) {
+      html, body { scroll-behavior: auto !important; }
       .hub-card, .year-panel {
         animation: none !important;
         opacity: 1 !important;
@@ -674,6 +910,60 @@ function renderHtml(subjects) {
       }
       .hub-card:hover { transform: none; }
       .hub-card:hover .hub-card__icon { transform: none; }
+    }
+    @media (max-width: 767px) {
+      html, body { scroll-padding-top: 56px; }
+      .hub-navbar {
+        gap: 0.35rem;
+        padding: 0.45rem 0.65rem;
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+      .hub-navbar__brand-btn {
+        font-size: 0.8125rem;
+        font-weight: 700;
+        max-width: min(72vw, 14rem);
+      }
+      .hub-navbar__links {
+        display: none;
+      }
+      .hub-navbar__toggle {
+        width: 2.25rem;
+        height: 2.25rem;
+      }
+      .hub-navbar__toggle .material-symbols-outlined {
+        font-size: 1.2rem;
+      }
+      .page-hero {
+        padding: 1rem 0.75rem 0.875rem;
+        margin-bottom: 1.25rem;
+      }
+      .page-hero h1 {
+        font-size: 1.125rem;
+        line-height: 1.45;
+      }
+      .lead {
+        font-size: 0.8125rem;
+        margin-bottom: 0.875rem;
+      }
+      .hero-stats {
+        gap: 0.5rem;
+      }
+      .hero-stat {
+        min-width: 0;
+        flex: 1 1 calc(50% - 0.5rem);
+        padding: 0.55rem 0.65rem;
+        border-radius: 0.75rem;
+      }
+      .hero-stat__icon {
+        font-size: 1.25rem !important;
+        padding: 0.3rem;
+      }
+      .hero-stat strong {
+        font-size: 0.9375rem;
+      }
+      .hero-stat span {
+        font-size: 0.6875rem;
+      }
     }
     @media (max-width: 640px) {
       .year-panel__header { flex-direction: column; align-items: flex-start; }
@@ -691,6 +981,25 @@ function renderHtml(subjects) {
 </script>
 </head>
 <body>
+  <nav class="hub-navbar" aria-label="التنقل الرئيسي">
+    <div class="hub-navbar__brand">
+      <button class="hub-navbar__brand-btn" type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">دلائل الدراسة</button>
+    </div>
+    <div class="hub-navbar__links">
+      ${Object.keys(byYear)
+        .sort((a, b) => Number(a) - Number(b))
+        .map(
+          (y) =>
+            `<a class="hub-navbar__link" href="#" data-scroll-target="year-${Number(y)}">السنة ${toArabicDigits(y)}</a>`,
+        )
+        .join("")}
+    </div>
+    <div class="hub-navbar__actions">
+      <button class="hub-navbar__toggle" type="button" id="hubThemeToggle" aria-label="تبديل المظهر" aria-pressed="false">
+        <span class="material-symbols-outlined" id="hubThemeIcon" aria-hidden="true">dark_mode</span>
+      </button>
+    </div>
+  </nav>
   <header class="page-hero">
     <h1>دلائل الدراسة التفاعلية</h1>
     <p class="lead">اختر المادة للبدء</p>
@@ -699,6 +1008,128 @@ function renderHtml(subjects) {
   <main>
   ${subjects.length ? yearSections : '<p class="empty">لا توجد مواد بعد.</p>'}
   </main>
+  <script>
+    (function () {
+      const key = 'study-guide-theme';
+      const toggle = document.getElementById('hubThemeToggle');
+      const icon = document.getElementById('hubThemeIcon');
+
+      function syncTheme(theme) {
+        const dark = theme === 'dark';
+        document.documentElement.classList.toggle('dark', dark);
+        document.body?.classList.toggle('dark', dark);
+        document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+        if (toggle) toggle.setAttribute('aria-pressed', String(dark));
+        if (icon) icon.textContent = dark ? 'light_mode' : 'dark_mode';
+      }
+
+      try {
+        const saved = localStorage.getItem(key);
+        const dark = saved ? saved === 'dark' : true;
+        syncTheme(dark ? 'dark' : 'light');
+        if (!saved) localStorage.setItem(key, 'dark');
+      } catch {
+        syncTheme('dark');
+      }
+
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          const dark = !document.documentElement.classList.contains('dark');
+          const next = dark ? 'dark' : 'light';
+          syncTheme(next);
+          try {
+            localStorage.setItem(key, next);
+          } catch {}
+        });
+      }
+
+      window.addEventListener('storage', (event) => {
+        if (event.key === key && typeof event.newValue === 'string') syncTheme(event.newValue);
+      });
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let scrollAnimFrame = null;
+      const SCROLL_DURATION_MS = 1200;
+      const SCROLL_PADDING_PX = 80;
+
+      function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      }
+
+      function setScrollY(y) {
+        try {
+          window.scrollTo({ top: y, left: 0, behavior: 'instant' });
+        } catch {
+          window.scrollTo(0, y);
+        }
+      }
+
+      function targetYFor(el) {
+        return Math.max(
+          0,
+          el.getBoundingClientRect().top + window.scrollY - SCROLL_PADDING_PX,
+        );
+      }
+
+      function smoothScrollToY(targetY, duration) {
+        if (scrollAnimFrame) cancelAnimationFrame(scrollAnimFrame);
+
+        const root = document.documentElement;
+        root.classList.add('hub-programmatic-scroll');
+        root.style.scrollBehavior = 'auto';
+
+        const startY = window.scrollY;
+        const distance = targetY - startY;
+
+        if (Math.abs(distance) < 2) {
+          root.classList.remove('hub-programmatic-scroll');
+          root.style.removeProperty('scroll-behavior');
+          return;
+        }
+
+        const startTime = performance.now();
+
+        function finish() {
+          scrollAnimFrame = null;
+          setScrollY(targetY);
+          root.classList.remove('hub-programmatic-scroll');
+          root.style.removeProperty('scroll-behavior');
+        }
+
+        function step(now) {
+          const progress = Math.min((now - startTime) / duration, 1);
+          setScrollY(startY + distance * easeInOutCubic(progress));
+          if (progress < 1) scrollAnimFrame = requestAnimationFrame(step);
+          else finish();
+        }
+
+        scrollAnimFrame = requestAnimationFrame(step);
+      }
+
+      document.querySelectorAll('.hub-navbar__link[data-scroll-target]').forEach((link) => {
+        link.addEventListener(
+          'click',
+          (event) => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            const id = link.dataset.scrollTarget;
+            if (!id) return;
+            const target = document.getElementById(id);
+            if (!target) return;
+            if (target.tagName === 'DETAILS') target.open = true;
+            const targetY = targetYFor(target);
+            if (prefersReducedMotion) {
+              setScrollY(targetY);
+            } else {
+              smoothScrollToY(targetY, SCROLL_DURATION_MS);
+            }
+            history.pushState(null, '', \`#\${id}\`);
+          },
+          true,
+        );
+      });
+    })();
+  </script>
 </body>
 </html>`;
 }

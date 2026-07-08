@@ -73,16 +73,16 @@ async function main() {
     .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
     .btn { display: inline-block; padding: 0.55rem 1rem; border-radius: 8px; font-size: 0.9rem; border: 1px solid #c5d0dc; background: #e8eef4; color: #1a1a1a; cursor: pointer; font-family: inherit; }
     .btn:hover { background: #dce6f0; }
-    .btn--primary { background: #1e5a8a; color: #fff; border-color: #1e5a8a; }
-    .btn--primary:hover { background: #164a72; }
+    .btn--primary { background: #2563eb; color: #fff; border-color: #2563eb; }
+    .btn--primary:hover { background: #1d4ed8; }
     .btn--ghost { background: transparent; }
     .toolbar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 1rem; }
     .status { font-size: 0.85rem; color: #444; margin-top: 0.75rem; word-break: break-word; }
     .status--error { color: #b00020; }
     .code-box { background: #f5f8fb; border-radius: 8px; padding: 1rem; margin: 1rem 0; text-align: center; }
-    .code-box .code { font-size: 2rem; font-weight: 700; letter-spacing: 0.15em; font-family: monospace; color: #1e5a8a; }
-    .setup { background: #fff8e6; border: 1px solid #e6d9a8; border-radius: 8px; padding: 1rem; font-size: 0.9rem; margin-bottom: 1rem; }
-    .setup code { background: #f0ebe0; padding: 0.1rem 0.35rem; border-radius: 4px; }
+    .code-box .code { font-size: 2rem; font-weight: 700; letter-spacing: 0.15em; font-family: monospace; color: #2563eb; }
+    .setup { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 1rem; font-size: 0.9rem; margin-bottom: 1rem; }
+    .setup code { background: #e0f2fe; padding: 0.1rem 0.35rem; border-radius: 4px; }
     .meta { font-size: 0.8rem; color: #666; font-family: monospace; margin-bottom: 0.5rem; }
     .user-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; font-size: 0.9rem; }
     .new-file { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: end; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #dde3ea; }

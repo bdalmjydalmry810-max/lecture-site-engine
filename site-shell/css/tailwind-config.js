@@ -93,7 +93,7 @@ tailwind.config = {
         'label-md': ['14px', { lineHeight: '20px', letterSpacing: '0.02em', fontWeight: '500' }],
         'display-lg': ['40px', { lineHeight: '52px', fontWeight: '700' }],
         'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
-        'display-lg-mobile': ['32px', { lineHeight: '40px', fontWeight: '700' }],
+        'display-lg-mobile': ['24px', { lineHeight: '32px', fontWeight: '700' }],
         'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
         'code-sm': ['14px', { lineHeight: '22px', fontWeight: '400' }],
         'headline-sm': ['20px', { lineHeight: '28px', fontWeight: '600' }],

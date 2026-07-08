@@ -7,6 +7,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const BASE_TAG_RE = /<base\s[^>]*href=["'][^"']*["'][^>]*>\s*/i;
+const STORAGE_PREFIX_RE = /data-storage-prefix="[^"]*"/;
 
 /** @returns {string} e.g. "/" or "/lecture-site-engine/" */
 export function resolveSiteBasePrefix() {
@@ -43,6 +44,32 @@ export async function patchSubjectIndexHtml(outDir, subjectRel) {
     html = html.replace(BASE_TAG_RE, tag);
   } else {
     html = html.replace(/<head>\s*\n/i, `<head>\n  ${tag}`);
+  }
+
+  await writeFile(indexPath, html);
+}
+
+/**
+ * Align inline FOUC theme script with per-subject guide-config storagePrefix.
+ * @param {string} outDir absolute path to built subject folder
+ */
+export async function patchSubjectStoragePrefix(outDir) {
+  const guidePath = path.join(outDir, 'js/guide-config.js');
+  const indexPath = path.join(outDir, 'index.html');
+  if (!existsSync(guidePath) || !existsSync(indexPath)) return;
+
+  const guideText = await readFile(guidePath, 'utf8');
+  const match = guideText.match(/storagePrefix:\s*['"]([^'"]+)['"]/);
+  const prefix = match?.[1] || 'study-guide';
+
+  let html = await readFile(indexPath, 'utf8');
+  if (STORAGE_PREFIX_RE.test(html)) {
+    html = html.replace(STORAGE_PREFIX_RE, `data-storage-prefix="${prefix}"`);
+  } else {
+    html = html.replace(
+      /<html([^>]*)>/i,
+      `<html$1 data-storage-prefix="${prefix}">`,
+    );
   }
 
   await writeFile(indexPath, html);

@@ -67,7 +67,7 @@ export function renderExercise(questions, partId, ctx) {
   return questions.map((q, qi) => {
     const qId = q.id || `exercise-${qi + 1}`;
     return `
-    <details id="${partId}-${qId}" class="accordion-card group bg-surface-container-lowest dark:bg-[#161b30] border border-outline-variant dark:border-[#1e40af] rounded-xl mb-md overflow-hidden custom-shadow box-animate box-hover scroll-mt-24" open>
+    <details id="${partId}-${qId}" class="accordion-card group bg-surface-container-lowest dark:bg-[#161b30] border border-outline-variant dark:border-[#1e40af] rounded-xl mb-md overflow-hidden custom-shadow box-animate box-hover scroll-mt-16" open>
       <summary class="flex items-center gap-md p-lg cursor-pointer list-none hover:bg-surface-container-high dark:hover:bg-[#1c2440] transition-colors">
         ${ms('terminal', false, 'text-secondary')}
         <span class="acc-title flex-1 font-headline-sm text-headline-sm">${esc(q.title)}</span>
@@ -102,7 +102,7 @@ export function renderTheory(questions, partId) {
   return questions.map((q, qi) => {
     const qId = q.id || `theory-${qi + 1}`;
     return `
-    <details id="${partId}-${qId}" class="accordion-card group bg-surface-container-lowest dark:bg-[#161b30] border border-outline-variant dark:border-[#1e40af] rounded-xl mb-md overflow-hidden custom-shadow box-animate box-hover scroll-mt-24">
+    <details id="${partId}-${qId}" class="accordion-card group bg-surface-container-lowest dark:bg-[#161b30] border border-outline-variant dark:border-[#1e40af] rounded-xl mb-md overflow-hidden custom-shadow box-animate box-hover scroll-mt-16">
       <summary class="flex items-center gap-md p-lg cursor-pointer list-none hover:bg-surface-container-high dark:hover:bg-[#1c2440] transition-colors">
         ${ms('edit_note', false, 'text-secondary')}
         <span class="acc-title flex-1 font-headline-sm text-headline-sm">${esc(q.title)}</span>
@@ -135,7 +135,7 @@ export function renderTrace(questions, partId, ctx) {
     const solutionBlocks = splitIdx >= 0 ? q.blocks.slice(splitIdx) : [];
 
     return `
-    <details id="${partId}-${qId}" class="accordion-card trace-exercise group bg-surface-container-lowest dark:bg-[#161b30] border border-outline-variant dark:border-[#1e40af] rounded-xl mb-md overflow-hidden custom-shadow box-animate box-hover scroll-mt-24" open>
+    <details id="${partId}-${qId}" class="accordion-card trace-exercise group bg-surface-container-lowest dark:bg-[#161b30] border border-outline-variant dark:border-[#1e40af] rounded-xl mb-md overflow-hidden custom-shadow box-animate box-hover scroll-mt-16" open>
       <summary class="flex items-center gap-md p-lg cursor-pointer list-none hover:bg-surface-container-high dark:hover:bg-[#1c2440] transition-colors">
         ${ms('track_changes', false, 'text-secondary')}
         <span class="acc-title flex-1 font-headline-sm text-headline-sm">${esc(q.title)}</span>
@@ -169,7 +169,7 @@ export function renderDesign(questions, partId, ctx) {
       : '';
 
     return `
-    <details id="${partId}-${qId}" class="accordion-card design-exercise group bg-surface-container-lowest dark:bg-[#161b30] border border-outline-variant dark:border-[#1e40af] rounded-xl mb-md overflow-hidden custom-shadow box-animate box-hover scroll-mt-24">
+    <details id="${partId}-${qId}" class="accordion-card design-exercise group bg-surface-container-lowest dark:bg-[#161b30] border border-outline-variant dark:border-[#1e40af] rounded-xl mb-md overflow-hidden custom-shadow box-animate box-hover scroll-mt-16">
       <summary class="flex items-center gap-md p-lg cursor-pointer list-none hover:bg-surface-container-high dark:hover:bg-[#1c2440] transition-colors">
         ${ms('architecture', false, 'text-secondary')}
         <span class="acc-title flex-1 font-headline-sm text-headline-sm">${esc(q.title)}</span>

@@ -1,0 +1,112 @@
+/**
+ * ═══════════════════════════════════════════════════════
+ *  🎨 هوية الهيئة الإدارية الرسمية — مصدر الألوان الحرفي
+ * ═══════════════════════════════════════════════════════
+ */
+
+:root {
+  --brand-hero: #111827;
+  --brand-hero-bright: #4f92ff;
+  --brand-hero-container: #1f2937;
+  --brand-hero-fixed: #dbeafe;
+  --brand-hero-fixed-dim: #bfdbfe;
+  --brand-hero-on: #ffffff;
+  --brand-hero-on-container: #f8fafc;
+  --brand-hero-on-fixed: #0f172a;
+  --brand-hero-on-fixed-variant: #1e293b;
+  --brand-hero-dark-bg: #0b0f19;
+  --brand-hero-dark-text: #f8fafc;
+
+  --brand-accent: #2563eb;
+  --brand-accent-container: #3b82f6;
+  --brand-accent-fixed: #dbeafe;
+  --brand-accent-fixed-dim: #93c5fd;
+  --brand-accent-bright: #4f92ff;
+  --brand-accent-on: #ffffff;
+  --brand-accent-on-container: #f8fafc;
+  --brand-accent-on-fixed: #0f172a;
+  --brand-accent-on-fixed-variant: #1e3a8a;
+  --brand-accent-dark-bg: #0b0f19;
+  --brand-accent-dark-bg-hover: #111827;
+  --brand-accent-dark-text: #bfdbfe;
+  --brand-accent-dark-surface: #111827;
+
+  --palette-primary: var(--brand-hero);
+  --palette-primary-bright: var(--brand-hero-bright);
+  --palette-primary-container: var(--brand-hero-container);
+  --palette-primary-fixed: var(--brand-hero-fixed);
+  --palette-on-primary: var(--brand-hero-on);
+  --palette-on-primary-container: var(--brand-hero-on-container);
+  --palette-on-primary-fixed: var(--brand-hero-on-fixed);
+  --palette-on-primary-fixed-variant: var(--brand-hero-on-fixed-variant);
+  --palette-primary-fixed-dim: var(--brand-hero-fixed-dim);
+  --palette-primary-dark-fixed-bg: var(--brand-hero-dark-bg);
+  --palette-primary-dark-fixed-text: var(--brand-hero-dark-text);
+
+  --palette-secondary: var(--brand-accent);
+  --palette-secondary-container: var(--brand-accent-container);
+  --palette-secondary-fixed: var(--brand-accent-fixed);
+  --palette-secondary-fixed-dim: var(--brand-accent-fixed-dim);
+  --palette-secondary-accent: var(--brand-accent-bright);
+  --palette-on-secondary: var(--brand-accent-on);
+  --palette-on-secondary-container: var(--brand-accent-on-container);
+  --palette-on-secondary-fixed: var(--brand-accent-on-fixed);
+  --palette-on-secondary-fixed-variant: var(--brand-accent-on-fixed-variant);
+  --palette-secondary-dark-bg: var(--brand-accent-dark-bg);
+  --palette-secondary-dark-bg-hover: var(--brand-accent-dark-bg-hover);
+  --palette-secondary-dark-text: var(--brand-accent-dark-text);
+  --palette-secondary-dark-surface: var(--brand-accent-dark-surface);
+
+  --palette-tertiary: #4f92ff;
+  --palette-tertiary-container: #60a5fa;
+  --palette-tertiary-fixed: #e0f2fe;
+  --palette-tertiary-fixed-dim: #bfdbfe;
+  --palette-on-tertiary: #ffffff;
+  --palette-on-tertiary-container: #f8fafc;
+  --palette-on-tertiary-fixed: #0f172a;
+  --palette-on-tertiary-fixed-variant: #1e3a8a;
+  --palette-tertiary-dark-bg: #0b0f19;
+
+  --palette-background: #f8fafc;
+  --palette-surface: #ffffff;
+  --palette-surface-bright: #ffffff;
+  --palette-surface-dim: #e2e8f0;
+  --palette-surface-variant: #e2e8f0;
+  --palette-surface-container-lowest: #ffffff;
+  --palette-surface-container-low: #f8fafc;
+  --palette-surface-container: #f1f5f9;
+  --palette-surface-container-high: #e2e8f0;
+  --palette-surface-container-highest: #cbd5e1;
+  --palette-surface-tint: #111827;
+  --palette-outline-variant: #e2e8f0;
+  --palette-outline: #94a3b8;
+
+  --palette-spinner-active: #2563eb;
+  --palette-spinner-active-dark: #4f92ff;
+  --palette-shadow-border-dark: #1e293b;
+
+  --palette-flow-backward: #2563eb;
+  --palette-flow-backward-dark: #4f92ff;
+}
+
+.dark {
+  --palette-dm-bg: #0b0f19;
+  --palette-dm-surface: #111827;
+  --palette-dm-elevated: #1f2937;
+  --palette-dm-elevated-2: #374151;
+  --palette-dm-border: rgba(79, 146, 255, 0.22);
+  --palette-dm-text: #f8fafc;
+  --palette-dm-text-muted: #cbd5e1;
+
+  --brand-glow-violet: color-mix(
+    in srgb,
+    var(--brand-hero-bright) 15%,
+    transparent
+  );
+  --brand-glow-blue: color-mix(in srgb, var(--brand-accent) 12%, transparent);
+  --brand-glow-coral: color-mix(
+    in srgb,
+    var(--brand-accent-bright) 8%,
+    transparent
+  );
+}

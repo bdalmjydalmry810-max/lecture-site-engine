@@ -443,7 +443,7 @@ export function createDefaultBlockHandlers(extraHandlers = []) {
   const handlers = [
   { id: 'h3', match: b => b.type === 'h3', render: (b, ctx) => {
     const sid = b.id ? `${ctx.partId}-${b.id}` : '';
-    return `<div class="flex items-center gap-md mb-md mt-lg scroll-mt-24 anchor-target"${sid ? ` id="${esc(sid)}"` : ''}>
+    return `<div class="flex items-center gap-md mb-md mt-lg scroll-mt-16 anchor-target"${sid ? ` id="${esc(sid)}"` : ''}>
         <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
           ${ms('bookmark', false, 'text-primary')}
         </div>
@@ -585,7 +585,7 @@ export function createDefaultBlockHandlers(extraHandlers = []) {
 export function renderH4(block, ctx, blocks, index) {
   if (block.id) {
     const sid = `${ctx.partId}-${block.id}`;
-    return `<div class="flex items-center gap-md mb-md mt-lg scroll-mt-24 anchor-target" id="${esc(sid)}">
+    return `<div class="flex items-center gap-md mb-md mt-lg scroll-mt-16 anchor-target" id="${esc(sid)}">
       <div class="w-8 h-8 bg-secondary/10 rounded-lg flex items-center justify-center shrink-0">
         ${ms('bookmark', false, 'text-secondary text-base')}
       </div>
@@ -619,7 +619,7 @@ export function renderCodeTitle(block, ctx, codeCounterRef) {
   codeCounterRef.n += 1;
   const title = block.text.replace(/^💻\s*(?:الكود(?:\/الأوامر)?:\s*)?/, '');
   const codeId = `${ctx.partId}-code-${String(codeCounterRef.n).padStart(2, '0')}`;
-  return `<div class="code-section mb-lg scroll-mt-24 anchor-target" id="${esc(codeId)}">
+  return `<div class="code-section mb-lg scroll-mt-16 anchor-target" id="${esc(codeId)}">
     <div class="flex items-center gap-md mb-md">
       ${ms('terminal', false, 'text-primary')}
       <h5 class="font-headline-sm text-headline-sm text-primary">${inlineMd(title)}</h5>

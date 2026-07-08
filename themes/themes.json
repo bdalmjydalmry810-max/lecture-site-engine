@@ -4,49 +4,49 @@
   "themes": [
     {
       "id": "amber-default",
-      "name_ar": "ذهبي كلاسيكي",
-      "name_en": "Classic Amber",
-      "description": "الافتراضي — ذهبي + أزرق + بني (tokens-base)",
+      "name_ar": "الهوية الرسمية",
+      "name_en": "Official Brand",
+      "description": "الافتراضي — هوية الهيئة الإدارية الرسمية (tokens-base)",
       "file": "amber-default.css",
       "usedBy": ["generic"]
     },
     {
       "id": "kotlin-pink-blue",
-      "name_ar": "زهري + أزرق",
-      "name_en": "Pink & Blue",
-      "description": "Kotlin / Android — زهري hero + أزرق accent + سماوي",
+      "name_ar": "الهوية الرسمية - Android",
+      "name_en": "Official Brand - Android",
+      "description": "Kotlin / Android — مواءمة كاملة مع هوية الهيئة الرسمية",
       "file": "kotlin-pink-blue.css",
       "usedBy": ["kotlin-android"]
     },
     {
       "id": "software-purple",
-      "name_ar": "موف احترافي",
-      "name_en": "Professional Purple",
-      "description": "Software Engineering — موف + أزرق + وردي",
+      "name_ar": "الهوية الرسمية - هندسة البرمجيات",
+      "name_en": "Official Brand - Software Engineering",
+      "description": "Software Engineering — مواءمة كاملة مع هوية الهيئة الرسمية",
       "file": "software-purple.css",
       "usedBy": ["software-eng", "software2"]
     },
     {
       "id": "programming-blue-lavender",
-      "name_ar": "أزرق + لافندر",
-      "name_en": "Blue & Lavender",
-      "description": "Programming Languages — أزرق حيوي + بنفسجي فاتح",
+      "name_ar": "الهوية الرسمية - لغات البرمجة",
+      "name_en": "Official Brand - Programming Languages",
+      "description": "Programming Languages — مواءمة كاملة مع هوية الهيئة الرسمية",
       "file": "programming-blue-lavender.css",
       "usedBy": ["programming-lang"]
     },
     {
       "id": "parallel-teal",
-      "name_ar": "أخضر تيل",
-      "name_en": "Teal Green",
-      "description": "Parallel / Kinetic — أخضر تيل + أزرق",
+      "name_ar": "الهوية الرسمية - التوازي",
+      "name_en": "Official Brand - Parallel",
+      "description": "Parallel / Kinetic — مواءمة كاملة مع هوية الهيئة الرسمية",
       "file": "parallel-teal.css",
       "usedBy": ["parallel"]
     },
     {
       "id": "gis-earth",
-      "name_ar": "أرض GIS",
-      "name_en": "GIS Earth",
-      "description": "Data Operations / GIS — أخضر + أزرق + بني",
+      "name_ar": "الهوية الرسمية - GIS",
+      "name_en": "Official Brand - GIS",
+      "description": "Data Operations / GIS — مواءمة كاملة مع هوية الهيئة الرسمية",
       "file": "gis-earth.css",
       "usedBy": ["data-operations"]
     }

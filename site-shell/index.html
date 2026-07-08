@@ -1,14 +1,29 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-storage-prefix="study-guide">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="site-build-id" content="">
   <title>Study Guide</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" id="hljsTheme">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+  <script>
+    (function () {
+      try {
+        var prefix = document.documentElement.getAttribute("data-storage-prefix") || "study-guide";
+        var saved = localStorage.getItem(prefix + "-theme");
+        var dark = saved ? saved === "dark" : true;
+        document.documentElement.classList.toggle("dark", dark);
+        document.documentElement.style.colorScheme = dark ? "dark" : "light";
+      } catch {
+        document.documentElement.classList.toggle("dark", true);
+        document.documentElement.style.colorScheme = "dark";
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="themes/tokens-base.css">
   <link id="siteTheme" rel="stylesheet" href="themes/amber-default.css">
   <script src="css/tailwind-config.js"></script>
@@ -24,21 +39,34 @@
     </script>
 </head>
 <body class="bg-background text-on-surface scroll-smooth">
-  <header class="bg-surface border-b border-outline-variant flex justify-between items-center w-full px-lg h-16 sticky top-0 z-50">
-    <div class="flex items-center gap-md">
-      <button type="button" id="backToHomeBtn" class="hidden p-base rounded-full hover:bg-surface-variant transition-all" aria-label="العودة للمحاضرات">
-        <span class="material-symbols-outlined text-primary">arrow_forward</span>
+    <header class="site-navbar bg-surface border-b border-outline-variant w-full px-md md:px-lg sticky top-0 z-50">
+      <div class="site-navbar__brand">
+        <button type="button" id="backToHubBtn" class="site-navbar__back md:hidden shrink-0 p-base rounded-full hover:bg-surface-variant transition-all" aria-label="العودة للسنوات الدراسية">
+          <span class="material-symbols-outlined text-primary">home</span>
+        </button>
+        <button type="button" id="backToHomeBtn" class="site-navbar__back hidden shrink-0 p-base rounded-full hover:bg-surface-variant transition-all" aria-label="العودة للمحاضرات">
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
       </button>
-      <button type="button" id="brandBtn" class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary hover:opacity-80 transition-opacity text-right">
-        <span id="appBrand">Study Guide</span>
+        <button type="button" id="brandBtn" class="site-navbar__brand-btn text-primary dark:text-inverse-primary hover:opacity-80 transition-opacity text-right min-w-0" title="العودة للسنوات الدراسية">
+        <span id="appBrandShort" class="md:hidden">موقع تفاعلي</span>
+        <span id="appBrand" class="hidden md:inline">Study Guide</span>
       </button>
     </div>
-    <div class="hidden md:flex items-center gap-md text-on-surface-variant font-label-md">
-      <span id="heroSub">دليل دراسي تفاعلي</span>
+      <nav class="site-navbar__links hidden md:flex items-center gap-sm text-on-surface-variant font-label-md" aria-label="روابط أساسية">
+        <a class="site-navbar__link" href="#home">الرئيسية</a>
+        <a class="site-navbar__link" href="../../index.html">السنوات الدراسية</a>
+      </nav>
+      <div class="site-navbar__actions">
+        <div class="lecture-width-control hidden" id="lectureWidthControl">
+          <button type="button" id="lectureWidthBtn" class="site-navbar__toggle p-base rounded-full hover:bg-surface-variant transition-all" aria-label="عرض المحتوى" aria-haspopup="true" aria-expanded="false" title="عرض المحتوى">
+            <span class="material-symbols-outlined text-on-surface-variant" aria-hidden="true">width</span>
+          </button>
+          <div id="lectureWidthMenu" class="lecture-width-menu hidden" role="menu" aria-label="خيارات العرض"></div>
+        </div>
+        <button type="button" id="themeToggle" class="site-navbar__toggle p-base rounded-full hover:bg-surface-variant transition-all" aria-label="تبديل الوضع">
+          <span class="material-symbols-outlined text-on-surface-variant" id="themeIcon">dark_mode</span>
+        </button>
     </div>
-    <button type="button" id="themeToggle" class="p-base rounded-full hover:bg-surface-variant transition-all" aria-label="تبديل الوضع">
-      <span class="material-symbols-outlined text-on-surface-variant" id="themeIcon">dark_mode</span>
-    </button>
   </header>
 
   <div id="homeView" class="min-h-[calc(100vh-64px)]">
@@ -61,7 +89,7 @@
     </div>
   </div>
 
-  <div id="lectureView" class="hidden flex">
+  <div id="lectureView" class="hidden flex" data-width="50">
     <aside class="hidden lg:flex flex-col h-[calc(100vh-64px)] w-80 bg-surface-container-low border-l border-outline-variant sticky top-16 overflow-hidden">
       <div id="sidebarCourse" class="p-lg flex flex-col items-center border-b border-outline-variant shrink-0">
         <span class="material-symbols-outlined text-primary scale-150 mb-md" id="sidebarMatIcon">school</span>
@@ -70,13 +98,49 @@
       </div>
       <nav id="sidebarToc" class="flex-1 py-md overflow-y-auto"></nav>
       <div class="p-lg border-t border-outline-variant shrink-0">
-        <button type="button" id="jumpQuizBtn" class="w-full bg-primary text-on-primary py-md rounded-lg font-bold hover:opacity-90 transition-all font-label-md">ابدأ الاختبار</button>
+        <button type="button" id="jumpQuizBtn" class="w-full bg-primary text-on-primary py-md rounded-lg font-bold hover:opacity-90 transition-all font-label-md">الملخص المنظم</button>
       </div>
     </aside>
-    <main class="flex-1 p-lg md:p-xl max-w-5xl mx-auto w-full">
+    <main class="flex-1 w-full lecture-main">
       <div id="content"></div>
     </main>
   </div>
+
+  <div id="mobileTocBackdrop" class="mobile-toc-backdrop hidden" aria-hidden="true"></div>
+  <aside id="mobileTocDrawer" class="mobile-toc-drawer hidden" aria-hidden="true" aria-label="فهرس المحاضرة">
+    <div class="mobile-toc-drawer__head">
+      <h2 class="font-headline-sm text-headline-sm text-primary">فهرس المحاضرة</h2>
+      <button type="button" id="mobileTocClose" class="mobile-toc-drawer__close" aria-label="إغلاق الفهرس">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div id="mobileTocCourse" class="mobile-toc-drawer__course">
+      <span class="material-symbols-outlined text-primary" id="mobileTocMatIcon">school</span>
+      <div>
+        <p class="font-label-md font-bold text-on-surface" id="mobileTocCourseTitle">...</p>
+        <p class="font-label-md text-on-surface-variant text-sm" id="mobileTocCourseSub"></p>
+      </div>
+    </div>
+    <nav id="mobileTocNav" class="mobile-toc-drawer__nav"></nav>
+    <div class="mobile-toc-drawer__foot">
+      <button type="button" id="mobileJumpQuizBtn" class="w-full bg-primary text-on-primary py-md rounded-lg font-bold font-label-md">الملخص المنظم</button>
+    </div>
+  </aside>
+
+  <nav id="mobileStudyBar" class="mobile-study-bar hidden lg:hidden" aria-label="أدوات الدراسة">
+    <button type="button" id="mobileTocOpen" class="mobile-study-bar__btn">
+      <span class="material-symbols-outlined">menu_book</span>
+      <span>الفهرس</span>
+    </button>
+    <button type="button" id="mobileStudyQuizBtn" class="mobile-study-bar__btn">
+      <span class="material-symbols-outlined">summarize</span>
+      <span>الملخص</span>
+    </button>
+    <button type="button" id="mobileScrollTopBtn" class="mobile-study-bar__btn">
+      <span class="material-symbols-outlined">keyboard_arrow_up</span>
+      <span>أعلى</span>
+    </button>
+  </nav>
 
   <footer class="bg-surface-container w-full py-lg border-t border-outline-variant">
     <div class="flex flex-col md:flex-row justify-between items-center px-lg gap-md max-w-container-max mx-auto">

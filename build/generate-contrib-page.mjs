@@ -106,7 +106,7 @@ async function main() {
     .back { display: inline-block; margin-bottom: 1rem; color: #1e5a8a; text-decoration: none; }
     .note { font-size: 0.85rem; color: #666; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #dde3ea; }
     .note--ok { background: #eef8f0; border: 1px solid #b8dcc0; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1rem; color: #1f4d2a; font-size: 0.88rem; }
-    .note--warn { background: #fff8e6; border: 1px solid #e6d9a8; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1rem; color: #5c4a00; font-size: 0.88rem; }
+    .note--warn { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1rem; color: #1d4ed8; font-size: 0.88rem; }
     .field input[type=text] { width: 100%; padding: 0.6rem 0.75rem; border-radius: 8px; border: 1px solid #c5d0dc; font-family: inherit; font-size: 1rem; }
     .upload-url { display: block; margin-top: 0.5rem; font-size: 0.75rem; color: #666; font-family: monospace; word-break: break-all; }
     .empty { color: #888; text-align: center; padding: 1rem; }
@@ -171,7 +171,7 @@ async function main() {
         <a class="btn btn--ghost is-disabled" id="btnFolder" href="#" target="_blank" rel="noopener">📁 المجلد على main</a>
       </div>
       <p class="upload-url" id="uploadUrlHint" hidden></p>
-      <p class="upload-url" id="forkHint" style="color:#5c4a00;margin-top:0.5rem" hidden>
+      <p class="upload-url" id="forkHint" style="color:#1d4ed8;margin-top:0.5rem" hidden>
         على صفحة مجلد <code>lectures/</code>: <strong>Add file</strong> → <strong>Upload files</strong> → اسحب <code>parN.md</code>
       </p>
     </article>

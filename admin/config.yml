@@ -55,12 +55,12 @@ collections:
                 widget: select
                 default: amber-default
                 options:
-                  - { label: "ذهبي كلاسيكي — Classic Amber", value: "amber-default" }
-                  - { label: "زهري + أزرق — Pink & Blue", value: "kotlin-pink-blue" }
-                  - { label: "موف احترافي — Professional Purple", value: "software-purple" }
-                  - { label: "أزرق + لافندر — Blue & Lavender", value: "programming-blue-lavender" }
-                  - { label: "أخضر تيل — Teal Green", value: "parallel-teal" }
-                  - { label: "أرض GIS — GIS Earth", value: "gis-earth" }
+                  - { label: "الهوية الرسمية — Official Brand", value: "amber-default" }
+                  - { label: "الهوية الرسمية — Android", value: "kotlin-pink-blue" }
+                  - { label: "الهوية الرسمية — Software Engineering", value: "software-purple" }
+                  - { label: "الهوية الرسمية — Programming Languages", value: "programming-blue-lavender" }
+                  - { label: "الهوية الرسمية — Parallel", value: "parallel-teal" }
+                  - { label: "الهوية الرسمية — GIS", value: "gis-earth" }
               - { label: "القسم", name: department, widget: string }
           - { label: "عنوان الموقع", name: title, widget: string }
           - { label: "العنوان الفرعي", name: subtitle, widget: string }
@@ -113,12 +113,12 @@ collections:
                 widget: select
                 default: amber-default
                 options:
-                  - { label: "ذهبي كلاسيكي — Classic Amber", value: "amber-default" }
-                  - { label: "زهري + أزرق — Pink & Blue", value: "kotlin-pink-blue" }
-                  - { label: "موف احترافي — Professional Purple", value: "software-purple" }
-                  - { label: "أزرق + لافندر — Blue & Lavender", value: "programming-blue-lavender" }
-                  - { label: "أخضر تيل — Teal Green", value: "parallel-teal" }
-                  - { label: "أرض GIS — GIS Earth", value: "gis-earth" }
+                  - { label: "الهوية الرسمية — Official Brand", value: "amber-default" }
+                  - { label: "الهوية الرسمية — Android", value: "kotlin-pink-blue" }
+                  - { label: "الهوية الرسمية — Software Engineering", value: "software-purple" }
+                  - { label: "الهوية الرسمية — Programming Languages", value: "programming-blue-lavender" }
+                  - { label: "الهوية الرسمية — Parallel", value: "parallel-teal" }
+                  - { label: "الهوية الرسمية — GIS", value: "gis-earth" }
               - { label: "القسم", name: department, widget: string }
           - { label: "عنوان الموقع", name: title, widget: string }
           - { label: "العنوان الفرعي", name: subtitle, widget: string }
