@@ -18,6 +18,9 @@ import {
 } from './analytics.js';
 import { initLaserPointer } from './laser-pointer.js';
 
+/** Set true when lecture notes localStorage behaviour is ready. */
+const LECTURE_NOTES_ENABLED = false;
+
 const STORAGE_THEME = `${GUIDE_CONFIG.storagePrefix || 'study-guide'}-theme`;
 const STORAGE_LAST_LECTURE = `${GUIDE_CONFIG.storagePrefix || 'study-guide'}-last-lecture`;
 const STORAGE_LECTURE_WIDTH = `${GUIDE_CONFIG.storagePrefix || 'study-guide'}-lecture-width`;
@@ -157,7 +160,7 @@ function showView(name) {
   document.getElementById('backToHomeBtn')?.classList.toggle('hidden', name === 'home');
   document.getElementById('backToHubBtn')?.classList.toggle('hidden', name !== 'home');
   document.getElementById('lectureWidthControl')?.classList.toggle('hidden', name !== 'lecture');
-  document.getElementById('lectureNotesBtn')?.classList.toggle('hidden', name !== 'lecture');
+  document.getElementById('lectureNotesBtn')?.classList.toggle('hidden', !LECTURE_NOTES_ENABLED || name !== 'lecture');
   document.getElementById('mobileStudyBar')?.classList.toggle('hidden', name !== 'lecture');
   document.documentElement.classList.toggle('is-lecture-view', name === 'lecture');
   const brandBtn = document.getElementById('brandBtn');
@@ -583,7 +586,7 @@ async function loadLectureView(idx, hashPart) {
 
   trackLectureView(item);
   if (!needsRender) trackLectureContentReady();
-  loadLectureNotes();
+  if (LECTURE_NOTES_ENABLED) loadLectureNotes();
 }
 
 function jumpToSummary() {
@@ -844,7 +847,7 @@ async function init() {
   initJumpSummary();
   bindJumpSummaryClicks();
   initLectureWidthToggle();
-  initLectureNotes();
+  if (LECTURE_NOTES_ENABLED) initLectureNotes();
   initMobileStudyUi();
   document.getElementById('backToHomeBtn')?.addEventListener('click', goToSubjectHome);
   document.getElementById('backToHubBtn')?.addEventListener('click', goToHubHome);
