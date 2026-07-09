@@ -15,6 +15,7 @@ import {
   distDir,
   listAllSubjectsWithLectures,
   subjectHasBuildableLectures,
+  subjectNeedsReviewBuild,
 } from './lib/subject-paths.mjs';
 import { readSubjectsFromStdin } from './lib/read-subjects-stdin.mjs';
 import { scaffoldSubjects } from './lib/scaffold-subject.mjs';
@@ -31,10 +32,11 @@ function runBuild(subject) {
   return r.status === 0;
 }
 
-function needsBuild(subject) {
+async function needsBuild(subject) {
   const out = distDir(subject);
   // Stub pages from generate-dist-index only have index.html — not a real build.
-  return !existsSync(path.join(out, 'lectures', 'manifest.json'));
+  if (!existsSync(path.join(out, 'lectures', 'manifest.json'))) return true;
+  return subjectNeedsReviewBuild(subject);
 }
 
 async function main() {
@@ -51,9 +53,8 @@ async function main() {
       else console.log(`Skipping ${s} — no par*.md lectures yet`);
     }
 
-    // Fill missing from dist (subjects with lectures but no built site)
     for (const s of await listAllSubjectsWithLectures()) {
-      if (needsBuild(s)) toBuild.add(s);
+      if (await needsBuild(s)) toBuild.add(s);
     }
   }
 

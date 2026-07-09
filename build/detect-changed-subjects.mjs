@@ -7,7 +7,11 @@
  *   node build/detect-changed-subjects.mjs --range HEAD~1..HEAD
  */
 import { execSync } from 'node:child_process';
-import { subjectsFromChangedFiles } from './lib/subject-paths.mjs';
+import {
+  subjectsFromChangedFiles,
+  listAllSubjectsWithLectures,
+  subjectNeedsReviewBuild,
+} from './lib/subject-paths.mjs';
 
 function parseArgs(argv) {
   const args = { base: null, range: null };
@@ -33,11 +37,22 @@ function gitChangedFiles(base, range) {
 
 const args = parseArgs(process.argv);
 const files = gitChangedFiles(args.base, args.range);
-const subjects = subjectsFromChangedFiles(files);
+const subjects = new Set(subjectsFromChangedFiles(files));
+
+// Review parser / build step changed → rebuild subjects with pending review output.
+const reviewPipelineChanged = files.some(f => {
+  const p = f.replace(/\\/g, '/');
+  return p === 'build/cli.mjs' || p.startsWith('parser/review/');
+});
+if (reviewPipelineChanged) {
+  for (const s of await listAllSubjectsWithLectures()) {
+    if (await subjectNeedsReviewBuild(s)) subjects.add(s);
+  }
+}
 
 if (process.env.DEBUG) {
   console.error('Changed files:', files);
-  console.error('Subjects:', subjects);
+  console.error('Subjects:', [...subjects]);
 }
 
-for (const s of subjects) console.log(s);
+for (const s of [...subjects].sort()) console.log(s);

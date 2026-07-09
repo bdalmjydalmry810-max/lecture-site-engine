@@ -1,5 +1,5 @@
 import { existsSync } from 'node:fs';
-import { readdir } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -51,6 +51,30 @@ export async function subjectHasBuildableLectures(subjectRel) {
   if (!existsSync(lecturesDir)) return false;
   const files = await readdir(lecturesDir);
   return files.some(f => /^par.+\.md$/i.test(f));
+}
+
+/** Dist missing parsed review JSON while source has review.md in manifest. */
+export async function subjectNeedsReviewBuild(subjectRel) {
+  const reviewsDir = path.join(subjectDir(subjectRel), 'reviews');
+  const manifestPath = path.join(reviewsDir, 'manifest.json');
+  if (!existsSync(manifestPath)) return false;
+
+  let manifest;
+  try {
+    manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+  } catch {
+    return false;
+  }
+
+  const distReviews = path.join(distDir(subjectRel), 'reviews');
+  for (const file of manifest.files || []) {
+    const rel = typeof file === 'string' ? file : file.path;
+    if (!rel || !/\.md$/i.test(rel)) continue;
+    if (!existsSync(path.join(reviewsDir, rel))) continue;
+    const jsonName = rel.replace(/\.md$/i, '.json');
+    if (!existsSync(path.join(distReviews, jsonName))) return true;
+  }
+  return false;
 }
 
 /** All subjects under year-1..year-5 that have lectures/ and at least one par*.md */

@@ -153,9 +153,13 @@ async function main() {
     },
   });
 
-  const mdFiles = args.skipValidate
-    ? (await readdir(path.join(subjectDir, 'lectures'))).filter(n => /^par.+\.md$/i.test(n)).sort()
-    : await validateSubject(subjectDir, parser);
+  const lecturesDir = path.join(subjectDir, 'lectures');
+  const hasLectureDir = existsSync(lecturesDir);
+  const mdFiles = args.skipValidate && hasLectureDir
+    ? (await readdir(lecturesDir)).filter(n => /^par.+\.md$/i.test(n)).sort()
+    : hasLectureDir
+      ? await validateSubject(subjectDir, parser)
+      : [];
 
   if (!mdFiles.length) {
     console.log('No lecture files to build.');
@@ -193,13 +197,14 @@ async function main() {
   await mkdir(lecturesOut, { recursive: true });
 
   const manifestSrc = path.join(subjectDir, 'lectures/manifest.json');
-  const manifest = JSON.parse(await readFile(manifestSrc, 'utf8'));
+  if (mdFiles.length && existsSync(manifestSrc)) {
+    const manifest = JSON.parse(await readFile(manifestSrc, 'utf8'));
 
-  const builtFiles = [];
-  /** @type {Map<string, { parsedAt: string, summary: ReturnType<typeof lectureSummaryFromLec>, jsonName: string }>} */
-  const parsedByJson = new Map();
+    const builtFiles = [];
+    /** @type {Map<string, { parsedAt: string, summary: ReturnType<typeof lectureSummaryFromLec>, jsonName: string }>} */
+    const parsedByJson = new Map();
 
-  for (const name of mdFiles) {
+    for (const name of mdFiles) {
     const text = normalizeLectureMd(await readFile(path.join(subjectDir, 'lectures', name), 'utf8'));
     const doc = parser.parseDocument(text);
     const lec = doc.lectures[0];
