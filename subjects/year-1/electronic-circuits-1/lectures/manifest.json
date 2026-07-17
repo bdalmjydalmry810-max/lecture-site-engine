@@ -1,0 +1,22 @@
+{
+  "settings": {
+    "subjectName": "دارات الكترونية 1",
+    "subjectNameEn": "Electronic Circuits 1",
+    "year": "2025-2026",
+    "academicYear": 5,
+    "theme": "programming-blue-lavender",
+    "enabledLectures": true,
+    "hubTag": "مادة حملة",
+    "department": "تصميم"
+  },
+  "title": "دارات الكترونية 1 - Electronic Circuits 1",
+  "subtitle": "ملخص سريع للمحاضرات النظرية والعملية",
+  "sections": [
+    { "key": "theory", "label": "النظري", "icon": "📖" },
+    { "key": "lab", "label": "العملي", "icon": "🔧" }
+  ],
+  "theoryFiles": [
+    { "path": "theory/par1.md", "num": 1, "icon": "📌", "matIcon": "school", "badge": "نظري ١" },
+    { "path": "theory/par2.md", "num": 2, "icon": "📖", "matIcon": "menu_book", "badge": "نظري ٢" }
+  ]
+}
