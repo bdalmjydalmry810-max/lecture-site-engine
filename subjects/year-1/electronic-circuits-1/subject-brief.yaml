@@ -1,0 +1,406 @@
+schema_version: "1.0"
+
+# ─── Subject identity ─────────────────────────────────────────────────────────
+subject:
+  id: ec1
+  name_ar: "الدارات الإلكترونية 1"
+  name_en: "Electronic Circuits 1"
+  tagline: "تيار جهد مقاومة دارات"
+  section_label: "القسم العملي"
+
+# ─── Locale & terminology ─────────────────────────────────────────────────────
+locale:
+  language: ar
+  direction: rtl
+  terms_in_backticks: true
+  inline_code_comments: english
+  extra_explanation_tag: "(شرح زيادة للفهم)"
+  not_in_lecture_tag: "(غير مشروحة في المحاضرة)"
+
+# ─── Domain ───────────────────────────────────────────────────────────────────
+domain: analysis
+
+domain_profile:
+  content_types:
+    - theory
+    - diagrams
+    - tables
+    - equations
+  forbid_adding: []
+  prerequisites: []
+
+# ─── Lecture heading ──────────────────────────────────────────────────────────
+lecture:
+  unit_label: "المحاضرة"
+  split_regex: "^# المحاضرة "
+  title_pattern: "# {unit_label} {num} — {title_en} ({title_ar})"
+  intro_blockquote: true
+
+# ─── Parts ────────────────────────────────────────────────────────────────────
+parts:
+
+  integration_map:
+    enabled: false
+    heading: "📌 خريطة التكامل (أين تقع هذه المحاضرة في الدورة؟)"
+
+  detail:
+    enabled: true
+    heading: "الجزء الأول: الشرح التفصيلي (سطر بسطر / فقرة بفقرة)"
+    numbered_sections: true
+    require_per_section:
+      - original_quote
+      - simplified_explanation
+      - analogy
+
+  summary:
+    enabled: true
+    heading: "الجزء الثاني: ملخص منظم"
+    subsections:
+      - definitions_table
+      - components_table
+      - comparisons_table
+      - glossary
+      - golden_points
+      - common_mistakes_table
+      - patterns
+      - main_ideas
+
+  mcq:
+    enabled: true
+    heading: "الجزء الثالث: أسئلة اختيار من متعدد (MCQ)"
+    count: 16
+    min_count: 14
+    difficulty: [medium, hard]
+    forbid_easy_literal: true
+    distribution:
+      comparisons: 20
+      code_scenario: 0
+      application: 40
+      numerical_trace: 40
+
+  debug:
+    enabled: false
+    heading: "الجزء الرابع: أسئلة تصحيح الكود"
+    count: 5
+    cover: [logic, misconception, return_check, dead_code]
+
+  exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين إضافية (من إعداد الدليل للتدريب)"
+    count_min: 4
+    count_max: 7
+    authored_by_guide: true
+    types:
+      - fill_gaps
+      - numerical_solve
+      - scenario
+
+  analysis_exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين تحليل وتطبيق (إضافية — من إعداد الدليل)"
+    count_min: 3
+    count_max: 6
+    types:
+      - table_fill
+      - numerical_solve
+      - case_study
+      - circuit_completion
+
+  trace_exercise:
+    enabled: true
+    heading: "الجزء الرابع: تمارين تتبع التنفيذ"
+    count_min: 3
+    note: "كل تمرين: مدخل + جدول/شجرة ناقصة للطالب + نموذج الحل الكامل"
+
+  design_question:
+    enabled: false
+    heading: "الجزء الرابع: أسئلة تصميم"
+    count_min: 1
+    types:
+      - er_diagram
+      - uml_design
+      - architecture
+      - schema_design
+
+  theory:
+    enabled: true
+    heading: "الجزء الخامس: أسئلة نظرية متوقعة بالامتحان"
+    count_min: 8
+
+  cheat_sheet:
+    enabled: true
+    heading: "الجزء السادس: ورقة المراجعة السريعة (Cheat Sheet)"
+    subsections:
+      - integration_map_table
+      - golden_rules_table
+      - quick_reference_tables
+
+  qa_cards:
+    enabled: true
+    heading: "الجزء الرابع: بطاقات سؤال وجواب (Q&A Cards)"
+    count_min: 12
+
+  reference_code:
+    enabled: false
+    heading: "الجزء الخامس: كتابة الكود الكامل (مرجع شامل)"
+    assemble_from_fragments: false
+    same_program_only: false
+    languages: []
+    note: ""
+
+  checklist:
+    enabled: true
+    heading: "الجزء السادس: قائمة فحص ذاتي قبل الامتحان ✅"
+
+# ─── Blocks ───────────────────────────────────────────────────────────────────
+blocks:
+
+  original_quote:
+    enabled: true
+
+  simplified_explanation:
+    enabled: true
+
+  code:
+    enabled: false
+    languages: []
+    require_line_explain: false
+
+  line_explain:
+    enabled: false
+    format: numbered_list
+
+  imports:
+    enabled: false
+
+  expected_output:
+    enabled: false
+
+  troubleshooting:
+    enabled: false
+
+  diagrams:
+    enabled: true
+    types: [circuit, waveform, block-diagram, characteristic-curve]
+    require_node_table: false
+    require_edge_table: false
+
+  uml:
+    enabled: false
+    types: [usecase, class, activity, flowchart]
+
+  screen_description:
+    enabled: false
+
+  algorithm:
+    enabled: false
+
+  structured_english:
+    enabled: false
+
+  compare:
+    enabled: true
+
+  callouts:
+    enabled: true
+
+  think_prompt:
+    enabled: true
+    min_per_lecture: 3
+
+  tables:
+    enabled: true
+
+  fill_gaps:
+    enabled: true
+
+  code_fix:
+    enabled: false
+
+  images_note:
+    enabled: false
+
+  qa_inline:
+    enabled: true
+
+  analogy:
+    enabled: true
+
+  trade_off:
+    enabled: true
+
+  before_after:
+    enabled: true
+
+  trace:
+    enabled: true
+
+  equations:
+    enabled: true
+    display_mode: block
+    require_explanation: true
+    common_symbols:
+      - "Voltage (V)"
+      - "Current (I)"
+      - "Resistance (R)"
+      - "Power (P)"
+      - "Energy (E, W)"
+      - "Capacitance (C)"
+      - "Inductance (L)"
+      - "Impedance (Z)"
+      - "Frequency (f)"
+
+# ─── Pedagogy flags ───────────────────────────────────────────────────────────
+pedagogy:
+  cover_every_line: true
+  complete_gaps: true
+  beginner_friendly: true
+  explain_why: true
+  daily_analogy_plus_example: true
+  follow_lecture_order: true
+  adapt_to_lecture_type: false
+  lecture_types: []
+
+# ─── Assessment ───────────────────────────────────────────────────────────────
+assessment:
+  mcq_option_letters: arabic
+
+# ─── أنواع أسئلة الأتمتة ─────────────────────────────────────────────────────
+automation_question_types:
+
+  flash_qa:
+    enabled: true
+    label_ar: "مراجعة سريعة (سؤال / جواب)"
+    difficulty: easy
+    count_min: 12
+    parts: [qa_cards, qa_inline, theory]
+    blocks: [qa_inline, callouts]
+    format: |
+      **Q{N}:** سؤال مراجعة مباشر (تعريف، فرق، متى نستخدم)
+      **A:** إجابة مختصرة قابلة للمقارنة الآلية (جملة أو جملتان)
+      — بدون تعليل طويل. مناسب للحفظ السريع قبل الامتحان.
+    examples:
+      - "ما الفرق بين `مقاومة` و `ممانعة`؟"
+      - "متى نستخدم `نظرية تيفنن`؟"
+
+  scenario_cluster:
+    enabled: true
+    label_ar: "تحدي مركّب (سيناريو + أسئلة متعددة)"
+    difficulty: hard
+    count_min: 3
+    questions_per_scenario: 4
+    parts: [mcq, theory]
+    blocks: [diagrams, tables, compare, equations, trace]
+    format: |
+      ### السيناريو {N}: {عنوان}
+      > [وصف الحالة: دارة، جدول، أو مسألة رياضية كاملة — 5–10 أسطر]
+      ثم 3–5 أسئلة MCQ **كلها مبنية على نفس السيناريو** (لا تكرر نفس الفكرة):
+      ### السؤال {N}.1 (hard) … أ) ب) ج) د) + تعليل
+      كل سيناريو يختبر: فهم + تطبيق + قرار (أي خطوة تالية؟ أي ناتج؟ أين الخطأ؟)
+    scenario_sources:
+      - numerical_case
+      - circuit_state
+      - waveform_analysis
+    examples:
+      - "دارة تحتوي بطارية ومقاومات موصولة على التوالي والتوازي — احسب التيار في كل فرع."
+      - "إشارة جيبية تمر عبر مقوم نصف موجة — ارسم شكل الموجة الناتجة."
+
+  hands_on:
+    enabled: true
+    label_ar: "تطبيق عملي (أكمل / احسب / حلّل)"
+    difficulty: medium
+    count_min: 5
+    parts: [exercise, analysis_exercise]
+    blocks: [fill_gaps, tables, equations, trace]
+    types:
+      - fill_gaps
+      - table_fill
+      - numerical_solve
+      - diagram_completion
+    format: |
+      كل تمرين: **المعطيات** + **المطلوب** (مرقّم) + **نموذج الحل الكامل**
+      الطالب يجيب بقيمة/جدول/مخطط — الإجابة قابلة للمقارنة حرفياً أو رقمياً.
+
+  step_trace:
+    enabled: true
+    label_ar: "تتبع خطوة بخطوة (جدول ناقص)"
+    difficulty: medium
+    count_min: 3
+    parts: [trace_exercise, mcq]
+    blocks: [trace, tables, diagrams]
+    format: |
+      **المدخل:** {حالة ابتدائية}
+      **أكمل الجدول:**
+      | الخطوة | العملية | الحالة |
+      | 1 | ... | ؟ |
+      **نموذج الحل:** جدول مكتمل + **النتيجة النهائية**
+      + 1–2 سؤال MCQ على نفس التتبع (ماذا في الخطوة 3؟)
+    trace_targets:
+      - variable_state
+      - signal_waveform
+      - circuit_simulation_step
+
+  compare_analyze:
+    enabled: true
+    label_ar: "مقارنة وتحليل (أيهما أفضل؟ لماذا؟)"
+    difficulty: medium
+    count_min: 4
+    parts: [mcq, theory, analysis_exercise]
+    blocks: [compare, trade_off, tables, analogy]
+    format: |
+      سؤال مقارنة بخيارات (أ، ب، ج، د) + تعليل لماذا الباقي خاطئ
+      أو جدول: | المعيار | الخيار A | الخيار B |
+      أو تمرين تحليل: «في الحالة X استخدم Y لأن Z»
+
+  find_the_bug:
+    enabled: false
+    label_ar: "اكتشف الخطأ (كود / منطق / حساب)"
+    difficulty: hard
+    count_min: 4
+    parts: [debug, exercise]
+    blocks: [code_fix, compare, troubleshooting]
+    bug_types: [logic, misconception, off_by_one, wrong_formula, race_condition, infinite_loop]
+    format: |
+      **الكود/الحساب (يحتوي خطأ):** …
+      **اكتشف الخطأ:** [وصف موجز]
+      **التصحيح:** … + **شرح الحل** (3 نقاط)
+
+  structured_theory:
+    enabled: true
+    label_ar: "نظري منظم (تعريف + مكونات + مثال)"
+    difficulty: medium
+    count_min: 8
+    parts: [theory, mcq]
+    blocks: [compare, tables, callouts, equations]
+    format: |
+      ### السؤال {N}: {السؤال}
+      **نموذج الإجابة:**
+      1. التعريف: …
+      2. المكونات/الشروط: …
+      3. المعادلات/القوانين: …
+      4. مثال: …
+      5. متى نستخدم: …
+      — هيكل ثابت يسهّل التصحيح الآلي بالكلمات المفتاحية.
+
+# ─── Output ───────────────────────────────────────────────────────────────────
+output:
+  validation_footer: true
+  schema_reference: "SCHEMA.md v1.0"
+  closing_line: "ابدأ الآن. سأرسل المحاضرة في الرسالة التالية."
+
+  checklist_items:
+    - "غطّيت كل معلومة وردت في المحاضرة"
+    - "كل قسم يبدأ بـ «النص الأصلي يقول» + «الشرح المبسّط»"
+    - "الأقسام مرقّمة هرمياً (1، 1.1، 2 …)"
+    - "استخدمت جداول لكل مقارنة وقائمة تعريفات"
+    - "كل مصطلح إنجليزي بين backticks"
+    - "≥16 سؤال MCQ مع تعليل كامل لكل خيار"
+    - "≥8 أسئلة نظرية مع نموذج إجابة منظم"
+    - "تمارين تتبع: كل تمرين له جدول ناقص + نموذج حل كامل"
+    - "تمارين تطبيقية من إعداد الدليل مع نموذج حل"
+    - "مراجعة سريعة: ≥12 بطاقة Q/A (flash_qa)"
+    - "تحدي مركّب: ≥3 سيناريوهات × 3–5 أسئلة MCQ لكل سيناريو (scenario_cluster)"
+    - "تطبيق عملي: ≥5 تمارين مع نموذج حل (hands_on)"
+    - "تتبع خطوة بخطوة: ≥3 جداول ناقصة + نموذج حل (step_trace)"
+    - "مقارنة وتحليل: ≥4 أسئلة مقارنة (compare_analyze)"
+    - "نظري منظم: ≥8 أسئلة بهيكل ثابت (structured_theory)"
